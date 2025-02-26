@@ -44,7 +44,7 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 public class SettingsHandler {
-  private final Preferences preferences = Preferences.userRoot().node(this.getClass().getName());
+  private final Preferences preferences = Preferences.userRoot().node("de").node("greluc").node("sc").node("sckillmonitor");
 
   /**
    * Persists user and application settings to a persistent storage.
@@ -81,7 +81,7 @@ public class SettingsHandler {
     preferences.put(SETTINGS_PLAYER_HANDLE, SettingsData.getHandle());
     preferences.putInt(SETTINGS_SCAN_INTERVAL_SECONDS, SettingsData.getInterval());
     preferences.putBoolean(SETTINGS_SHOW_ALL, SettingsData.isShowAll());
-    preferences.putBoolean(SETTINGS_WRITE_KILLEVENT_TO_FILE, SettingsData.isWriteKillEventToFile());
+    preferences.putBoolean(SETTINGS_WRITE_TO_FILE, SettingsData.isWriteKillEventToFile());
     try {
       preferences.flush();
     } catch (BackingStoreException exception) {
@@ -147,6 +147,6 @@ public class SettingsHandler {
     SettingsData.setInterval(
         Integer.parseInt(preferences.get(SETTINGS_SCAN_INTERVAL_SECONDS, "60")));
     SettingsData.setShowAll(preferences.getBoolean(SETTINGS_SHOW_ALL, false));
-    SettingsData.setShowAll(preferences.getBoolean(SETTINGS_WRITE_KILLEVENT_TO_FILE, false));
+    SettingsData.setShowAll(preferences.getBoolean(SETTINGS_WRITE_TO_FILE, false));
   }
 }

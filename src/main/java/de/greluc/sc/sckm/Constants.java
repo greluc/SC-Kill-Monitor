@@ -41,16 +41,16 @@ public class Constants {
   public static final String TECH_PREVIEW = "TECH-PREVIEW";
   public static final String CUSTOM = "Custom";
 
-  public static final String SETTINGS_PATH_LIVE = "PATH_LIVE";
-  public static final String SETTINGS_PATH_PTU = "PATH_PTU";
-  public static final String SETTINGS_PATH_EPTU = "PATH_EPTU";
-  public static final String SETTINGS_PATH_HOTFIX = "PATH_HOTFIX";
-  public static final String SETTINGS_PATH_TECH_PREVIEW = "PATH_TECH_PREVIEW";
-  public static final String SETTINGS_PATH_CUSTOM = "PATH_CUSTOM";
-  public static final String SETTINGS_PLAYER_HANDLE = "PLAYER_HANDLE";
-  public static final String SETTINGS_SCAN_INTERVAL_SECONDS = "SCAN_INTERVAL_SECONDS";
-  public static final String SETTINGS_SHOW_ALL = "SHOW_ALL";
-  public static final String SETTINGS_WRITE_KILLEVENT_TO_FILE = "WRITE_KILLEVENT_TO_FILE";
+  public static final String SETTINGS_PATH_LIVE = "path_live";
+  public static final String SETTINGS_PATH_PTU = "path_ptu";
+  public static final String SETTINGS_PATH_EPTU = "path_eptu";
+  public static final String SETTINGS_PATH_HOTFIX = "path_hotfix";
+  public static final String SETTINGS_PATH_TECH_PREVIEW = "path_tech_preview";
+  public static final String SETTINGS_PATH_CUSTOM = "path_custom";
+  public static final String SETTINGS_PLAYER_HANDLE = "player_handle";
+  public static final String SETTINGS_SCAN_INTERVAL_SECONDS = "interval_seconds";
+  public static final String SETTINGS_SHOW_ALL = "show_all";
+  public static final String SETTINGS_WRITE_TO_FILE = "write_to_file";
 
   public static final String APP_TITLE = "SC Kill Monitor";
 
