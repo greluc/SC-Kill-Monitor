@@ -19,23 +19,23 @@
   ~ along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                         ~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<bom serialNumber="urn:uuid:05c39c57-67f8-4f83-a7d0-4f52f10bf3e2" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
+<bom serialNumber="urn:uuid:21b9ae85-0cb6-4cc5-88e3-51e8db95c118" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
   <metadata>
-    <timestamp>2025-02-24T18:15:03Z</timestamp>
+    <timestamp>2025-02-26T19:14:43Z</timestamp>
     <tools>
       <components>
         <component type="application">
           <author>CycloneDX</author>
           <name>cyclonedx-gradle-plugin</name>
-          <version>2.1.0</version>
+          <version>2.2.0</version>
         </component>
       </components>
     </tools>
-    <component type="library" bom-ref="pkg:maven/de.greluc.sc/sckillmonitor@1.2.1">
+    <component type="library" bom-ref="pkg:maven/de.greluc.sc/sckillmonitor@1.2.1?project_path=%3A">
       <group>de.greluc.sc</group>
       <name>sckillmonitor</name>
       <version>1.2.1</version>
-      <purl>pkg:maven/de.greluc.sc/sckillmonitor@1.2.1</purl>
+      <purl>pkg:maven/de.greluc.sc/sckillmonitor@1.2.1?project_path=%3A</purl>
       <modified>false</modified>
       <externalReferences>
         <reference type="vcs">
@@ -2153,7 +2153,7 @@ of Jackson components maintained by FasterXML.com</description>
     </dependency>
     <dependency ref="pkg:maven/commons-codec/commons-codec@1.15?type=jar"/>
     <dependency ref="pkg:maven/commons-collections/commons-collections@3.2.2?type=jar"/>
-    <dependency ref="pkg:maven/de.greluc.sc/sckillmonitor@1.2.1">
+    <dependency ref="pkg:maven/de.greluc.sc/sckillmonitor@1.2.1?project_path=%3A">
       <dependency ref="pkg:maven/io.github.mkpaz/atlantafx-base@2.0.1?type=jar"/>
       <dependency ref="pkg:maven/org.openjfx/javafx-fxml@23?type=jar"/>
       <dependency ref="pkg:maven/org.junit.jupiter/junit-jupiter-api@5.11.4?type=jar"/>

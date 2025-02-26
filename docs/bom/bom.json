@@ -1,28 +1,28 @@
 {
   "bomFormat" : "CycloneDX",
   "specVersion" : "1.6",
-  "serialNumber" : "urn:uuid:05c39c57-67f8-4f83-a7d0-4f52f10bf3e2",
+  "serialNumber" : "urn:uuid:21b9ae85-0cb6-4cc5-88e3-51e8db95c118",
   "version" : 1,
   "metadata" : {
-    "timestamp" : "2025-02-24T18:15:03Z",
+    "timestamp" : "2025-02-26T19:14:43Z",
     "tools" : {
       "components" : [
         {
           "type" : "application",
           "author" : "CycloneDX",
           "name" : "cyclonedx-gradle-plugin",
-          "version" : "2.1.0"
+          "version" : "2.2.0"
         }
       ],
       "services" : [ ]
     },
     "component" : {
       "type" : "library",
-      "bom-ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.2.1",
+      "bom-ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.2.1?project_path=%3A",
       "group" : "de.greluc.sc",
       "name" : "sckillmonitor",
       "version" : "1.2.1",
-      "purl" : "pkg:maven/de.greluc.sc/sckillmonitor@1.2.1",
+      "purl" : "pkg:maven/de.greluc.sc/sckillmonitor@1.2.1?project_path=%3A",
       "modified" : false,
       "externalReferences" : [
         {
@@ -4448,7 +4448,7 @@
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.2.1",
+      "ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.2.1?project_path=%3A",
       "dependsOn" : [
         "pkg:maven/io.github.mkpaz/atlantafx-base@2.0.1?type=jar",
         "pkg:maven/org.openjfx/javafx-fxml@23?type=jar",
