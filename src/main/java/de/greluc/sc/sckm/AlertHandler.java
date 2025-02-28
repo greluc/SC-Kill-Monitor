@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
  * as displaying general error alerts.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.0
+ * @version 1.2.1
  * @since 1.0.0
  */
 public class AlertHandler {
@@ -61,6 +61,6 @@ public class AlertHandler {
     alert.headerTextProperty().set(header);
     alert.contentTextProperty().set(content);
     alert.setResizable(true);
-    alert.showAndWait();
+    alert.show();
   }
 }

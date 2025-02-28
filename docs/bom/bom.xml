@@ -19,23 +19,23 @@
   ~ along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                         ~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<bom serialNumber="urn:uuid:a4a4f734-6147-46af-a616-96ae33d35d4f" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
+<bom serialNumber="urn:uuid:21b9ae85-0cb6-4cc5-88e3-51e8db95c118" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
   <metadata>
-    <timestamp>2025-02-22T19:37:23Z</timestamp>
+    <timestamp>2025-02-26T19:14:43Z</timestamp>
     <tools>
       <components>
         <component type="application">
           <author>CycloneDX</author>
           <name>cyclonedx-gradle-plugin</name>
-          <version>2.1.0</version>
+          <version>2.2.0</version>
         </component>
       </components>
     </tools>
-    <component type="library" bom-ref="pkg:maven/de.greluc.sc/sckillmonitor@1.2.0">
+    <component type="library" bom-ref="pkg:maven/de.greluc.sc/sckillmonitor@1.2.1?project_path=%3A">
       <group>de.greluc.sc</group>
       <name>sckillmonitor</name>
-      <version>1.2.0</version>
-      <purl>pkg:maven/de.greluc.sc/sckillmonitor@1.2.0</purl>
+      <version>1.2.1</version>
+      <purl>pkg:maven/de.greluc.sc/sckillmonitor@1.2.1?project_path=%3A</purl>
       <modified>false</modified>
       <externalReferences>
         <reference type="vcs">
@@ -394,21 +394,21 @@ of Jackson components maintained by FasterXML.com</description>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/com.puppycrawl.tools/checkstyle@10.21.2?type=jar">
+    <component type="library" bom-ref="pkg:maven/com.puppycrawl.tools/checkstyle@10.21.3?type=jar">
       <group>com.puppycrawl.tools</group>
       <name>checkstyle</name>
-      <version>10.21.2</version>
+      <version>10.21.3</version>
       <description>Checkstyle is a development tool to help programmers write Java code
     that adheres to a coding standard</description>
       <hashes>
-        <hash alg="MD5">b8af50a52e5149cc61eee3ae695ba75d</hash>
-        <hash alg="SHA-1">dc88b7a4625a2e129c88d956315dacd0c2f337b6</hash>
-        <hash alg="SHA-256">4e83c0e76c4cf9dcceaa7e777ada8673344dea64156c28eb5e54e95977c23fa7</hash>
-        <hash alg="SHA-512">e479f4c4b29378e6291b2ca1077ba2e4d1a3e53e5215747fbcea8c42680ce1a96b98c5a34a553759cb19d73dc04ca4886bae9674a7144d745ce441cd3747a599</hash>
-        <hash alg="SHA-384">a03bed2e37ab26f3b12284043f8bf791deb0e9d36dfaec1908c4e0ce7fe7b0650dc7f8dee7170550d9298cc48773ed5c</hash>
-        <hash alg="SHA3-384">53db4f5f884800e49f90bf5f5fc339f84987a121a44fb6dd051c57bb5db9cfe84268eece4fc0d0a43a01beb741142c63</hash>
-        <hash alg="SHA3-256">837e577e786c62f6c6100560821202050503e6f3fa3a4b52ebfb3cc5af057dd7</hash>
-        <hash alg="SHA3-512">e37af566d65be374a1930f8634be15d60f939bfd200edf013732bb41063b5e2694bbe4c8de6191e4663566481103e8c96c51cc33ec6101b2ce3f8a13dc5cd571</hash>
+        <hash alg="MD5">13fa119f36104c46201bfc22fa4c4391</hash>
+        <hash alg="SHA-1">449071067ba3453d6b39b8f30f8feaa2a3366915</hash>
+        <hash alg="SHA-256">00d3283db8561244e1f92d95842dace51b28a2542fc9eeb7d50e4d7fe7c4dbdf</hash>
+        <hash alg="SHA-512">6c23dd9970c737cbb8349d15c882bbca32439adeeaa47f1d3520d04dfb0b825ac966dcde138047909c9d724319a0e6defc9c5b49db40c18cbb34d545d36758ad</hash>
+        <hash alg="SHA-384">bffced78a3891c086dc541ac685fd317ded0858bda6286bfce846b975c0c824a87b93b5f44ca4d7239edfb48560dea49</hash>
+        <hash alg="SHA3-384">b36d2a48177a12a2b38f8ab8e68d85aebedc3d4936d828bae7691f79d290d4d6a68ebdda56453623543af8307a3d6edc</hash>
+        <hash alg="SHA3-256">96c98c12f19031f100fba95ce350e8efcfc9cfe017909b8fe0a9ec3772034fda</hash>
+        <hash alg="SHA3-512">2a36bd80c9bb88e5a530e4bccd53d6848ad09a4eb21139245fe6bccecede36aa46295bd3d93d5203c6306895ec2c6cdfb148d5372a9c0e82fc0fd2abb951f87e</hash>
       </hashes>
       <licenses>
         <license>
@@ -417,7 +417,7 @@ of Jackson components maintained by FasterXML.com</description>
           <url>https://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html</url>
         </license>
       </licenses>
-      <purl>pkg:maven/com.puppycrawl.tools/checkstyle@10.21.2?type=jar</purl>
+      <purl>pkg:maven/com.puppycrawl.tools/checkstyle@10.21.3?type=jar</purl>
       <modified>false</modified>
       <externalReferences>
         <reference type="build-system">
@@ -437,20 +437,20 @@ of Jackson components maintained by FasterXML.com</description>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/commons-beanutils/commons-beanutils@1.10.0?type=jar">
+    <component type="library" bom-ref="pkg:maven/commons-beanutils/commons-beanutils@1.10.1?type=jar">
       <group>commons-beanutils</group>
       <name>commons-beanutils</name>
-      <version>1.10.0</version>
+      <version>1.10.1</version>
       <description>Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
       <hashes>
-        <hash alg="MD5">35fa2aabe7e5a629012b0c902993fb6a</hash>
-        <hash alg="SHA-1">db165c75534817bf971c530838138011fbe2dca2</hash>
-        <hash alg="SHA-256">b6e8dbf5d4a7fd66edbc7106886909c097dc7e0768ca78cc1055955d6ff877a1</hash>
-        <hash alg="SHA-512">dff9acf4dab4b61932644c4d1f706c50465455526595ec9a5abfefec3a0f07176c43f5490f9ad47f440736d0d25575306c4414aaf6b494dd3e2a053ff727f9ad</hash>
-        <hash alg="SHA-384">cd54e74f79750451949b5e85a80e7b9b8185c89656e283f441b419153eba9d5fa06280c74f9a08335fabe5479bf8ab16</hash>
-        <hash alg="SHA3-384">85feb0b9d082ad98b615274866c99320b4a092566cdac9779da757e0afce724ffb522fdab9968d11e8d7fef4fc981b81</hash>
-        <hash alg="SHA3-256">f4883363ea7e96302d4628b7257fb7b377248325f3f87c7cce6831fe6ae12869</hash>
-        <hash alg="SHA3-512">71bf969a759c0c6a3a706914ca566ecec4644b2fd5d05ab93b107ef67ee5a5e7cc5f7c416366e7d65e58cce3f591a9d679007c8724dfe92aeb19f20de65d3149</hash>
+        <hash alg="MD5">27ac839d60e2bff6b222827756fde6cb</hash>
+        <hash alg="SHA-1">22c392b43aa32e1364fb39647111edfa91df9070</hash>
+        <hash alg="SHA-256">707a09e86ed1cf5516cdabdf1710d8fe201b6e26e7233870dce1d0ccf2a468d1</hash>
+        <hash alg="SHA-512">e9e8ee35d9074eb6e8f1af6986e2b431aa8185d711407bbaca3f5ee52f77e4e23b695e832f859c1567fd91f27a37cb7e07d7061a22ac7af560f83bedb58b06f1</hash>
+        <hash alg="SHA-384">780f990cd068da31bc40a635e527bcb249fdd61cd8ff8ce6f0fffd5f5f5bb8334733acca16f3221765d5ed0ecd5d60af</hash>
+        <hash alg="SHA3-384">858dbd2eff793c0e8d26a6437898c27b55bbf4864fa2e9450ec03bf7ab0c5aa07a7eb458b4ab57b73ce7a672d3871070</hash>
+        <hash alg="SHA3-256">4be2d7514d157c931f9e28321da7b7590eb4751fe4629ae8f23d2d22ca7f0b84</hash>
+        <hash alg="SHA3-512">f21d8359dc06a70beb0ba56ba1253c592ca781aba7cba2dc4fd8afc1bbb29fbca46f1cda259b8840c520c61d2b1a79d90ff2905d4067ac3a407bb5e916a7fc0d</hash>
       </hashes>
       <licenses>
         <license>
@@ -459,7 +459,7 @@ of Jackson components maintained by FasterXML.com</description>
           <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
       </licenses>
-      <purl>pkg:maven/commons-beanutils/commons-beanutils@1.10.0?type=jar</purl>
+      <purl>pkg:maven/commons-beanutils/commons-beanutils@1.10.1?type=jar</purl>
       <modified>false</modified>
       <externalReferences>
         <reference type="issue-tracker">
@@ -2137,9 +2137,9 @@ of Jackson components maintained by FasterXML.com</description>
     </dependency>
     <dependency ref="pkg:maven/com.google.guava/listenablefuture@9999.0-empty-to-avoid-conflict-with-guava?type=jar"/>
     <dependency ref="pkg:maven/com.google.j2objc/j2objc-annotations@3.0.0?type=jar"/>
-    <dependency ref="pkg:maven/com.puppycrawl.tools/checkstyle@10.21.2?type=jar">
+    <dependency ref="pkg:maven/com.puppycrawl.tools/checkstyle@10.21.3?type=jar">
       <dependency ref="pkg:maven/org.apache.maven.doxia/doxia-core@1.12.0?type=jar"/>
-      <dependency ref="pkg:maven/commons-beanutils/commons-beanutils@1.10.0?type=jar"/>
+      <dependency ref="pkg:maven/commons-beanutils/commons-beanutils@1.10.1?type=jar"/>
       <dependency ref="pkg:maven/net.sf.saxon/Saxon-HE@12.5?type=jar"/>
       <dependency ref="pkg:maven/org.apache.maven.doxia/doxia-module-xdoc@1.12.0?type=jar"/>
       <dependency ref="pkg:maven/org.checkerframework/checker-qual@3.48.4?type=jar"/>
@@ -2148,16 +2148,16 @@ of Jackson components maintained by FasterXML.com</description>
       <dependency ref="pkg:maven/com.google.guava/guava@33.4.0-jre?type=jar"/>
       <dependency ref="pkg:maven/org.antlr/antlr4-runtime@4.13.2?type=jar"/>
     </dependency>
-    <dependency ref="pkg:maven/commons-beanutils/commons-beanutils@1.10.0?type=jar">
+    <dependency ref="pkg:maven/commons-beanutils/commons-beanutils@1.10.1?type=jar">
       <dependency ref="pkg:maven/commons-collections/commons-collections@3.2.2?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/commons-codec/commons-codec@1.15?type=jar"/>
     <dependency ref="pkg:maven/commons-collections/commons-collections@3.2.2?type=jar"/>
-    <dependency ref="pkg:maven/de.greluc.sc/sckillmonitor@1.2.0">
+    <dependency ref="pkg:maven/de.greluc.sc/sckillmonitor@1.2.1?project_path=%3A">
       <dependency ref="pkg:maven/io.github.mkpaz/atlantafx-base@2.0.1?type=jar"/>
       <dependency ref="pkg:maven/org.openjfx/javafx-fxml@23?type=jar"/>
       <dependency ref="pkg:maven/org.junit.jupiter/junit-jupiter-api@5.11.4?type=jar"/>
-      <dependency ref="pkg:maven/com.puppycrawl.tools/checkstyle@10.21.2?type=jar"/>
+      <dependency ref="pkg:maven/com.puppycrawl.tools/checkstyle@10.21.3?type=jar"/>
       <dependency ref="pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.18.2?type=jar"/>
       <dependency ref="pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3?type=jar"/>
       <dependency ref="pkg:maven/org.projectlombok/lombok@1.18.36?type=jar"/>

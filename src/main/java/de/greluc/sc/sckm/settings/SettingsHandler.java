@@ -20,15 +20,7 @@
 
 package de.greluc.sc.sckm.settings;
 
-import static de.greluc.sc.sckm.Constants.SETTINGS_PATH_CUSTOM;
-import static de.greluc.sc.sckm.Constants.SETTINGS_PATH_EPTU;
-import static de.greluc.sc.sckm.Constants.SETTINGS_PATH_HOTFIX;
-import static de.greluc.sc.sckm.Constants.SETTINGS_PATH_LIVE;
-import static de.greluc.sc.sckm.Constants.SETTINGS_PATH_PTU;
-import static de.greluc.sc.sckm.Constants.SETTINGS_PATH_TECH_PREVIEW;
-import static de.greluc.sc.sckm.Constants.SETTINGS_PLAYER_HANDLE;
-import static de.greluc.sc.sckm.Constants.SETTINGS_SCAN_INTERVAL_SECONDS;
-import static de.greluc.sc.sckm.Constants.SETTINGS_SHOW_ALL;
+import static de.greluc.sc.sckm.Constants.*;
 
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -47,31 +39,37 @@ import lombok.extern.log4j.Log4j2;
  * updated in {@link SettingsData} when loaded from persistent storage.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.0
+ * @version 1.2.1
  * @since 1.0.0
  */
 @Log4j2
 public class SettingsHandler {
-  private final Preferences preferences = Preferences.userRoot().node(this.getClass().getName());
+  private final Preferences preferences = Preferences.userRoot().node("de").node("greluc").node("sc").node("sckillmonitor");
 
   /**
-   * Saves the current settings to persistent storage using the Preferences API. The settings are
-   * retrieved from the {@link SettingsData} class and written to the preferences node associated
-   * with the current user.
+   * Persists user and application settings to a persistent storage.
    *
-   * <p>The following settings are saved:
+   * <p>This method saves various settings parameters, such as file paths, user handle, interval,
+   * and boolean flags, into a preference storage. The settings are fetched from the
+   * {@link SettingsData} class and written to the persistent store using the provided preferences
+   * instance.
    *
+   * <p>After all settings have been written, the method attempts to flush the changes to ensure
+   * that they are immediately committed to the persistent storage. If the flush operation fails
+   * due to a {@link java.util.prefs.BackingStoreException}, an error message is logged.
+   *
+   * <p>The parameters saved to the storage include:
    * <ul>
-   *   <li>Paths for different application configurations.
-   *   <li>The user handle.
+   *   <li>Paths for live, PTU (Public Test Universe), EPTU (Experimental Public Test Universe),
+   *       hotfix, tech preview, and custom environments.
+   *   <li>User handle.
    *   <li>Scan interval in seconds.
+   *   <li>Show all flag.
+   *   <li>Write kill-event-to-file flag.
    * </ul>
    *
-   * <p>After saving the settings to the Preferences API, an attempt is made to persist the
-   * preferences to the underlying storage.
-   *
-   * <p>If an error occurs during the persistence operation, a log entry will be created with the
-   * corresponding error message and stack trace.
+   * <p>Logging is used to capture any exceptions encountered during the flush operation, ensuring
+   * that failures are handled and can be reviewed for troubleshooting.
    */
   public void saveSettings() {
     preferences.put(SETTINGS_PATH_LIVE, SettingsData.getPathLive());
@@ -83,6 +81,7 @@ public class SettingsHandler {
     preferences.put(SETTINGS_PLAYER_HANDLE, SettingsData.getHandle());
     preferences.putInt(SETTINGS_SCAN_INTERVAL_SECONDS, SettingsData.getInterval());
     preferences.putBoolean(SETTINGS_SHOW_ALL, SettingsData.isShowAll());
+    preferences.putBoolean(SETTINGS_WRITE_TO_FILE, SettingsData.isWriteKillEventToFile());
     try {
       preferences.flush();
     } catch (BackingStoreException exception) {
@@ -91,35 +90,31 @@ public class SettingsHandler {
   }
 
   /**
-   * Loads and applies user preferences stored in a persistent storage. If the preferences cannot be
-   * synchronized due to a BackingStoreException, default values will be used for all settings.
+   * Loads application settings from persistent storage and updates the corresponding
+   * values in the {@code SettingsData} class. If the preferences cannot be retrieved,
+   * default values are applied.
    *
-   * <p>This method retrieves specific configuration values for the application's file paths, user
-   * handle, and scanning interval from the preferences store. The loaded settings are applied to
-   * the static fields of the SettingsData class using its setter methods.
-   *
-   * <p>Preferences retrieved:
-   *
-   * <ul>
-   *   <li>PATH_LIVE: File path to the game log for the LIVE version.
-   *   <li>PATH_PTU: File path to the game log for the PTU version.
-   *   <li>PATH_EPTU: File path to the game log for the EPTU version.
-   *   <li>PATH_HOTFIX: File path to the game log for the HOTFIX version.
-   *   <li>PATH_TECH_PREVIEW: File path to the game log for the TECH PREVIEW version.
-   *   <li>PATH_CUSTOM: File path to a user-specified custom location.
-   *   <li>PLAYER_HANDLE: Player's handle or username.
-   *   <li>SCAN_INTERVAL_SECONDS: Time interval, in seconds, used for scanning.
-   * </ul>
-   *
-   * <p>If any of the retrieved preference values are not found, default values are used:
+   * <p>Attempts to sync the preferences from the backing store, and logs an error if
+   * the sync fails. Each setting is either fetched from the user preferences or set to
+   * a default value if unavailable.
    *
    * <ul>
-   *   <li>File paths default to typical installation directories.
-   *   <li>PLAYER_HANDLE defaults to an empty string.
-   *   <li>SCAN_INTERVAL_SECONDS defaults to 1 second.
+   *   <li>{@code SETTINGS_PATH_LIVE}: Path to the LIVE game log.
+   *   <li>{@code SETTINGS_PATH_PTU}: Path to the PTU game log.
+   *   <li>{@code SETTINGS_PATH_EPTU}: Path to the EPTU game log.
+   *   <li>{@code SETTINGS_PATH_HOTFIX}: Path to the HOTFIX game log.
+   *   <li>{@code SETTINGS_PATH_TECH_PREVIEW}: Path to the TECH-PREVIEW game log.
+   *   <li>{@code SETTINGS_PATH_CUSTOM}: Custom log file path.
+   *   <li>{@code SETTINGS_PLAYER_HANDLE}: Player's handle or identifier.
+   *   <li>{@code SETTINGS_SCAN_INTERVAL_SECONDS}: Interval in seconds for scanning.
+   *   <li>{@code SETTINGS_SHOW_ALL}: Boolean flag for showing all events.
+   *   <li>{@code SETTINGS_WRITE_KILLEVENT_TO_FILE}: Boolean flag for writing kill events to a file.
    * </ul>
    *
-   * <p>Logs an error message if the preferences cannot be loaded and defaults are applied.
+   * <p>Default paths are system-specific, referencing directories in the "C:\Program Files\Roberts Space Industries\StarCitizen" folder.
+   *
+   * <p>If the {@code BackingStoreException} occurs during the sync operation, it logs an error message and uses the default values for all preferences.
+   * Settings related to paths, handles, intervals, and other options are updated accordingly in {@code SettingsData}.
    */
   public void loadSettings() {
     try {
@@ -150,7 +145,8 @@ public class SettingsHandler {
     SettingsData.setPathCustom(preferences.get(SETTINGS_PATH_CUSTOM, ""));
     SettingsData.setHandle(preferences.get(SETTINGS_PLAYER_HANDLE, ""));
     SettingsData.setInterval(
-        Integer.parseInt(preferences.get(SETTINGS_SCAN_INTERVAL_SECONDS, "1")));
+        Integer.parseInt(preferences.get(SETTINGS_SCAN_INTERVAL_SECONDS, "60")));
     SettingsData.setShowAll(preferences.getBoolean(SETTINGS_SHOW_ALL, false));
+    SettingsData.setShowAll(preferences.getBoolean(SETTINGS_WRITE_TO_FILE, false));
   }
 }

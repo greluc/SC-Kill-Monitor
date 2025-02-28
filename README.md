@@ -1,6 +1,7 @@
 # SC Kill Monitor
 
-[![GitHub Release](https://img.shields.io/github/v/release/greluc/SC-Kill-Monitor?style=for-the-badge&labelColor=232323&)](https://github.com/greluc/SC-Kill-Monitor/releases) ![GitHub branch check runs](https://img.shields.io/github/check-runs/greluc/SC-Kill-Monitor/main?style=for-the-badge&labelColor=232323&) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/greluc/SC-Kill-Monitor/total?style=for-the-badge&labelColor=232323&) [![Static Badge](https://img.shields.io/badge/%F0%9F%92%96-%23fff?style=for-the-badge&labelColor=232323&label=Star%20Citizen)](https://robertsspaceindustries.com/)
+[![GitHub Release](https://img.shields.io/github/v/release/greluc/SC-Kill-Monitor?style=for-the-badge&labelColor=232323&)](https://github.com/greluc/SC-Kill-Monitor/releases) ![GitHub branch check runs](https://img.shields.io/github/check-runs/greluc/SC-Kill-Monitor/main?style=for-the-badge&labelColor=232323&) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/greluc/SC-Kill-Monitor/total?style=for-the-badge&labelColor=232323&) ![GitHub License](https://img.shields.io/github/license/greluc/sc-kill-monitor?style=for-the-badge&labelColor=232323) [![Static Badge](https://img.shields.io/badge/%F0%9F%92%96-%23fff?style=for-the-badge&labelColor=232323&label=Star%20Citizen)](https://robertsspaceindustries.com/)
+
 
 ## Table Of Contents
 
