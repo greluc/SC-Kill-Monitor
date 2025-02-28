@@ -30,7 +30,7 @@ package de.greluc.sc.sckm.settings;
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @since 1.0.0
- * @version 1.2.0
+ * @version 1.2.1
  */
 public interface SettingsListener {
   /**

@@ -18,76 +18,62 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-package de.greluc.sc.sckm.settings;
+package de.greluc.sc.sckm.data;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
-import org.junit.jupiter.api.Test;
+import java.time.format.DateTimeFormatter;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * The SettingsDataTest class contains unit tests for verifying the behavior of the SettingsData
- * class. These tests are designed to confirm correct functionality and expected behavior when
- * modifying the selected channel and interacting with listeners.
+ * The KillEventFormatter class provides a utility method for formatting kill events into
+ * human-readable string representations. This class is primarily used to format the details of a
+ * {@link KillEvent} record into a structured string for display or logging purposes.
  *
- * <p>Key functionalities tested include:
+ * <p>The formatted string includes the following details from the kill event:
  *
  * <ul>
- *   <li>Updating the selected channel property.
- *   <li>Ensuring listeners are notified on updates.
- *   <li>Verifying that removed listeners are not notified.
+ *   <li>Timestamp of the event in the format "dd.MM.yy HH:mm:ss:SSS UTC".
+ *   <li>Name of the killed player.
+ *   <li>Zone or location in the game where the event occurred.
+ *   <li>Name of the killer (player, NPC, or other entity).
+ *   <li>Weapon or method used to perform the kill.
+ *   <li>Type of damage inflicted (e.g., explosive, ballistic).
  * </ul>
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @version 1.2.1
- * @since 1.0.0
+ * @since 1.2.1
  */
-class SettingsDataTest {
-
-  @Test
-  void testSetSelectedChannelUpdatesValue() {
-    // Arrange
-    String newChannel = "PTU";
-
-    // Act
-    SettingsData.setSelectedChannel(newChannel);
-
-    // Assert
-    assertEquals(newChannel, SettingsData.getSelectedChannel());
-  }
-
-  @Test
-  void testSetSelectedChannelNotifiesListeners() {
-    // Arrange
-    String newChannel = "TECH-PREVIEW";
-    SettingsListener mockListener = mock(SettingsListener.class);
-    SettingsData.addListener(mockListener);
-
-    // Act
-    SettingsData.setSelectedChannel(newChannel);
-
-    // Assert
-    verify(mockListener, times(1)).settingsChanged();
-
-    // Cleanup
-    SettingsData.removeListener(mockListener);
-  }
-
-  @Test
-  void testSetSelectedChannelDoesNotNotifyRemovedListener() {
-    // Arrange
-    String newChannel = "HOTFIX";
-    SettingsListener mockListener = mock(SettingsListener.class);
-    SettingsData.addListener(mockListener);
-    SettingsData.removeListener(mockListener);
-
-    // Act
-    SettingsData.setSelectedChannel(newChannel);
-
-    // Assert
-    verify(mockListener, never()).settingsChanged();
+public class KillEventFormatter {
+  /**
+   * Formats the details of a KillEvent into a human-readable string representation.
+   *
+   * @param killEvent the KillEvent object containing information about a specific kill event
+   * @return a string representation of the KillEvent with details such as timestamp, killed player,
+   *     killer, weapon used, damage type, and zone
+   */
+  @Contract(pure = true)
+  public static @NotNull String format(@NotNull KillEvent killEvent) {
+    return "Kill Date = "
+        + killEvent.timestamp().format(DateTimeFormatter.ofPattern("dd.MM.yy HH:mm:ss:SSS"))
+        + " UTC"
+        + "\n"
+        + "Killed Player = "
+        + killEvent.killedPlayer()
+        + "\n"
+        + "Zone = "
+        + killEvent.zone()
+        + "\n"
+        + "Killer = "
+        + killEvent.killer()
+        + "\n"
+        + "Used Method/Weapon = "
+        + killEvent.weapon()
+        + "\n"
+        + "Class = "
+        + killEvent.weaponClass()
+        + "\n"
+        + "Damage Type = "
+        + killEvent.damageType();
   }
 }

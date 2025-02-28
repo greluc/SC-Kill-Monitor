@@ -25,8 +25,8 @@ import de.greluc.sc.sckm.settings.SettingsData;
 import de.greluc.sc.sckm.settings.SettingsHandler;
 import java.io.File;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.Generated;
@@ -54,7 +54,7 @@ import org.jetbrains.annotations.NotNull;
  * </ul>
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.0
+ * @version 1.2.1
  * @since 1.0.0
  */
 public class SettingsViewController {
@@ -64,12 +64,13 @@ public class SettingsViewController {
   @FXML private TextField inputPathHotfix;
   @FXML private TextField inputPathTechPreview;
   @FXML private TextField inputPathCustom;
+  @FXML private CheckBox cbWriteKillEvent;
   @Setter private SettingsHandler settingsHandler;
 
   /**
-   * Initializes the view components of the {@code SettingsViewController}.
+   * Initializes the view components of the {@link  SettingsViewController}.
    *
-   * <p>- Sets the text of input fields with the corresponding file path values retrieved from
+   * <p>Sets the text of input fields with the corresponding file path values retrieved from
    * {@link SettingsData}.
    *
    * <p>Specifically, it initializes the following input fields:
@@ -83,7 +84,7 @@ public class SettingsViewController {
    *   <li>{@code inputPathCustom} with a custom path.
    * </ul>
    *
-   * This method ensures that the view reflects the current settings stored in the {@link
+   * <p>This method ensures that the view reflects the current settings stored in the {@link
    * SettingsData} class.
    */
   @FXML
@@ -94,6 +95,7 @@ public class SettingsViewController {
     inputPathHotfix.setText(SettingsData.getPathHotfix());
     inputPathTechPreview.setText(SettingsData.getPathTechPreview());
     inputPathCustom.setText(SettingsData.getPathCustom());
+    cbWriteKillEvent.setSelected(SettingsData.isWriteKillEventToFile());
   }
 
   /**
@@ -121,6 +123,7 @@ public class SettingsViewController {
     SettingsData.setPathHotfix(inputPathHotfix.getText());
     SettingsData.setPathTechPreview(inputPathTechPreview.getText());
     SettingsData.setPathCustom(inputPathCustom.getText());
+    SettingsData.setWriteKillEventToFile(cbWriteKillEvent.isSelected());
     settingsHandler.saveSettings();
     closeWindow();
   }
@@ -284,16 +287,14 @@ public class SettingsViewController {
   }
 
   /**
-   * Opens a file chooser dialog, allowing the user to select a file or directory, and retrieves the
-   * absolute path of the selected file. If no file is selected, an empty string is returned.
+   * Opens a file chooser dialog to allow the user to select a file or directory and retrieves the
+   * absolute path of the selected item.
    *
-   * @return a non-null string representing the absolute path of the selected file, or an empty
-   *     string if no file is chosen.
+   * @return the absolute path of the selected file or directory as a non-null string. If no
+   *     selection is made, returns an empty string.
    */
   private @NotNull String getPath() {
-    Optional<File> fileContainer = FileHandler.showFileChooser();
-    AtomicReference<String> path = new AtomicReference<>("");
-    fileContainer.ifPresent(file -> path.set(file.getAbsolutePath()));
-    return path.get();
+    Optional<File> fileContainer = FileHandler.openFileChooser();
+    return fileContainer.map(File::getAbsolutePath).orElse("");
   }
 }

@@ -48,7 +48,7 @@ import org.jetbrains.annotations.NotNull;
  * </ul>
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.0
+ * @version 1.2.1
  * @since 1.0.0
  */
 public class SettingsData {
@@ -76,9 +76,10 @@ public class SettingsData {
 
   @Getter private static String pathCustom = "";
   @Getter private static String handle = "";
-  @Getter private static int interval = 1;
+  @Getter private static int interval = 60;
   @Getter private static String selectedChannel = LIVE;
   @Getter private static boolean isShowAll = false;
+  @Getter private static boolean isWriteKillEventToFile = false;
 
   /** Used to exclude the unused constructor from code coverage evaluation. */
   @Generated
@@ -185,6 +186,11 @@ public class SettingsData {
 
   public static void setShowAll(boolean isShowAll) {
     SettingsData.isShowAll = isShowAll;
+    listeners.forEach(SettingsListener::settingsChanged);
+  }
+
+  public static void setWriteKillEventToFile(boolean isWriteKillEventToFile) {
+    SettingsData.isWriteKillEventToFile = isWriteKillEventToFile;
     listeners.forEach(SettingsListener::settingsChanged);
   }
 

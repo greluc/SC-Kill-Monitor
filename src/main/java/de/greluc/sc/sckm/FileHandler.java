@@ -42,7 +42,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @since 1.0.0
- * @version 1.2.0
+ * @version 1.2.1
  */
 @Log4j2
 public class FileHandler {
@@ -63,7 +63,7 @@ public class FileHandler {
    * @return an {@link Optional} containing the selected {@link File}, or an empty {@link Optional}
    *     if no file is chosen.
    */
-  public static @NotNull Optional<File> showFileChooser() {
+  public static @NotNull Optional<File> openFileChooser() {
     log.debug("Trying to choose a file!");
     final var fileType = "*.log";
     final var filter = new FileChooser.ExtensionFilter("log File", fileType);
