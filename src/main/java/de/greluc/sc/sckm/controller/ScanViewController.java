@@ -20,14 +20,8 @@
 
 package de.greluc.sc.sckm.controller;
 
-import static de.greluc.sc.sckm.Constants.CUSTOM;
-import static de.greluc.sc.sckm.Constants.EPTU;
-import static de.greluc.sc.sckm.Constants.HOTFIX;
-import static de.greluc.sc.sckm.Constants.PTU;
-import static de.greluc.sc.sckm.Constants.TECH_PREVIEW;
 import static de.greluc.sc.sckm.data.KillEventExtractor.extractKillEvents;
 
-import de.greluc.sc.sckm.AlertHandler;
 import de.greluc.sc.sckm.data.KillEvent;
 import de.greluc.sc.sckm.data.KillEventFormatter;
 import de.greluc.sc.sckm.settings.SettingsData;
@@ -41,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;

@@ -20,9 +20,8 @@
 
 package de.greluc.sc.sckm.settings;
 
-import static de.greluc.sc.sckm.Constants.LIVE;
-
 import de.greluc.sc.sckm.Constants;
+import de.greluc.sc.sckm.data.ChannelType;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Generated;
@@ -77,7 +76,7 @@ public class SettingsData {
   @Getter private static String pathCustom = "";
   @Getter private static String handle = "";
   @Getter private static int interval = 60;
-  @Getter private static String selectedChannel = LIVE;
+  @Getter private static ChannelType selectedChannel = ChannelType.LIVE;
   @Getter private static boolean isShowAll = false;
   @Getter private static boolean isWriteKillEventToFile = false;
 
@@ -179,7 +178,7 @@ public class SettingsData {
    *
    * @param selectedChannel The new selected channel to be set.
    */
-  public static void setSelectedChannel(@NotNull String selectedChannel) {
+  public static void setSelectedChannel(@NotNull ChannelType selectedChannel) {
     SettingsData.selectedChannel = selectedChannel;
     listeners.forEach(SettingsListener::settingsChanged);
   }

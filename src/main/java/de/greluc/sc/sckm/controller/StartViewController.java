@@ -20,14 +20,9 @@
 
 package de.greluc.sc.sckm.controller;
 
-import static de.greluc.sc.sckm.Constants.CUSTOM;
-import static de.greluc.sc.sckm.Constants.EPTU;
-import static de.greluc.sc.sckm.Constants.HOTFIX;
-import static de.greluc.sc.sckm.Constants.LIVE;
-import static de.greluc.sc.sckm.Constants.PTU;
-import static de.greluc.sc.sckm.Constants.TECH_PREVIEW;
-
 import de.greluc.sc.sckm.AlertHandler;
+import de.greluc.sc.sckm.Constants;
+import de.greluc.sc.sckm.data.ChannelType;
 import de.greluc.sc.sckm.settings.SettingsData;
 import de.greluc.sc.sckm.settings.SettingsHandler;
 import de.greluc.sc.sckm.settings.SettingsListener;
@@ -37,7 +32,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.util.StringConverter;
+import lombok.Generated;
 import lombok.extern.log4j.Log4j2;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The StartViewController class manages the user interface interactions and related logic for the
@@ -55,7 +53,7 @@ public class StartViewController implements SettingsListener {
   @FXML private Label selectedPathValue;
   @FXML private TextField inputHandle;
   @FXML private TextField inputInterval;
-  @FXML private ComboBox<String> channelSelection;
+  @FXML private ComboBox<ChannelType> channelSelection;
   private MainViewController mainViewController;
 
   /**
@@ -80,8 +78,40 @@ public class StartViewController implements SettingsListener {
     inputHandle.setText(SettingsData.getHandle());
     inputInterval.setText(String.valueOf(SettingsData.getInterval()));
     channelSelection.setItems(
-        FXCollections.observableArrayList(LIVE, PTU, EPTU, HOTFIX, TECH_PREVIEW, CUSTOM));
+        FXCollections.observableArrayList(
+            ChannelType.LIVE,
+            ChannelType.PTU,
+            ChannelType.EPTU,
+            ChannelType.HOTFIX,
+            ChannelType.TECH_PREVIEW,
+            ChannelType.CUSTOM));
     channelSelection.getSelectionModel().select(SettingsData.getSelectedChannel());
+    channelSelection.setConverter(
+        new StringConverter<>() {
+          @Override
+          @NotNull
+          @Generated
+          public String toString(ChannelType type) {
+            if (type == null) {
+              return "";
+            }
+            return switch (type) {
+              case PTU -> Constants.PTU;
+              case EPTU -> Constants.EPTU;
+              case HOTFIX -> Constants.HOTFIX;
+              case TECH_PREVIEW -> Constants.TECH_PREVIEW;
+              case CUSTOM -> Constants.CUSTOM;
+              default -> Constants.LIVE;
+            };
+          }
+
+          @Override
+          @Generated
+          public ChannelType fromString(String string) {
+            return null;
+          }
+        });
+
     setSelectedPath();
     SettingsData.addListener(this);
     log.info("Initialized StartViewController");
