@@ -44,7 +44,7 @@ import org.jetbrains.annotations.NotNull;
  * location.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.1
+ * @version 1.3.0
  * @since 1.2.1
  */
 @Log4j2
@@ -77,6 +77,16 @@ public class KillEventExtractor {
           event.ifPresent(
               killEvent -> {
                 if (killEvent.killedPlayer().equals(SettingsData.getHandle())
+                    && !killEvents.contains(killEvent)) {
+                  killEvents.addFirst(killEvent);
+                  log.info("New kill event detected");
+                  log.debug("Kill Event:\n{}", killEvent);
+                  if (SettingsData.isWriteKillEventToFile()) {
+                    writeKillEventToFile(
+                        killEvent,
+                        scanStartTime.format(DateTimeFormatter.ofPattern("yyMMdd-HHmmss")));
+                  }
+                } else if (SettingsData.isKillerModeActive() && killEvent.killer().equals(SettingsData.getHandle())
                     && !killEvents.contains(killEvent)) {
                   killEvents.addFirst(killEvent);
                   log.info("New kill event detected");

@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.x.x](https://github.com/greluc/SC-Kill-Monitor/releases/tag/v1.x.x)
+
+- BUG: Fix spacing in ``SettingsView``.
+- FEATURE: Add killer mode.
+
 ## [v1.2.1](https://github.com/greluc/SC-Kill-Monitor/releases/tag/v1.2.1)
 
 - BUG: Make ``KillEvent`` data selectable again.

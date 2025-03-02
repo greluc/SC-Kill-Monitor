@@ -21,73 +21,71 @@
 package de.greluc.sc.sckm.settings;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 
-/**
- * The SettingsDataTest class contains unit tests for verifying the behavior of the SettingsData
- * class. These tests are designed to confirm correct functionality and expected behavior when
- * modifying the selected channel and interacting with listeners.
- *
- * <p>Key functionalities tested include:
- *
- * <ul>
- *   <li>Updating the selected channel property.
- *   <li>Ensuring listeners are notified on updates.
- *   <li>Verifying that removed listeners are not notified.
- * </ul>
- *
- * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.1
- * @since 1.0.0
- */
-class SettingsDataTest {
+public class SettingsDataTest {
 
   @Test
-  void testSetSelectedChannelUpdatesValue() {
-    // Arrange
-    String newChannel = "PTU";
+  public void testSetPathLive_UpdatesPathSuccessfully() {
+    // Arrange: Define a new path for testing
+    String newPath = "D:\\Games\\StarCitizen\\LIVE\\game.log";
 
-    // Act
-    SettingsData.setSelectedChannel(newChannel);
+    // Act: Update the pathLive using the setter
+    SettingsData.setPathLive(newPath);
 
-    // Assert
-    assertEquals(newChannel, SettingsData.getSelectedChannel());
+    // Assert: Verify the pathLive variable is updated
+    assertEquals(newPath, SettingsData.getPathLive());
   }
 
   @Test
-  void testSetSelectedChannelNotifiesListeners() {
-    // Arrange
-    String newChannel = "TECH-PREVIEW";
+  public void testSetPathLive_NotifiesListeners() {
+    // Arrange: Create a mock listener and add it to the SettingsData listeners list
     SettingsListener mockListener = mock(SettingsListener.class);
     SettingsData.addListener(mockListener);
 
-    // Act
-    SettingsData.setSelectedChannel(newChannel);
+    // Define a new path
+    String newPath = "D:\\Games\\StarCitizen\\LIVE\\game.log";
 
-    // Assert
+    // Act: Update the pathLive using the setter
+    SettingsData.setPathLive(newPath);
+
+    // Assert: Verify that the listener's settingsChanged method was called
     verify(mockListener, times(1)).settingsChanged();
 
-    // Cleanup
+    // Cleanup: Remove the mock listener to prevent interference with other tests
     SettingsData.removeListener(mockListener);
   }
 
   @Test
-  void testSetSelectedChannelDoesNotNotifyRemovedListener() {
-    // Arrange
-    String newChannel = "HOTFIX";
+  public void testSetPathPtu_UpdatesPathSuccessfully() {
+    // Arrange: Define a new path for testing
+    String newPath = "D:\\Games\\StarCitizen\\LIVE\\game.log";
+
+    // Act: Update the pathLive using the setter
+    SettingsData.setPathPtu(newPath);
+
+    // Assert: Verify the pathLive variable is updated
+    assertEquals(newPath, SettingsData.getPathPtu());
+  }
+
+  @Test
+  public void testSetPathPtu_NotifiesListeners() {
+    // Arrange: Create a mock listener and add it to the SettingsData listeners list
     SettingsListener mockListener = mock(SettingsListener.class);
     SettingsData.addListener(mockListener);
+
+    // Define a new path
+    String newPath = "D:\\Games\\StarCitizen\\LIVE\\game.log";
+
+    // Act: Update the pathLive using the setter
+    SettingsData.setPathPtu(newPath);
+
+    // Assert: Verify that the listener's settingsChanged method was called
+    verify(mockListener, times(1)).settingsChanged();
+
+    // Cleanup: Remove the mock listener to prevent interference with other tests
     SettingsData.removeListener(mockListener);
-
-    // Act
-    SettingsData.setSelectedChannel(newChannel);
-
-    // Assert
-    verify(mockListener, never()).settingsChanged();
   }
 }

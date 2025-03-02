@@ -20,9 +20,8 @@
 
 package de.greluc.sc.sckm.settings;
 
-import static de.greluc.sc.sckm.Constants.LIVE;
-
 import de.greluc.sc.sckm.Constants;
+import de.greluc.sc.sckm.data.ChannelType;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Generated;
@@ -48,7 +47,7 @@ import org.jetbrains.annotations.NotNull;
  * </ul>
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.1
+ * @version 1.3.0
  * @since 1.0.0
  */
 public class SettingsData {
@@ -77,9 +76,10 @@ public class SettingsData {
   @Getter private static String pathCustom = "";
   @Getter private static String handle = "";
   @Getter private static int interval = 60;
-  @Getter private static String selectedChannel = LIVE;
-  @Getter private static boolean isShowAll = false;
+  @Getter private static ChannelType selectedChannel = ChannelType.LIVE;
+  @Getter private static boolean isShowAllActive = false;
   @Getter private static boolean isWriteKillEventToFile = false;
+  @Getter private static boolean isKillerModeActive = false;
 
   /** Used to exclude the unused constructor from code coverage evaluation. */
   @Generated
@@ -179,18 +179,23 @@ public class SettingsData {
    *
    * @param selectedChannel The new selected channel to be set.
    */
-  public static void setSelectedChannel(@NotNull String selectedChannel) {
+  public static void setSelectedChannel(@NotNull ChannelType selectedChannel) {
     SettingsData.selectedChannel = selectedChannel;
     listeners.forEach(SettingsListener::settingsChanged);
   }
 
-  public static void setShowAll(boolean isShowAll) {
-    SettingsData.isShowAll = isShowAll;
+  public static void setShowAllActive(boolean isShowAll) {
+    SettingsData.isShowAllActive = isShowAll;
     listeners.forEach(SettingsListener::settingsChanged);
   }
 
   public static void setWriteKillEventToFile(boolean isWriteKillEventToFile) {
     SettingsData.isWriteKillEventToFile = isWriteKillEventToFile;
+    listeners.forEach(SettingsListener::settingsChanged);
+  }
+
+  public static void setKillerModeActive(boolean isKillerModeActive) {
+    SettingsData.isKillerModeActive = isKillerModeActive;
     listeners.forEach(SettingsListener::settingsChanged);
   }
 

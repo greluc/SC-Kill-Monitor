@@ -20,14 +20,8 @@
 
 package de.greluc.sc.sckm.controller;
 
-import static de.greluc.sc.sckm.Constants.CUSTOM;
-import static de.greluc.sc.sckm.Constants.EPTU;
-import static de.greluc.sc.sckm.Constants.HOTFIX;
-import static de.greluc.sc.sckm.Constants.PTU;
-import static de.greluc.sc.sckm.Constants.TECH_PREVIEW;
 import static de.greluc.sc.sckm.data.KillEventExtractor.extractKillEvents;
 
-import de.greluc.sc.sckm.AlertHandler;
 import de.greluc.sc.sckm.data.KillEvent;
 import de.greluc.sc.sckm.data.KillEventFormatter;
 import de.greluc.sc.sckm.settings.SettingsData;
@@ -41,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -71,7 +64,7 @@ import org.jetbrains.annotations.NotNull;
  * project.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.1
+ * @version 1.3.0
  * @since 1.0.0
  */
 @Log4j2
@@ -103,7 +96,7 @@ public class ScanViewController {
     scrollPane.setFitToHeight(true);
     scrollPane.setFitToWidth(true);
     executorService.submit(this::startScan);
-    cbShowAll.setSelected(SettingsData.isShowAll());
+    cbShowAll.setSelected(SettingsData.isShowAllActive());
   }
 
   /**
@@ -132,7 +125,7 @@ public class ScanViewController {
    */
   @FXML
   protected void onShowAllClicked() {
-    SettingsData.setShowAll(cbShowAll.isSelected());
+    SettingsData.setShowAllActive(cbShowAll.isSelected());
     evaluatedKillEvents.clear();
     textPane.getChildren().clear();
     displayKillEvents();
@@ -245,13 +238,17 @@ public class ScanViewController {
             killEvents.forEach(
                 killEvent -> {
                   if (!evaluatedKillEvents.contains(killEvent)) {
-                    if (killEvent.killer().equals(SettingsData.getHandle())
-                        || killEvent.killer().toLowerCase().contains("unknown")
+                    if (killEvent.killer().toLowerCase().contains("unknown")
                         || killEvent.killer().toLowerCase().contains("aimodule")
                         || killEvent.killer().toLowerCase().contains("pu_")
                         || killEvent.killer().toLowerCase().contains("npc_")
                         || killEvent.killer().toLowerCase().contains("kopion_")) {
-                      if (SettingsData.isShowAll()) {
+                      if (SettingsData.isShowAllActive()) {
+                        textPane.getChildren().add(getKillEventPane(killEvent));
+                        evaluatedKillEvents.add(killEvent);
+                      }
+                    } else if (killEvent.killer().equals(SettingsData.getHandle())) {
+                      if (SettingsData.isKillerModeActive() || SettingsData.isShowAllActive()) {
                         textPane.getChildren().add(getKillEventPane(killEvent));
                         evaluatedKillEvents.add(killEvent);
                       }
