@@ -65,6 +65,7 @@ public class SettingsViewController {
   @FXML private TextField inputPathTechPreview;
   @FXML private TextField inputPathCustom;
   @FXML private CheckBox cbWriteKillEvent;
+  @FXML private CheckBox cbKillerMode;
   @Setter private SettingsHandler settingsHandler;
 
   /**

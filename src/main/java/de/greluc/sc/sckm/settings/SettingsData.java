@@ -79,6 +79,7 @@ public class SettingsData {
   @Getter private static ChannelType selectedChannel = ChannelType.LIVE;
   @Getter private static boolean isShowAll = false;
   @Getter private static boolean isWriteKillEventToFile = false;
+  @Getter private static boolean isKillerModeActive = false;
 
   /** Used to exclude the unused constructor from code coverage evaluation. */
   @Generated
@@ -190,6 +191,11 @@ public class SettingsData {
 
   public static void setWriteKillEventToFile(boolean isWriteKillEventToFile) {
     SettingsData.isWriteKillEventToFile = isWriteKillEventToFile;
+    listeners.forEach(SettingsListener::settingsChanged);
+  }
+
+  public static void setKillerModeActive(boolean isKillerModeActive) {
+    SettingsData.isKillerModeActive = isKillerModeActive;
     listeners.forEach(SettingsListener::settingsChanged);
   }
 

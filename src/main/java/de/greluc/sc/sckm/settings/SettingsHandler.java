@@ -66,6 +66,7 @@ public class SettingsHandler {
    *   <li>Scan interval in seconds.
    *   <li>Show all flag.
    *   <li>Write kill-event-to-file flag.
+   *   <li>Killer-mode-active flag.
    * </ul>
    *
    * <p>Logging is used to capture any exceptions encountered during the flush operation, ensuring
@@ -82,6 +83,7 @@ public class SettingsHandler {
     preferences.putInt(SETTINGS_SCAN_INTERVAL_SECONDS, SettingsData.getInterval());
     preferences.putBoolean(SETTINGS_SHOW_ALL, SettingsData.isShowAll());
     preferences.putBoolean(SETTINGS_WRITE_TO_FILE, SettingsData.isWriteKillEventToFile());
+    preferences.putBoolean(SETTINGS_KILLER_MODE_ACTIVE, SettingsData.isKillerModeActive());
     try {
       preferences.flush();
     } catch (BackingStoreException exception) {
@@ -109,6 +111,7 @@ public class SettingsHandler {
    *   <li>{@code SETTINGS_SCAN_INTERVAL_SECONDS}: Interval in seconds for scanning.
    *   <li>{@code SETTINGS_SHOW_ALL}: Boolean flag for showing all events.
    *   <li>{@code SETTINGS_WRITE_KILLEVENT_TO_FILE}: Boolean flag for writing kill events to a file.
+   *   <li>{@code SETTINGS_KILLER_MODE_ACTIVE}: Boolean flag for activating the killer mode.
    * </ul>
    *
    * <p>Default paths are system-specific, referencing directories in the "C:\Program Files\Roberts Space Industries\StarCitizen" folder.
@@ -148,5 +151,6 @@ public class SettingsHandler {
         Integer.parseInt(preferences.get(SETTINGS_SCAN_INTERVAL_SECONDS, "60")));
     SettingsData.setShowAll(preferences.getBoolean(SETTINGS_SHOW_ALL, false));
     SettingsData.setShowAll(preferences.getBoolean(SETTINGS_WRITE_TO_FILE, false));
+    SettingsData.setShowAll(preferences.getBoolean(SETTINGS_KILLER_MODE_ACTIVE, false));
   }
 }
