@@ -127,6 +127,6 @@
     </Button>
    <Label text="Write KillEvent to file:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
    <CheckBox fx:id="cbWriteKillEvent" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-   <Label text="Killer mode:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+   <Label text="Killer Mode:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
    <CheckBox fx:id="cbKillerMode" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="8" />
 </GridPane>
