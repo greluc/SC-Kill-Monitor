@@ -39,7 +39,7 @@ import java.time.ZonedDateTime;
  * for tracking or monitoring purposes.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.1
+ * @version 1.3.0
  * @since 1.0.0
  */
 public record KillEvent(

@@ -64,7 +64,7 @@ import org.jetbrains.annotations.NotNull;
  * project.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.1
+ * @version 1.3.0
  * @since 1.0.0
  */
 @Log4j2
