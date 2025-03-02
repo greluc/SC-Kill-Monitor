@@ -81,7 +81,7 @@ public class SettingsHandler {
     preferences.put(SETTINGS_PATH_CUSTOM, SettingsData.getPathCustom());
     preferences.put(SETTINGS_PLAYER_HANDLE, SettingsData.getHandle());
     preferences.putInt(SETTINGS_SCAN_INTERVAL_SECONDS, SettingsData.getInterval());
-    preferences.putBoolean(SETTINGS_SHOW_ALL, SettingsData.isShowAll());
+    preferences.putBoolean(SETTINGS_SHOW_ALL, SettingsData.isShowAllActive());
     preferences.putBoolean(SETTINGS_WRITE_TO_FILE, SettingsData.isWriteKillEventToFile());
     preferences.putBoolean(SETTINGS_KILLER_MODE_ACTIVE, SettingsData.isKillerModeActive());
     try {
@@ -149,8 +149,8 @@ public class SettingsHandler {
     SettingsData.setHandle(preferences.get(SETTINGS_PLAYER_HANDLE, ""));
     SettingsData.setInterval(
         Integer.parseInt(preferences.get(SETTINGS_SCAN_INTERVAL_SECONDS, "60")));
-    SettingsData.setShowAll(preferences.getBoolean(SETTINGS_SHOW_ALL, false));
-    SettingsData.setShowAll(preferences.getBoolean(SETTINGS_WRITE_TO_FILE, false));
-    SettingsData.setShowAll(preferences.getBoolean(SETTINGS_KILLER_MODE_ACTIVE, false));
+    SettingsData.setShowAllActive(preferences.getBoolean(SETTINGS_SHOW_ALL, false));
+    SettingsData.setWriteKillEventToFile(preferences.getBoolean(SETTINGS_WRITE_TO_FILE, false));
+    SettingsData.setKillerModeActive(preferences.getBoolean(SETTINGS_KILLER_MODE_ACTIVE, false));
   }
 }

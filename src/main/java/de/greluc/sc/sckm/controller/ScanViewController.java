@@ -96,7 +96,7 @@ public class ScanViewController {
     scrollPane.setFitToHeight(true);
     scrollPane.setFitToWidth(true);
     executorService.submit(this::startScan);
-    cbShowAll.setSelected(SettingsData.isShowAll());
+    cbShowAll.setSelected(SettingsData.isShowAllActive());
   }
 
   /**
@@ -125,7 +125,7 @@ public class ScanViewController {
    */
   @FXML
   protected void onShowAllClicked() {
-    SettingsData.setShowAll(cbShowAll.isSelected());
+    SettingsData.setShowAllActive(cbShowAll.isSelected());
     evaluatedKillEvents.clear();
     textPane.getChildren().clear();
     displayKillEvents();
@@ -238,13 +238,17 @@ public class ScanViewController {
             killEvents.forEach(
                 killEvent -> {
                   if (!evaluatedKillEvents.contains(killEvent)) {
-                    if (killEvent.killer().equals(SettingsData.getHandle())
-                        || killEvent.killer().toLowerCase().contains("unknown")
+                    if (killEvent.killer().toLowerCase().contains("unknown")
                         || killEvent.killer().toLowerCase().contains("aimodule")
                         || killEvent.killer().toLowerCase().contains("pu_")
                         || killEvent.killer().toLowerCase().contains("npc_")
                         || killEvent.killer().toLowerCase().contains("kopion_")) {
-                      if (SettingsData.isShowAll()) {
+                      if (SettingsData.isShowAllActive()) {
+                        textPane.getChildren().add(getKillEventPane(killEvent));
+                        evaluatedKillEvents.add(killEvent);
+                      }
+                    } else if (killEvent.killer().equals(SettingsData.getHandle())) {
+                      if (SettingsData.isKillerModeActive() || SettingsData.isShowAllActive()) {
                         textPane.getChildren().add(getKillEventPane(killEvent));
                         evaluatedKillEvents.add(killEvent);
                       }

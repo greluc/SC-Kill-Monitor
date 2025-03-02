@@ -97,6 +97,7 @@ public class SettingsViewController {
     inputPathTechPreview.setText(SettingsData.getPathTechPreview());
     inputPathCustom.setText(SettingsData.getPathCustom());
     cbWriteKillEvent.setSelected(SettingsData.isWriteKillEventToFile());
+    cbKillerMode.setSelected(SettingsData.isKillerModeActive());
   }
 
   /**

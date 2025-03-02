@@ -77,7 +77,7 @@ public class SettingsData {
   @Getter private static String handle = "";
   @Getter private static int interval = 60;
   @Getter private static ChannelType selectedChannel = ChannelType.LIVE;
-  @Getter private static boolean isShowAll = false;
+  @Getter private static boolean isShowAllActive = false;
   @Getter private static boolean isWriteKillEventToFile = false;
   @Getter private static boolean isKillerModeActive = false;
 
@@ -184,8 +184,8 @@ public class SettingsData {
     listeners.forEach(SettingsListener::settingsChanged);
   }
 
-  public static void setShowAll(boolean isShowAll) {
-    SettingsData.isShowAll = isShowAll;
+  public static void setShowAllActive(boolean isShowAll) {
+    SettingsData.isShowAllActive = isShowAll;
     listeners.forEach(SettingsListener::settingsChanged);
   }
 
