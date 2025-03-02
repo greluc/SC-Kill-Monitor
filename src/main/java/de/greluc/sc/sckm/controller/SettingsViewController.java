@@ -125,6 +125,7 @@ public class SettingsViewController {
     SettingsData.setPathTechPreview(inputPathTechPreview.getText());
     SettingsData.setPathCustom(inputPathCustom.getText());
     SettingsData.setWriteKillEventToFile(cbWriteKillEvent.isSelected());
+    SettingsData.setKillerModeActive(cbKillerMode.isSelected());
     settingsHandler.saveSettings();
     closeWindow();
   }

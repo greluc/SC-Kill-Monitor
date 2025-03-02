@@ -86,6 +86,16 @@ public class KillEventExtractor {
                         killEvent,
                         scanStartTime.format(DateTimeFormatter.ofPattern("yyMMdd-HHmmss")));
                   }
+                } else if (SettingsData.isKillerModeActive() && killEvent.killer().equals(SettingsData.getHandle())
+                    && !killEvents.contains(killEvent)) {
+                  killEvents.addFirst(killEvent);
+                  log.info("New kill event detected");
+                  log.debug("Kill Event:\n{}", killEvent);
+                  if (SettingsData.isWriteKillEventToFile()) {
+                    writeKillEventToFile(
+                        killEvent,
+                        scanStartTime.format(DateTimeFormatter.ofPattern("yyMMdd-HHmmss")));
+                  }
                 }
               });
         }
