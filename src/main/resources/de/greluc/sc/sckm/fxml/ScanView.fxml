@@ -23,44 +23,57 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<GridPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="de.greluc.sc.sckm.controller.ScanViewController">
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.greluc.sc.sckm.controller.ScanViewController">
     <columnConstraints>
-        <ColumnConstraints hgrow="NEVER" maxWidth="10.0" minWidth="10.0" prefWidth="10.0"/>
-        <ColumnConstraints hgrow="NEVER" maxWidth="50.0" minWidth="50.0" prefWidth="50.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="NEVER" maxWidth="10.0" minWidth="10.0" prefWidth="10.0"/>
+        <ColumnConstraints hgrow="NEVER" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+        <ColumnConstraints hgrow="NEVER" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+        <ColumnConstraints hgrow="NEVER" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="NEVER"/>
-        <RowConstraints minHeight="100.0" vgrow="ALWAYS"/>
-        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="NEVER"/>
-        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="NEVER"/>
+        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
+        <RowConstraints minHeight="100.0" vgrow="ALWAYS" />
+        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="NEVER" />
+        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
     </rowConstraints>
-    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308"
-                maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-                vbarPolicy="ALWAYS" GridPane.columnIndex="1" GridPane.columnSpan="2147483647"
-                GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
-        <VBox fx:id="textPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-              prefHeight="0.0"/>
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" vbarPolicy="ALWAYS" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+        <VBox fx:id="textPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
     </ScrollPane>
-    <Button mnemonicParsing="false" onAction="#onStopPressed" style="-fx-background-color: #76000b;"
-            GridPane.columnIndex="1" GridPane.rowIndex="2">
+    <Button mnemonicParsing="false" onAction="#onStopPressed" style="-fx-background-color: #76000b;" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../icons/player-pause_white.png"/>
+                <Image url="@../icons/player-pause_white.png" />
             </ImageView>
         </graphic>
     </Button>
-    <CheckBox fx:id="cbShowAll" mnemonicParsing="false" onAction="#onShowAllClicked"
-              text="Show All Events" GridPane.columnIndex="2" GridPane.halignment="LEFT"
-              GridPane.rowIndex="2">
+    <CheckBox fx:id="cbShowAll" mnemonicParsing="false" onAction="#onShowAllClicked" text="Show All Events" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
         <GridPane.margin>
-            <Insets left="10.0"/>
+            <Insets left="10.0" />
         </GridPane.margin>
     </CheckBox>
+   <Label text="Death Count:" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+      <GridPane.margin>
+         <Insets right="5.0" />
+      </GridPane.margin>
+   </Label>
+   <Label fx:id="labelKillCount" text="Kill Count:" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+      <GridPane.margin>
+         <Insets right="5.0" />
+      </GridPane.margin>
+   </Label>
+   <Label fx:id="labelKillCountValue" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+   <Label fx:id="labelDeathCountValue" GridPane.columnIndex="6" GridPane.rowIndex="2" />
 </GridPane>
