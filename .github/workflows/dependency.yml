@@ -1,0 +1,16 @@
+name: Java CI with Gradle
+on: [pull_request]
+jobs:
+  dependency-submission:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '23'
+          distribution: 'zulu'
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@v4
