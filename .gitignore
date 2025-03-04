@@ -42,6 +42,7 @@ bin/
 .DS_Store
 /src/test/resources/game.02.log
 /src/test/resources/game.01.log
+/src/test/resources/Game.log
 
 .idea
 output
