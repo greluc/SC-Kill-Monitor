@@ -86,7 +86,7 @@ public class ScKillMonitorApp extends Application {
           .getIcons()
           .add(
               new javafx.scene.image.Image(
-                  String.valueOf(ScKillMonitorApp.class.getResource("logos/SC-Kill-Monitor.png"))));
+                  String.valueOf(ScKillMonitorApp.class.getResource("logos/sckm.jpg"))));
       stage.setOnCloseRequest(
           ignored -> {
             Platform.exit();
