@@ -18,13 +18,13 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-val checkstyleVersion="10.21.3" // https://github.com/checkstyle/checkstyle
+val checkstyleVersion="10.21.4" // https://github.com/checkstyle/checkstyle
 val annotationsVersion="26.0.2" // https://mvnrepository.com/artifact/org.jetbrains/annotations https://github.com/JetBrains/java-annotations
-val junitVersion = "5.11.4" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+val junitVersion = "5.12.0" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 val mockitoVersion = "5.15.2" // https://mvnrepository.com/artifact/org.mockito/mockito-core
 val atlantaFxVersion = "2.0.1" // https://mvnrepository.com/artifact/io.github.mkpaz/atlantafx-base
 val log4j2Version = "2.24.3" // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
-val jacksonVersion = "2.18.2" // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+val jacksonVersion = "2.18.3" // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 val mockitoAgent = configurations.create("mockitoAgent")
 
 plugins {
@@ -33,7 +33,7 @@ plugins {
   id("idea")
   id("jacoco")
   id("checkstyle")
-  id("io.freefair.lombok") version "8.12.2" // https://plugins.gradle.org/plugin/io.freefair.lombok
+  id("io.freefair.lombok") version "8.12.2.1" // https://plugins.gradle.org/plugin/io.freefair.lombok
   id("org.cyclonedx.bom") version "2.2.0" // https://github.com/CycloneDX/cyclonedx-gradle-plugin
   id("dev.hydraulic.conveyor") version "1.12" // https://plugins.gradle.org/plugin/dev.hydraulic.conveyor
   id("org.javamodularity.moduleplugin") version "1.8.15" // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
