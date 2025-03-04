@@ -59,7 +59,7 @@ dependencies {
 
 base {
   group = "de.greluc.sc"
-  version = "1.3.0"
+  version = "1.3.0.RC4"
   description = "SC Kill Monitor - See who griefed you!"
 }
 
