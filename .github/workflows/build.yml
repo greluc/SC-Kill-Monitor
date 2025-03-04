@@ -23,6 +23,8 @@ jobs:
           path: build/install/sckillmonitor/lib
   Package:
     needs: [Build]
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
