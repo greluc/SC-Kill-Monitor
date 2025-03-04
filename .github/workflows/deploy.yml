@@ -1,0 +1,27 @@
+name: Deploy to GitHub
+
+on: [workflow_dispatch]
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Windows build
+        uses: actions/download-artifact@v4
+        with:
+          name: build-result
+          path: ./artifacts
+
+      - name: Run Conveyor
+        uses: hydraulic-software/conveyor/actions/build@v9.2
+        env:
+          OAUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          command: make copied-site
+          signing_key: ${{ secrets.SIGNING_KEY }}
+          agree_to_license: 1
