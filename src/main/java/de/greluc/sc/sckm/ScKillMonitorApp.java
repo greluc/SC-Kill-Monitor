@@ -81,6 +81,9 @@ public class ScKillMonitorApp extends Application {
       stage.setScene(scene);
       stage.setMinWidth(700);
       stage.setMinHeight(500);
+      stage.setMaxWidth(700);
+      stage.setMaxHeight(500);
+      stage.setResizable(false);
       stage.setTitle("SC Kill Monitor");
       stage
           .getIcons()
