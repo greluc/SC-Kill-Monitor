@@ -20,7 +20,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-result
-          path: build/install/sckillmonitor/lib
+          path: build/libs
   Package:
     needs: [Build]
     permissions:
