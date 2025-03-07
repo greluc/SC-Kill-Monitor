@@ -23,9 +23,11 @@ package de.greluc.sc.sckm.controller;
 import de.greluc.sc.sckm.ScKillMonitorApp;
 import de.greluc.sc.sckm.settings.SettingsHandler;
 import java.io.IOException;
+import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -51,6 +53,7 @@ import lombok.extern.log4j.Log4j2;
 public class MainViewController {
   private final SettingsHandler settingsHandler = new SettingsHandler();
   @FXML private GridPane basePane;
+  @FXML private ImageView imageViewBackground;
   private GridPane startPane;
   private GridPane scanPane;
 
@@ -68,6 +71,11 @@ public class MainViewController {
   @FXML
   protected void initialize() {
     settingsHandler.loadSettings();
+    imageViewBackground.setImage(
+        new javafx.scene.image.Image(
+            Objects.requireNonNull(
+                ScKillMonitorApp.class.getResourceAsStream("background.png"))));
+    imageViewBackground.setPreserveRatio(true);
     FXMLLoader fxmlLoader =
         new FXMLLoader(ScKillMonitorApp.class.getResource("fxml/StartView.fxml"));
     try {
