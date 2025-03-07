@@ -257,11 +257,16 @@ public class ScanViewController {
             if (checkIfNoPlayer(killEvent) && !SettingsData.isShowAllActive()) {
               return;
             }
-            if (killEvent.killer().equals(SettingsData.getHandle())
-                && SettingsData.isKillerModeActive()) {
+            if (killEvent.killer().equals(SettingsData.getHandle())) {
               if (SettingsData.getHandle().equals(killEvent.killedPlayer())) {
+                if (!SettingsData.isShowAllActive()) {
+                  return;
+                }
                 deathCount++;
               } else {
+                if (!SettingsData.isKillerModeActive()) {
+                  return;
+                }
                 killCount++;
               }
             } else {
