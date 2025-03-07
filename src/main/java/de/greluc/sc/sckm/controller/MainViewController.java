@@ -123,6 +123,7 @@ public class MainViewController {
       Scene scene = new Scene(fxmlLoader.load());
       SettingsViewController settingsViewController = fxmlLoader.getController();
       settingsViewController.setSettingsHandler(settingsHandler);
+      stage.setTitle("SC Kill Monitor - Settings");
       stage.setScene(scene);
       stage.setMaximized(false);
       stage.setResizable(true);
@@ -166,6 +167,7 @@ public class MainViewController {
           new FXMLLoader(ScKillMonitorApp.class.getResource("fxml/AboutView.fxml"));
       Stage stage = new Stage();
       Scene scene = new Scene(fxmlLoader.load());
+      stage.setTitle("SC Kill Monitor - About");
       stage.setScene(scene);
       stage.setMaximized(false);
       stage.setResizable(true);

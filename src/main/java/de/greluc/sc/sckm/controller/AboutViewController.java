@@ -43,6 +43,7 @@ public class AboutViewController {
 
   @FXML private TextArea textAreaAbout;
   @FXML private ImageView imageViewLogoSc;
+  @FXML private ImageView imageViewLogoSckm;
 
   /**
    * Initializes the About view of the SC Kill Monitor application.
@@ -99,5 +100,11 @@ public class AboutViewController {
                 ScKillMonitorApp.class.getResourceAsStream("logos/sc.png"))));
     imageViewLogoSc.setPreserveRatio(true);
     imageViewLogoSc.setFitHeight(100);
+    imageViewLogoSckm.setImage(
+        new javafx.scene.image.Image(
+            Objects.requireNonNull(
+                ScKillMonitorApp.class.getResourceAsStream("logos/sckm.jpg"))));
+    imageViewLogoSckm.setPreserveRatio(true);
+    imageViewLogoSckm.setFitHeight(100);
   }
 }
