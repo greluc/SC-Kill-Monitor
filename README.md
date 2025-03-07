@@ -46,7 +46,7 @@ By participating in this project, you agree to abide by its terms.
 
 - Lucas Greuloch ([@greluc](https://github.com/greluc))
 - René Jansen ([@rjcncpt](https://github.com/rjcncpt))
-- Jaeger_XCI
+- Jaeger_XCI ([PHANTOM X](https://discord.gg/dGRrUu7bb4))
 
 <div style="display: flex; align-items: center; gap: 10px;">
   <a href="https://robertsspaceindustries.com/en/"><img src="src/main/resources/de/greluc/sc/sckm/logos/sc.png" alt="Made By The Community" style="height: 200px;"></a>
