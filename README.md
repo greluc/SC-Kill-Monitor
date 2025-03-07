@@ -50,6 +50,6 @@ By participating in this project, you agree to abide by its terms.
 
 <div style="display: flex; align-items: center; gap: 10px;">
   <a href="https://robertsspaceindustries.com/en/"><img src="src/main/resources/de/greluc/sc/sckm/logos/sc.png" alt="Made By The Community" style="height: 200px;"></a>
-  <a href="https://en.wikipedia.org/wiki/Java_(programming_language)"><img src="src/main/resources/de/greluc/sc/sckm/logos/Logo_Java.svg" alt="Java" style="height: 200px;"></a>
-  <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="src/main/resources/de/greluc/sc/sckm/logos/Logo_GPLv3.svg" alt="GPLv3" style="height: 200px;"></a>
+  <a href="https://en.wikipedia.org/wiki/Java_(programming_language)"><img src="src/main/resources/de/greluc/sc/sckm/logos/java.svg" alt="Java" style="height: 200px;"></a>
+  <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="src/main/resources/de/greluc/sc/sckm/logos/gplv3.svg" alt="GPLv3" style="height: 200px;"></a>
 </div>
