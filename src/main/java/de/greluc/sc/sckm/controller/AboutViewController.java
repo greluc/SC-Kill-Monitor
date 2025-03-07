@@ -72,6 +72,11 @@ public class AboutViewController {
             SC Kill Monitor is an application to search the Star Citizen game.log file for the person who killed you.
 
             The source code is available on GitHub: https://github.com/greluc/SC-Kill-Monitor
+            
+            The team behind the app:
+            - Lucas Greuloch (greluc, https://github.com/greluc)
+            - René Jansen (rjcncpt, https://github.com/rjcncpt)
+            - Jaeger_XCI (PHANTOM X, https://discord.gg/dGRrUu7bb4)
 
             It is licensed under the GNU General Public License v3.0 (GPLv3). You can find the license text under https://github.com/greluc/SC-Kill-Monitor/blob/main/LICENSE.md
 
@@ -91,7 +96,7 @@ public class AboutViewController {
     imageViewLogoSc.setImage(
         new javafx.scene.image.Image(
             Objects.requireNonNull(
-                ScKillMonitorApp.class.getResourceAsStream("logos/MadeByTheCommunity_Black.png"))));
+                ScKillMonitorApp.class.getResourceAsStream("logos/sc.png"))));
     imageViewLogoSc.setPreserveRatio(true);
     imageViewLogoSc.setFitHeight(100);
   }
