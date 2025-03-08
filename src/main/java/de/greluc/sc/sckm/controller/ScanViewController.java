@@ -20,14 +20,8 @@
 
 package de.greluc.sc.sckm.controller;
 
-import static de.greluc.sc.sckm.Constants.CUSTOM;
-import static de.greluc.sc.sckm.Constants.EPTU;
-import static de.greluc.sc.sckm.Constants.HOTFIX;
-import static de.greluc.sc.sckm.Constants.PTU;
-import static de.greluc.sc.sckm.Constants.TECH_PREVIEW;
 import static de.greluc.sc.sckm.data.KillEventExtractor.extractKillEvents;
 
-import de.greluc.sc.sckm.AlertHandler;
 import de.greluc.sc.sckm.data.KillEvent;
 import de.greluc.sc.sckm.data.KillEventFormatter;
 import de.greluc.sc.sckm.settings.SettingsData;
@@ -41,8 +35,8 @@ import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
@@ -71,7 +65,7 @@ import org.jetbrains.annotations.NotNull;
  * project.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.1
+ * @version 1.3.0
  * @since 1.0.0
  */
 @Log4j2
@@ -82,6 +76,11 @@ public class ScanViewController {
   @FXML private VBox textPane;
   @FXML private ScrollPane scrollPane;
   @FXML private CheckBox cbShowAll;
+  @FXML private Label labelKillCount;
+  @FXML private Label labelKillCountValue;
+  @FXML private Label labelDeathCountValue;
+  private int killCount = 0;
+  private int deathCount = 0;
   private MainViewController mainViewController;
 
   /**
@@ -103,7 +102,13 @@ public class ScanViewController {
     scrollPane.setFitToHeight(true);
     scrollPane.setFitToWidth(true);
     executorService.submit(this::startScan);
-    cbShowAll.setSelected(SettingsData.isShowAll());
+    cbShowAll.setSelected(SettingsData.isShowAllActive());
+    if (!SettingsData.isKillerModeActive()) {
+      labelKillCount.setVisible(false);
+      labelKillCountValue.setVisible(false);
+    }
+    labelKillCountValue.setText(String.valueOf(killCount));
+    labelDeathCountValue.setText(String.valueOf(deathCount));
   }
 
   /**
@@ -123,18 +128,23 @@ public class ScanViewController {
   }
 
   /**
-   * Handles the "Show All" button click event in the UI.
+   * Handles the action event triggered when the "Show All" checkbox or button is clicked.
    *
-   * <p>This method updates the application's settings to reflect the state of the "Show All"
-   * checkbox. It clears the collection of evaluated kill events and the content displayed in the
-   * text pane. After clearing the text pane, it repopulates it by calling the displayKillEvents
-   * method.
+   * <p>This method updates the "show all" setting based on the selection status
+   * of the associated checkbox. It clears the existing list of evaluated kill
+   * events, resets the text pane content, and initializes counters for kill
+   * and death counts. The respective labels displaying these counts are also updated.
+   * Finally, it refreshes and displays the current list of kill events.
    */
   @FXML
   protected void onShowAllClicked() {
-    SettingsData.setShowAll(cbShowAll.isSelected());
+    SettingsData.setShowAllActive(cbShowAll.isSelected());
     evaluatedKillEvents.clear();
     textPane.getChildren().clear();
+    killCount = 0;
+    deathCount = 0;
+    labelKillCountValue.setText(String.valueOf(killCount));
+    labelDeathCountValue.setText(String.valueOf(deathCount));
     displayKillEvents();
   }
 
@@ -149,35 +159,29 @@ public class ScanViewController {
   }
 
   /**
-   * Starts a continuous scan process for capturing and processing kill events from log files based
-   * on the selected channel configuration.
+   * Starts the scanning process for kill events by continuously monitoring a log file based on
+   * the selected channel and update interval configured in settings. The method determines the
+   * appropriate file path based on the currently selected channel, initializes counters for kill
+   * and death events, and repeatedly extracts event data from the log file at the specified
+   * interval.
    *
-   * <p>This method determines the appropriate log file path based on the selected channel (e.g.,
-   * PTU, EPTU, HOTFIX, TECH_PREVIEW, CUSTOM, or default LIVE channel) and initializes a scanning
-   * process to repeatedly extract and display kill events. The interval for each scan iteration is
-   * determined using the configured interval value from {@link SettingsData}.
+   * <p>The scanning process logs details about the selected configuration and updates the GUI
+   * with the processed kill events. If an error occurs during file processing or if the scan
+   * thread is interrupted, the method gracefully terminates the scanning process.
    *
-   * <p>The scanning process logs diagnostic and informational messages, including details about the
-   * selected handle, interval, channel, and log file path. In case of file read errors or
-   * interruptions, the method handles exceptions gracefully, ensuring proper logging and cleanup.
+   * <p><b>Note:</b> This method continuously runs until an error occurs or the thread is
+   * interrupted. Proper thread management is required when invoking this method to ensure
+   * efficient system resource usage.
    *
-   * <p>The scan runs indefinitely until interrupted (e.g., by an external thread), at which point
-   * the thread is terminated cleanly.
-   *
-   * <p>Details:
-   *
+   * <p>Operational flow:
    * <ul>
-   *   <li>Log messages are recorded at various stages, including scan start, extraction completion,
-   *       and GUI update completion.
-   *   <li>Kill events are extracted and displayed in each scan iteration.
-   *   <li>Handles exceptions for I/O errors during file read and interruptions during sleep.
+   *   <li>Determine the correct file path for the selected channel from user settings.</li>
+   *   <li>Log configuration details such as handle, interval, channel, and file path.</li>
+   *   <li>Initialize scanning by monitoring the log file for kill events.</li>
+   *   <li>Extract and process kill event data, then update the GUI.</li>
+   *   <li>Sleep for the configured interval before repeating the scan.</li>
+   *   <li>Handle errors and interruptions in a robust manner to stop the scan gracefully.</li>
    * </ul>
-   *
-   * <p><strong>Note:</strong> Ensure that {@link SettingsData} is properly configured before
-   * invoking this method, as it relies on the settings like selected channel, interval, handle, and
-   * log file paths.
-   *
-   * @throws RuntimeException if any unexpected error occurs during scanning.
    */
   public void startScan() {
     String selectedPathValue =
@@ -196,9 +200,11 @@ public class ScanViewController {
     log.info("Using the selected channel: {}", SettingsData.getSelectedChannel());
     log.info("Using the selected log file path: {}", selectedPathValue);
     ZonedDateTime scanStartTime = ZonedDateTime.now();
+    killCount = 0;
+    deathCount = 0;
 
     while (true) {
-      try{
+      try {
         extractKillEvents(killEvents, selectedPathValue, scanStartTime);
       } catch (IOException ioException) {
         Platform.runLater(this::onStopPressed);
@@ -219,48 +225,62 @@ public class ScanViewController {
   }
 
   /**
-   * Displays the kill events in the user interface while ensuring that each kill event is displayed
-   * only once. The method filters and adds the kill events to the text pane based on specific
-   * conditions and user settings.
+   * Processes and displays kill events within the application. This method iterates over all kill
+   * events, filtering and evaluating each event to update related statistics and UI elements such
+   * as kill count, death count, and displaying the kill event in a specified pane. The method ensures
+   * no duplicate event evaluations by tracking processed events.
    *
-   * <p>The kill events are processed on the JavaFX application thread using the {@code
-   * Platform.runLater} method. This ensures that the UI updates occur on the correct thread. Each
-   * kill event is checked against a list of already evaluated events to prevent duplication.
-   *
-   * <p>Kill events are displayed if:
-   *
+   * <p>The method performs the following tasks:
    * <ul>
-   *   <li>The killer field matches the user's handle.
-   *   <li>The killer's name includes certain predefined substrings (e.g., "unknown", "aimodule",
-   *       "pu_", "npc_", "kopion_").
-   *   <li>The user settings permit displaying all kill events.
+   *   <li>Skips evaluation of kill events already processed (stored in {@code evaluatedKillEvents}).
+   *   <li>Filters events based on criteria such as player presence and active settings.
+   *   <li>Modifies kill or death count based on configuration settings and event details, such as
+   *       the killer and killed player.
+   *   <li>Updates the UI in a thread-safe manner using the JavaFX {@code Platform.runLater} method
+   *       to reflect kill and death statistics in labels and add the kill event pane to the
+   *       designated component.
+   *   <li>Adds processed kill events to the list of evaluated events.
    * </ul>
    *
-   * <p>When a kill event meets the display criteria, it is added to the UI and marked as evaluated
-   * by adding it to the collection of processed events.
+   * <p>Conditions and Settings:
+   * <ul>
+   *   <li>Respects the visibility settings from {@code SettingsData} to determine if all active
+   *       events should be shown or only specific ones.
+   *   <li>Evaluates the event in "Killer Mode" to categorize events and correctly update the kill or
+   *       death count.
+   * </ul>
    */
   private void displayKillEvents() {
-    Platform.runLater(
-        () ->
-            killEvents.forEach(
-                killEvent -> {
-                  if (!evaluatedKillEvents.contains(killEvent)) {
-                    if (killEvent.killer().equals(SettingsData.getHandle())
-                        || killEvent.killer().toLowerCase().contains("unknown")
-                        || killEvent.killer().toLowerCase().contains("aimodule")
-                        || killEvent.killer().toLowerCase().contains("pu_")
-                        || killEvent.killer().toLowerCase().contains("npc_")
-                        || killEvent.killer().toLowerCase().contains("kopion_")) {
-                      if (SettingsData.isShowAll()) {
-                        textPane.getChildren().add(getKillEventPane(killEvent));
-                        evaluatedKillEvents.add(killEvent);
-                      }
-                    } else {
-                      textPane.getChildren().add(getKillEventPane(killEvent));
-                      evaluatedKillEvents.add(killEvent);
-                    }
-                  }
-                }));
+    killEvents.forEach(
+        killEvent -> {
+          if (!evaluatedKillEvents.contains(killEvent)) {
+            if (checkIfNoPlayer(killEvent) && !SettingsData.isShowAllActive()) {
+              return;
+            }
+            if (killEvent.killer().equals(SettingsData.getHandle())) {
+              if (SettingsData.getHandle().equals(killEvent.killedPlayer())) {
+                if (!SettingsData.isShowAllActive()) {
+                  return;
+                }
+                deathCount++;
+              } else {
+                if (!SettingsData.isKillerModeActive()) {
+                  return;
+                }
+                killCount++;
+              }
+            } else {
+              deathCount++;
+            }
+            Platform.runLater(
+                () -> {
+                  textPane.getChildren().add(getKillEventPane(killEvent));
+                  labelKillCountValue.setText(String.valueOf(killCount));
+                  labelDeathCountValue.setText(String.valueOf(deathCount));
+                });
+            evaluatedKillEvents.add(killEvent);
+          }
+        });
   }
 
   /**
@@ -283,5 +303,30 @@ public class ScanViewController {
 
     VBox.setMargin(textArea, new Insets(5, 10, 0, 0)); // Top, Right, Bottom, Left
     return wrapper;
+  }
+
+  /**
+   * Checks if neither the killer nor the killed player in the given kill event represents an actual
+   * player. This method inspects the names of the killer and killed player to determine if they are
+   * system entities or non-player characters (NPCs).
+   *
+   * @param killEvent The kill event containing information about the killer and killed player. Must
+   *     not be null.
+   * @return {@code true} if neither the killer nor the killed player is an actual player, {@code
+   *     false} otherwise.
+   */
+  private boolean checkIfNoPlayer(@NotNull KillEvent killEvent) {
+    if (killEvent.killer().toLowerCase().contains("unknown")
+        || killEvent.killer().toLowerCase().contains("aimodule")
+        || killEvent.killer().toLowerCase().contains("pu_")
+        || killEvent.killer().toLowerCase().contains("npc_")
+        || killEvent.killer().toLowerCase().contains("kopion_")) {
+      return true;
+    } else
+      return killEvent.killedPlayer().toLowerCase().contains("unknown")
+          || killEvent.killedPlayer().toLowerCase().contains("aimodule")
+          || killEvent.killedPlayer().toLowerCase().contains("pu_")
+          || killEvent.killedPlayer().toLowerCase().contains("npc_")
+          || killEvent.killedPlayer().toLowerCase().contains("kopion_");
   }
 }

@@ -44,7 +44,7 @@ import org.jetbrains.annotations.NotNull;
  * <p>The application exits completely when the user closes the main window.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.1
+ * @version 1.3.0
  * @since 1.0.0
  */
 @Log4j2
@@ -81,12 +81,15 @@ public class ScKillMonitorApp extends Application {
       stage.setScene(scene);
       stage.setMinWidth(700);
       stage.setMinHeight(500);
+      stage.setMaxWidth(700);
+      stage.setMaxHeight(500);
+      stage.setResizable(false);
       stage.setTitle("SC Kill Monitor");
       stage
           .getIcons()
           .add(
               new javafx.scene.image.Image(
-                  String.valueOf(ScKillMonitorApp.class.getResource("logos/SC-Kill-Monitor.png"))));
+                  String.valueOf(ScKillMonitorApp.class.getResource("logos/sckm.jpg"))));
       stage.setOnCloseRequest(
           ignored -> {
             Platform.exit();

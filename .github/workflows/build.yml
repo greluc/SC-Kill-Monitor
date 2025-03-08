@@ -1,0 +1,47 @@
+name: CI
+on: [pull_request]
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '23'
+          distribution: 'zulu'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Build with Gradle Wrapper
+        run: ./gradlew installDist --warning-mode all
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-result
+          path: build/install/sckillmonitor/lib
+  Package:
+    needs: [Build]
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download Windows build
+        uses: actions/download-artifact@v4
+        with:
+          name: build-result
+          path: ./artifacts
+      - name: Run Conveyor
+        uses: hydraulic-software/conveyor/actions/build@v17.0
+        with:
+          command: -f ci.conveyor.conf make windows-zip
+          signing_key: ${{ secrets.SIGNING_KEY }}
+          agree_to_license: 1
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-result
+          path: output

@@ -36,13 +36,14 @@ import javafx.scene.image.ImageView;
  * application's description and setting the application's logos into an image view.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.2.1
+ * @version 1.3.0
  * @since 1.0.1
  */
 public class AboutViewController {
 
   @FXML private TextArea textAreaAbout;
   @FXML private ImageView imageViewLogoSc;
+  @FXML private ImageView imageViewLogoSckm;
 
   /**
    * Initializes the About view of the SC Kill Monitor application.
@@ -72,6 +73,11 @@ public class AboutViewController {
             SC Kill Monitor is an application to search the Star Citizen game.log file for the person who killed you.
 
             The source code is available on GitHub: https://github.com/greluc/SC-Kill-Monitor
+            
+            The team behind the app:
+            - Lucas Greuloch (greluc, https://github.com/greluc)
+            - René Jansen (rjcncpt, https://github.com/rjcncpt)
+            - Jaeger_XCI (PHANTOM X, https://discord.gg/dGRrUu7bb4)
 
             It is licensed under the GNU General Public License v3.0 (GPLv3). You can find the license text under https://github.com/greluc/SC-Kill-Monitor/blob/main/LICENSE.md
 
@@ -91,8 +97,14 @@ public class AboutViewController {
     imageViewLogoSc.setImage(
         new javafx.scene.image.Image(
             Objects.requireNonNull(
-                ScKillMonitorApp.class.getResourceAsStream("logos/MadeByTheCommunity_Black.png"))));
+                ScKillMonitorApp.class.getResourceAsStream("logos/sc.png"))));
     imageViewLogoSc.setPreserveRatio(true);
     imageViewLogoSc.setFitHeight(100);
+    imageViewLogoSckm.setImage(
+        new javafx.scene.image.Image(
+            Objects.requireNonNull(
+                ScKillMonitorApp.class.getResourceAsStream("logos/sckm.jpg"))));
+    imageViewLogoSckm.setPreserveRatio(true);
+    imageViewLogoSckm.setFitHeight(100);
   }
 }

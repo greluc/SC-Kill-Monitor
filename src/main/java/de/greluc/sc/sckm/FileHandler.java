@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import lombok.Generated;
 import lombok.extern.log4j.Log4j2;
@@ -42,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @since 1.0.0
- * @version 1.2.1
+ * @version 1.3.0
  */
 @Log4j2
 public class FileHandler {
@@ -91,7 +92,10 @@ public class FileHandler {
     File file = new File(String.format("logs/kill-events_%s.log", fileSuffix));
     try (FileWriter writer = new FileWriter(file, true)) {
       String json = objectMapper.writeValueAsString(killEvent);
-      writer.write(json + System.lineSeparator());
+      if (file.length() > 0) {
+        writer.write("," + System.lineSeparator());
+      }
+      writer.write(json);
       log.info("KillEvent successfully written to file: {}", file.getAbsolutePath());
     } catch (IOException e) {
       log.error("Error while writing KillEvent to file", e);
