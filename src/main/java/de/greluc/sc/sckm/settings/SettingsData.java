@@ -47,7 +47,7 @@ import org.jetbrains.annotations.NotNull;
  * </ul>
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.3.0
+ * @version 1.4.0
  * @since 1.0.0
  */
 public class SettingsData {
@@ -80,6 +80,7 @@ public class SettingsData {
   @Getter private static boolean isShowAllActive = false;
   @Getter private static boolean isWriteKillEventToFile = false;
   @Getter private static boolean isKillerModeActive = false;
+  @Getter private static boolean isStreamerModeActive = false;
 
   /** Used to exclude the unused constructor from code coverage evaluation. */
   @Generated
@@ -88,115 +89,130 @@ public class SettingsData {
   }
 
   /**
-   * Sets the path for the live environment and notifies all registered listeners about the change
-   * in settings.
+   * Sets the path for the Live environment.
    *
-   * @param pathLive The new path for the live environment.
+   * @param pathLive The new path for the Live environment. Must not be null.
    */
   public static void setPathLive(@NotNull String pathLive) {
     SettingsData.pathLive = pathLive;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
   /**
-   * Sets the path for the PTU (Public Test Universe) environment and notifies all registered
-   * listeners about the change in settings.
+   * Sets the path for the PTU (Public Test Universe) environment.
    *
-   * @param pathPtu The new path for the PTU environment.
+   * @param pathPtu The new path for the PTU environment. Must not be null.
    */
   public static void setPathPtu(@NotNull String pathPtu) {
     SettingsData.pathPtu = pathPtu;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
   /**
-   * Sets the path for the EPTU (Experimental Public Test Universe) environment and notifies all
-   * registered listeners about the change in settings.
+   * Sets the path for the EPTU (Experimental Public Test Universe) environment.
    *
-   * @param pathEptu The new path for the EPTU environment.
+   * @param pathEptu The new path for the EPTU environment. Must not be null.
    */
   public static void setPathEptu(@NotNull String pathEptu) {
     SettingsData.pathEptu = pathEptu;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
   /**
-   * Sets the path for the Hotfix environment and notifies all registered listeners about the change
-   * in settings.
+   * Sets the path for the Hotfix environment.
    *
-   * @param pathHotfix The new path for the Hotfix environment.
+   * @param pathHotfix The new path for the Hotfix environment. Must not be null.
    */
   public static void setPathHotfix(@NotNull String pathHotfix) {
     SettingsData.pathHotfix = pathHotfix;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
   /**
-   * Sets the path for the Tech Preview environment and notifies all registered listeners about the
-   * change in settings.
+   * Sets the path for the Tech Preview environment.
    *
-   * @param pathTechPreview The new path for the Tech Preview environment.
+   * @param pathTechPreview The new path for the Tech Preview environment. Must not be null.
    */
   public static void setPathTechPreview(@NotNull String pathTechPreview) {
     SettingsData.pathTechPreview = pathTechPreview;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
   /**
-   * Sets the custom path and notifies all registered listeners about the change in settings.
+   * Sets the custom path configuration for the application.
    *
-   * @param pathCustom The new custom path to be set.
+   * @param pathCustom The new custom path to be set. Must not be null.
    */
   public static void setPathCustom(@NotNull String pathCustom) {
     SettingsData.pathCustom = pathCustom;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
   /**
-   * Sets the handle value and notifies all registered listeners about the change in settings.
+   * Sets the handle in the {@code SettingsData} class. This value is used to uniquely identify
+   * or represent a specific aspect of the settings configuration.
    *
-   * @param handle The new handle to be set.
+   * @param handle The new handle value to set. Must not be {@code null}.
    */
   public static void setHandle(@NotNull String handle) {
     SettingsData.handle = handle;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
   /**
-   * Sets the interval value and notifies all registered listeners about the change in settings.
+   * Sets the interval value for the {@code SettingsData} configuration.
    *
-   * @param interval The new interval value to be set.
+   * @param interval The new interval value to set. Must be a non-negative integer.
    */
   public static void setInterval(int interval) {
     SettingsData.interval = interval;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
   /**
-   * Sets the selected channel and notifies all registered listeners about the change in settings.
-   * This method is used to update the current channel setting and trigger any associated actions in
-   * registered listeners.
+   * Sets the selected channel for the application configuration.
    *
-   * @param selectedChannel The new selected channel to be set.
+   * @param selectedChannel The channel to set as selected. Must not be {@code null}.
    */
   public static void setSelectedChannel(@NotNull ChannelType selectedChannel) {
     SettingsData.selectedChannel = selectedChannel;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
+  /**
+   * Sets the state of the "Show All Events" setting.
+   *
+   * @param isShowAll A boolean value indicating whether to enable or disable the "Show All Events" setting.
+   *                  When {@code true}, all events will be displayed; when {@code false}, only a subset
+   *                  of events may be shown depending on other configurations.
+   */
   public static void setShowAllActive(boolean isShowAll) {
     SettingsData.isShowAllActive = isShowAll;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
+  /**
+   * Sets the state of whether kill events should be written to a file.
+   *
+   * @param isWriteKillEventToFile A boolean value indicating whether kill events should
+   *                                be written to a file. When {@code true}, kill events
+   *                                will be logged to a file; when {@code false}, they
+   *                                will not be logged.
+   */
   public static void setWriteKillEventToFile(boolean isWriteKillEventToFile) {
     SettingsData.isWriteKillEventToFile = isWriteKillEventToFile;
-    listeners.forEach(SettingsListener::settingsChanged);
   }
 
+  /**
+   * Sets the state of the "Killer Mode" setting in the application configuration.
+   *
+   * @param isKillerModeActive A boolean value indicating whether "Killer Mode" should be
+   *                           active or not. When {@code true}, "Killer Mode" is enabled;
+   *                           when {@code false}, it is disabled.
+   */
   public static void setKillerModeActive(boolean isKillerModeActive) {
     SettingsData.isKillerModeActive = isKillerModeActive;
-    listeners.forEach(SettingsListener::settingsChanged);
+  }
+
+  /**
+   * Sets the state of the "Streamer Mode" setting in the application configuration.
+   *
+   * @param isStreamerModeActive A boolean value indicating whether "Streamer Mode" should be
+   *                             active or not. When {@code true}, "Streamer Mode" is enabled;
+   *                             when {@code false}, it is disabled.
+   */
+  public static void setStreamerModeActive(boolean isStreamerModeActive) {
+    SettingsData.isStreamerModeActive = isStreamerModeActive;
   }
 
   /**
@@ -207,6 +223,20 @@ public class SettingsData {
    */
   public static void addListener(@NotNull SettingsListener listener) {
     listeners.add(listener);
+  }
+
+  /**
+   * Notifies all registered {@link SettingsListener} instances about changes in the settings.
+   *
+   * <p>This method iterates through the list of registered listeners and invokes their
+   * {@link SettingsListener#settingsChanged()} method to inform them of a settings modification.
+   *
+   * <p>Listeners should implement the {@link SettingsListener} interface and be added to the
+   * listener list using {@code addListener(SettingsListener listener)} prior to being notified
+   * via this method.
+   */
+  public static void settingsChanged() {
+    listeners.forEach(SettingsListener::settingsChanged);
   }
 
   /**

@@ -54,7 +54,7 @@ import org.jetbrains.annotations.NotNull;
  * </ul>
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.3.0
+ * @version 1.4.0
  * @since 1.0.0
  */
 public class SettingsViewController {
@@ -69,24 +69,19 @@ public class SettingsViewController {
   @Setter private SettingsHandler settingsHandler;
 
   /**
-   * Initializes the view components of the {@link  SettingsViewController}.
+   * Initializes the settings view by populating the input fields and checkboxes with values from
+   * the {@code SettingsData} class.
    *
-   * <p>Sets the text of input fields with the corresponding file path values retrieved from
-   * {@link SettingsData}.
-   *
-   * <p>Specifically, it initializes the following input fields:
-   *
+   * <p>This method is automatically invoked by JavaFX during the creation of the settings view
+   * controller. It retrieves the current settings stored in the {@code SettingsData} class and
+   * uses them to set the contents of the UI elements, including text fields and checkboxes. The
+   * following actions are performed:
    * <ul>
-   *   <li>{@code inputPathLive} with the live environment path.
-   *   <li>{@code inputPathPtu} with the Public Test Universe (PTU) path.
-   *   <li>{@code inputPathEptu} with the Experimental Public Test Universe (EPTU) path.
-   *   <li>{@code inputPathHotfix} with the Hotfix environment path.
-   *   <li>{@code inputPathTechPreview} with the Tech Preview environment path.
-   *   <li>{@code inputPathCustom} with a custom path.
+   *   <li>Sets the text fields for LIVE, PTU, EPTU, Hotfix, Tech Preview, and custom paths based
+   *       on the respective values stored in the {@code SettingsData}.
+   *   <li>Updates the states of the "Write Kill Event to File" and "Killer Mode" checkboxes to
+   *       reflect their current values in the {@code SettingsData}.
    * </ul>
-   *
-   * <p>This method ensures that the view reflects the current settings stored in the {@link
-   * SettingsData} class.
    */
   @FXML
   protected void initialize() {
@@ -101,20 +96,21 @@ public class SettingsViewController {
   }
 
   /**
-   * Handles the save action triggered in the settings view. This method captures the current input
-   * values from the UI, updates the corresponding paths in the {@link SettingsData} class, and then
-   * persists these updated settings using the {@code settingsHandler}. After saving the settings,
-   * the associated window is closed.
+   * Handles the "Save" button action in the settings view and persists the updated settings data.
    *
-   * <p>The following paths are updated based on the user input:
+   * <p>This method is triggered when the user clicks the "Save" button in the settings interface.
+   * It retrieves the values entered into the various input fields, updates the corresponding
+   * properties in the {@link SettingsData} class, and saves the settings using the
+   * {@code settingsHandler}.
    *
+   * <p>Specifically, this method performs the following actions:
    * <ul>
-   *   <li>Live environment path.<br>
-   *   <li>PTU (Public Test Universe) environment path.<br>
-   *   <li>EPTU (Experimental Public Test Universe) environment path.<br>
-   *   <li>Hotfix environment path.<br>
-   *   <li>Tech Preview environment path.<br>
-   *   <li>Custom path.
+   *   <li>Updates file path settings for live, PTU, EPTU, Hotfix, Tech Preview, and custom environments.
+   *   <li>Stores the boolean values for the "Write Kill Event to File" and "Killer Mode" options.
+   *   <li>Invokes the {@link SettingsData#settingsChanged()} method to signal that the settings
+   *       have been modified.
+   *   <li>Calls the {@code settingsHandler.saveSettings()} method to persist the changes.
+   *   <li>Closes the settings window by calling {@link #closeWindow()}.
    * </ul>
    */
   @FXML
@@ -127,6 +123,7 @@ public class SettingsViewController {
     SettingsData.setPathCustom(inputPathCustom.getText());
     SettingsData.setWriteKillEventToFile(cbWriteKillEvent.isSelected());
     SettingsData.setKillerModeActive(cbKillerMode.isSelected());
+    SettingsData.settingsChanged();
     settingsHandler.saveSettings();
     closeWindow();
   }

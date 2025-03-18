@@ -4,7 +4,8 @@
 
 | Version | Supported          |
 |---------|--------------------|
-| 1.3.0   | :white_check_mark: |
+| 1.4.0   | :white_check_mark: |
+| 1.3.x   | :x:                |
 | 1.2.x   | :x:                |
 | 1.1.x   | :x:                |
 | 1.0.x   | :x:                |
@@ -18,6 +19,7 @@ Please report vulnerabilities to lucas.greuloch@pm.me.
 
 | Version | Virus Total Link                                                                                              |
 |---------|---------------------------------------------------------------------------------------------------------------|
+| 1.4.0   | https://                                                                                                      |
 | 1.3.0   | https://www.virustotal.com/gui/url/1218be3f196087af041c681dab30366fcbcbfa641f365f277c9bf00eb73c8393?nocache=1 |
 | 1.2.1   | https://www.virustotal.com/gui/url/dcd102f6cec5c00e9918f3cbf7e28fa66d06ec4904d513440601ae716b455c1c?nocache=1 |
 | 1.2.0   | https://www.virustotal.com/gui/url/f65b512f3c2f33b0f4df71f7c2401f7abb9153223f5a50530535a001294f7f29           |

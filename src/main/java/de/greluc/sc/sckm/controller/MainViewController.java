@@ -20,6 +20,8 @@
 
 package de.greluc.sc.sckm.controller;
 
+import static de.greluc.sc.sckm.Constants.APP_TITLE;
+
 import de.greluc.sc.sckm.ScKillMonitorApp;
 import de.greluc.sc.sckm.settings.SettingsHandler;
 import java.io.IOException;
@@ -46,7 +48,7 @@ import lombok.extern.log4j.Log4j2;
  * manage user preferences and settings.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.3.0
+ * @version 1.4.0
  * @since 1.0.0
  */
 @Log4j2
@@ -123,7 +125,7 @@ public class MainViewController {
       Scene scene = new Scene(fxmlLoader.load());
       SettingsViewController settingsViewController = fxmlLoader.getController();
       settingsViewController.setSettingsHandler(settingsHandler);
-      stage.setTitle("SC Kill Monitor - Settings");
+      stage.setTitle(APP_TITLE + " - Settings");
       stage.setScene(scene);
       stage.setMaximized(false);
       stage.setResizable(true);
@@ -167,7 +169,7 @@ public class MainViewController {
           new FXMLLoader(ScKillMonitorApp.class.getResource("fxml/AboutView.fxml"));
       Stage stage = new Stage();
       Scene scene = new Scene(fxmlLoader.load());
-      stage.setTitle("SC Kill Monitor - About");
+      stage.setTitle(APP_TITLE + " - About");
       stage.setScene(scene);
       stage.setMaximized(false);
       stage.setResizable(true);

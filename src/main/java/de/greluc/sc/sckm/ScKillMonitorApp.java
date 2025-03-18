@@ -20,6 +20,8 @@
 
 package de.greluc.sc.sckm;
 
+import static de.greluc.sc.sckm.Constants.APP_TITLE;
+
 import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
 import java.io.IOException;
@@ -44,7 +46,7 @@ import org.jetbrains.annotations.NotNull;
  * <p>The application exits completely when the user closes the main window.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.3.0
+ * @version 1.4.0
  * @since 1.0.0
  */
 @Log4j2
@@ -84,7 +86,7 @@ public class ScKillMonitorApp extends Application {
       stage.setMaxWidth(700);
       stage.setMaxHeight(500);
       stage.setResizable(false);
-      stage.setTitle("SC Kill Monitor");
+      stage.setTitle(APP_TITLE);
       stage
           .getIcons()
           .add(

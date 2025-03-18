@@ -19,9 +19,9 @@
   ~ along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                         ~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<bom serialNumber="urn:uuid:830dfad2-4b1b-4912-85f9-2d8c5e3b9e1f" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
+<bom serialNumber="urn:uuid:e78287ed-44ab-4397-87d7-71842ec05d69" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
   <metadata>
-    <timestamp>2025-03-04T16:07:57Z</timestamp>
+    <timestamp>2025-03-18T13:20:42Z</timestamp>
     <tools>
       <components>
         <component type="application">
@@ -31,11 +31,11 @@
         </component>
       </components>
     </tools>
-    <component type="library" bom-ref="pkg:maven/de.greluc.sc/sckillmonitor@1.3.0?project_path=%3A">
+    <component type="library" bom-ref="pkg:maven/de.greluc.sc/sckillmonitor@1.4.0?project_path=%3A">
       <group>de.greluc.sc</group>
       <name>sckillmonitor</name>
-      <version>1.3.0</version>
-      <purl>pkg:maven/de.greluc.sc/sckillmonitor@1.3.0?project_path=%3A</purl>
+      <version>1.4.0</version>
+      <purl>pkg:maven/de.greluc.sc/sckillmonitor@1.4.0?project_path=%3A</purl>
       <modified>false</modified>
       <externalReferences>
         <reference type="vcs">
@@ -2153,7 +2153,7 @@ of Jackson components maintained by FasterXML.com</description>
     </dependency>
     <dependency ref="pkg:maven/commons-codec/commons-codec@1.15?type=jar"/>
     <dependency ref="pkg:maven/commons-collections/commons-collections@3.2.2?type=jar"/>
-    <dependency ref="pkg:maven/de.greluc.sc/sckillmonitor@1.3.0?project_path=%3A">
+    <dependency ref="pkg:maven/de.greluc.sc/sckillmonitor@1.4.0?project_path=%3A">
       <dependency ref="pkg:maven/io.github.mkpaz/atlantafx-base@2.0.1?type=jar"/>
       <dependency ref="pkg:maven/org.openjfx/javafx-fxml@23?type=jar"/>
       <dependency ref="pkg:maven/org.junit.jupiter/junit-jupiter-api@5.11.4?type=jar"/>
@@ -2261,7 +2261,6 @@ of Jackson components maintained by FasterXML.com</description>
     <dependency ref="pkg:maven/org.junit.jupiter/junit-jupiter-engine@5.11.4?type=jar">
       <dependency ref="pkg:maven/org.junit/junit-bom@5.11.4?type=pom"/>
       <dependency ref="pkg:maven/org.junit.jupiter/junit-jupiter-api@5.11.4?type=jar"/>
-      <dependency ref="pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar"/>
       <dependency ref="pkg:maven/org.junit.platform/junit-platform-engine@1.11.4?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/org.junit.platform/junit-platform-commons@1.11.4?type=jar">
@@ -2271,7 +2270,6 @@ of Jackson components maintained by FasterXML.com</description>
     <dependency ref="pkg:maven/org.junit.platform/junit-platform-engine@1.11.4?type=jar">
       <dependency ref="pkg:maven/org.junit/junit-bom@5.11.4?type=pom"/>
       <dependency ref="pkg:maven/org.opentest4j/opentest4j@1.3.0?type=jar"/>
-      <dependency ref="pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar"/>
       <dependency ref="pkg:maven/org.junit.platform/junit-platform-commons@1.11.4?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/org.junit/junit-bom@5.11.4?type=pom">

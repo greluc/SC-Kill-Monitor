@@ -39,7 +39,7 @@ import lombok.extern.log4j.Log4j2;
  * updated in {@link SettingsData} when loaded from persistent storage.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.3.0
+ * @version 1.4.0
  * @since 1.0.0
  */
 @Log4j2
@@ -47,30 +47,22 @@ public class SettingsHandler {
   private final Preferences preferences = Preferences.userRoot().node("de").node("greluc").node("sc").node("sckillmonitor");
 
   /**
-   * Persists user and application settings to a persistent storage.
+   * Saves the application settings to persistent storage.
    *
-   * <p>This method saves various settings parameters, such as file paths, user handle, interval,
-   * and boolean flags, into a preference storage. The settings are fetched from the
-   * {@link SettingsData} class and written to the persistent store using the provided preferences
-   * instance.
+   * <p>This method writes various settings such as file paths, player handle, scan interval, and
+   * boolean flags related to specific application modes into a preferences storage. Once all
+   * settings are written, it attempts to flush the preferences, ensuring the changes are
+   * persisted. If the flush operation fails due to a {@link BackingStoreException}, an error
+   * is logged.
    *
-   * <p>After all settings have been written, the method attempts to flush the changes to ensure
-   * that they are immediately committed to the persistent storage. If the flush operation fails
-   * due to a {@link java.util.prefs.BackingStoreException}, an error message is logged.
-   *
-   * <p>The parameters saved to the storage include:
    * <ul>
-   *   <li>Paths for live, PTU (Public Test Universe), EPTU (Experimental Public Test Universe),
-   *       hotfix, tech preview, and custom environments.
-   *   <li>User handle.
-   *   <li>Scan interval in seconds.
-   *   <li>Show all flag.
-   *   <li>Write kill-event-to-file flag.
-   *   <li>Killer-mode-active flag.
+   *   <li>Settings include paths for different environments (Live, PTU, EPTU, Hotfix,
+   *       Tech Preview, Custom).
+   *   <li>Player handle.
+   *   <li>Scan interval for specific application operations.
+   *   <li>Display settings and operational modes flags (e.g., Show All, Killer Mode,
+   *       Streamer Mode).
    * </ul>
-   *
-   * <p>Logging is used to capture any exceptions encountered during the flush operation, ensuring
-   * that failures are handled and can be reviewed for troubleshooting.
    */
   public void saveSettings() {
     preferences.put(SETTINGS_PATH_LIVE, SettingsData.getPathLive());
@@ -84,6 +76,7 @@ public class SettingsHandler {
     preferences.putBoolean(SETTINGS_SHOW_ALL, SettingsData.isShowAllActive());
     preferences.putBoolean(SETTINGS_WRITE_TO_FILE, SettingsData.isWriteKillEventToFile());
     preferences.putBoolean(SETTINGS_KILLER_MODE_ACTIVE, SettingsData.isKillerModeActive());
+    preferences.putBoolean(SETTINGS_STREAMER_MODE_ACTIVE, SettingsData.isStreamerModeActive());
     try {
       preferences.flush();
     } catch (BackingStoreException exception) {
@@ -92,32 +85,20 @@ public class SettingsHandler {
   }
 
   /**
-   * Loads application settings from persistent storage and updates the corresponding
-   * values in the {@code SettingsData} class. If the preferences cannot be retrieved,
-   * default values are applied.
+   * Loads the application settings from persistent storage into the {@link SettingsData} object.
    *
-   * <p>Attempts to sync the preferences from the backing store, and logs an error if
-   * the sync fails. Each setting is either fetched from the user preferences or set to
-   * a default value if unavailable.
+   * <p>This method attempts to synchronize the preferences store, retrieves the settings,
+   * and applies default values if no stored value is found. These settings include paths
+   * for various configurations (e.g., LIVE, PTU, EPTU, hotfix, tech preview, or custom paths),
+   * user preferences such as player handle, scan interval, and feature toggles (e.g.,
+   * show all active, killer mode, streamer mode, etc.).
    *
-   * <ul>
-   *   <li>{@code SETTINGS_PATH_LIVE}: Path to the LIVE game log.
-   *   <li>{@code SETTINGS_PATH_PTU}: Path to the PTU game log.
-   *   <li>{@code SETTINGS_PATH_EPTU}: Path to the EPTU game log.
-   *   <li>{@code SETTINGS_PATH_HOTFIX}: Path to the HOTFIX game log.
-   *   <li>{@code SETTINGS_PATH_TECH_PREVIEW}: Path to the TECH-PREVIEW game log.
-   *   <li>{@code SETTINGS_PATH_CUSTOM}: Custom log file path.
-   *   <li>{@code SETTINGS_PLAYER_HANDLE}: Player's handle or identifier.
-   *   <li>{@code SETTINGS_SCAN_INTERVAL_SECONDS}: Interval in seconds for scanning.
-   *   <li>{@code SETTINGS_SHOW_ALL}: Boolean flag for showing all events.
-   *   <li>{@code SETTINGS_WRITE_KILLEVENT_TO_FILE}: Boolean flag for writing kill events to a file.
-   *   <li>{@code SETTINGS_KILLER_MODE_ACTIVE}: Boolean flag for activating the killer mode.
-   * </ul>
+   * <p>If the preferences cannot be synchronized due to a {@link BackingStoreException},
+   * an error is logged, and default values are used for the settings.
    *
-   * <p>Default paths are system-specific, referencing directories in the "C:\Program Files\Roberts Space Industries\StarCitizen" folder.
-   *
-   * <p>If the {@code BackingStoreException} occurs during the sync operation, it logs an error message and uses the default values for all preferences.
-   * Settings related to paths, handles, intervals, and other options are updated accordingly in {@code SettingsData}.
+   * <p>This method interacts with the underlying {@code preferences} storage mechanism
+   * and uses predefined keys to fetch the corresponding values. Any missing keys default
+   * to the specified fallback values.
    */
   public void loadSettings() {
     try {
@@ -152,5 +133,6 @@ public class SettingsHandler {
     SettingsData.setShowAllActive(preferences.getBoolean(SETTINGS_SHOW_ALL, false));
     SettingsData.setWriteKillEventToFile(preferences.getBoolean(SETTINGS_WRITE_TO_FILE, false));
     SettingsData.setKillerModeActive(preferences.getBoolean(SETTINGS_KILLER_MODE_ACTIVE, false));
+    SettingsData.setStreamerModeActive(preferences.getBoolean(SETTINGS_STREAMER_MODE_ACTIVE, false));
   }
 }

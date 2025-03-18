@@ -51,7 +51,7 @@
         <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="NEVER" />
         <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
     </rowConstraints>
-    <Label text="Welcome to SC Kill Monitor!" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+    <Label style="-fx-font-family: &quot;Segoe UI&quot;;" text="Welcome to SC Kill Monitor!" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
     <Button onAction="#onStartButtonClicked" style="-fx-background-color: #00766b;" GridPane.columnIndex="1" GridPane.rowIndex="8">
         <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -59,31 +59,31 @@
             </ImageView>
         </graphic>
     </Button>
-    <Label text="Select Channel:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+    <Label style="-fx-font-family: &quot;Segoe UI&quot;;" text="Select Channel:" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <GridPane.margin>
             <Insets right="10.0" />
         </GridPane.margin>
     </Label>
-    <ComboBox fx:id="channelSelection" onAction="#onChannelSelection" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-    <Label text="Selected Path:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <ComboBox fx:id="channelSelection" onAction="#onChannelSelection" style="-fx-font-family: &quot;Segoe UI&quot;;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <Label style="-fx-font-family: &quot;Segoe UI&quot;;" text="Selected Path:" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <GridPane.margin>
             <Insets right="10.0" />
         </GridPane.margin>
     </Label>
-    <Label fx:id="selectedPathValue" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-    <Label text="Set Handle:" GridPane.columnIndex="1" GridPane.rowIndex="5">
+    <Label fx:id="selectedPathValue" style="-fx-font-family: &quot;Segoe UI&quot;;" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+    <Label style="-fx-font-family: &quot;Segoe UI&quot;;" text="Set Handle:" GridPane.columnIndex="1" GridPane.rowIndex="5">
         <GridPane.margin>
             <Insets right="10.0" />
         </GridPane.margin>
     </Label>
-    <TextField fx:id="inputHandle" promptText="SC Player Handle (required)" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-    <Label text="Set Scan Intervall (s):" GridPane.columnIndex="1" GridPane.rowIndex="6">
+    <TextField fx:id="inputHandle" promptText="SC Player Handle (required)" style="-fx-font-family: &quot;Segoe UI&quot;;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+    <Label style="-fx-font-family: &quot;Segoe UI&quot;;" text="Set Scan Intervall (s):" GridPane.columnIndex="1" GridPane.rowIndex="6">
         <GridPane.margin>
             <Insets right="10.0" />
         </GridPane.margin>
     </Label>
-    <TextField fx:id="inputInterval" promptText="Time in Seconds (required)" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-    <Label text="Disclaimer: The SC Kill Monitor app may only be used to report potential griefings or stream snipings. Use of the identified player names for purposes that violate the Star Citizen Terms and Conditions is prohibited. The responsibility for compliant use lies with the user. This application is fan made and is not officially affiliated with Cloud Imperium Games." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.valignment="TOP">
+    <TextField fx:id="inputInterval" promptText="Time in Seconds (required)" style="-fx-font-family: &quot;Segoe UI&quot;;" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+    <Label style="-fx-font-family: &quot;Segoe UI&quot;;" text="Disclaimer: The SC Kill Monitor app may only be used to report potential griefings or stream snipings. Use of the identified player names for purposes that violate the Star Citizen Terms and Conditions is prohibited. The responsibility for compliant use lies with the user. This application is fan made and is not officially affiliated with Cloud Imperium Games." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.valignment="TOP">
         <GridPane.margin>
             <Insets top="10.0" />
         </GridPane.margin>

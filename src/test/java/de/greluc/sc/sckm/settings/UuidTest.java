@@ -18,49 +18,24 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-package de.greluc.sc.sckm;
+package de.greluc.sc.sckm.settings;
 
-import static de.greluc.sc.sckm.Constants.APP_TITLE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javafx.scene.control.Alert;
-import lombok.Generated;
-import org.jetbrains.annotations.NotNull;
+import java.util.UUID;
+import org.junit.jupiter.api.Test;
 
-/**
- * Provides utility methods to display alerts within the application.
- *
- * <p>The AlertHandler class contains static methods to display different types of alerts using
- * JavaFX's Alert class. It supports alerts with configurable types, headers, and content, as well
- * as displaying general error alerts.
- *
- * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.4.0
- * @since 1.0.0
- */
-public class AlertHandler {
+public class UuidTest {
 
-  /** Shows a general error that doesn't specify a specific error in its message. */
-  @Generated
-  public static void showGeneralError() {
-    showAlert(
-        Alert.AlertType.ERROR, "ERROR", "An error occurred while performing the desired action.");
-  }
+  @Test
+  public void testUuidIsEqualForSameInput() {
+    String input = "2025-02-12T14:38:24.454Z";
+    UUID uuid1 = UUID.nameUUIDFromBytes(input.getBytes());
+    UUID uuid2 = UUID.nameUUIDFromBytes(input.getBytes());
+    UUID uuid3 = UUID.nameUUIDFromBytes(input.getBytes());
 
-  /**
-   * Shows an alert. Uses the {@link Alert} class.
-   *
-   * @param alertType {@link Alert.AlertType} that should be used for the alert.
-   * @param header String containing the short text with the main information.
-   * @param content String containing the description of the alert.
-   */
-  @Generated
-  public static void showAlert(
-      @NotNull Alert.AlertType alertType, @NotNull String header, @NotNull String content) {
-    var alert = new Alert(alertType);
-    alert.titleProperty().set(APP_TITLE);
-    alert.headerTextProperty().set(header);
-    alert.contentTextProperty().set(content);
-    alert.setResizable(true);
-    alert.show();
+    assertEquals(uuid1, uuid2);
+    assertEquals(uuid2, uuid3);
+    assertEquals(uuid1, uuid3);
   }
 }

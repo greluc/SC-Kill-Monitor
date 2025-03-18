@@ -45,7 +45,7 @@ import org.jetbrains.annotations.NotNull;
  * <p>Implements the SettingsListener interface to respond to changes in settings data.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.3.0
+ * @version 1.4.0
  * @since 1.0.0
  */
 @Log4j2
@@ -168,6 +168,7 @@ public class StartViewController implements SettingsListener {
     try {
       SettingsData.setHandle(inputHandle.getText());
       SettingsData.setInterval(Integer.parseInt(inputInterval.getText()));
+      SettingsData.settingsChanged();
       SettingsHandler settingsHandler = new SettingsHandler();
       settingsHandler.saveSettings();
       mainViewController.onStartPressed();

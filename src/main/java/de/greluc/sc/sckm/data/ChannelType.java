@@ -20,6 +20,28 @@
 
 package de.greluc.sc.sckm.data;
 
+/**
+ * Represents the type of a channel. The {@code ChannelType} enum is used to categorize different
+ * types of communication channels or deployment channels within the system.
+ *
+ * <p>Enum Values:
+ * <ul>
+ *   <li>{@code LIVE}: Represents a live or production channel.</li>
+ *   <li>{@code PTU}: Represents a Public Test Universe channel, often used for public testing of
+ *       new features or updates.</li>
+ *   <li>{@code EPTU}: Represents an Evocati Public Test Universe channel, typically reserved for
+ *       early access testing by a select group of testers.</li>
+ *   <li>{@code HOTFIX}: Represents a channel used for deploying urgent fixes to the live
+ *       environment.</li>
+ *   <li>{@code TECH_PREVIEW}: Represents a technical preview channel, often used for showcasing
+ *       or experimenting with new technology or features.</li>
+ *   <li>{@code CUSTOM}: Represents a customizable or user-defined channel type.</li>
+ * </ul>
+ *
+ * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
+ * @version 1.4.0
+ * @since 1.0.0
+ */
 public enum ChannelType {
   LIVE,
   PTU,

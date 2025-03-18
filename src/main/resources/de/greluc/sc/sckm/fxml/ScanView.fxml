@@ -36,7 +36,9 @@
     <columnConstraints>
         <ColumnConstraints hgrow="NEVER" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
         <ColumnConstraints hgrow="NEVER" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="150.0" prefWidth="150.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="150.0" prefWidth="150.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="10.0" />
       <ColumnConstraints hgrow="NEVER" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
       <ColumnConstraints hgrow="NEVER" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" />
@@ -59,21 +61,22 @@
             </ImageView>
         </graphic>
     </Button>
-    <CheckBox fx:id="cbShowAll" mnemonicParsing="false" onAction="#onShowAllClicked" text="Show All Events" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+    <CheckBox fx:id="cbShowAll" mnemonicParsing="false" onAction="#onShowAllClicked" style="-fx-font-family: &quot;Segoe UI&quot;;" text="Show All Events" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
         <GridPane.margin>
             <Insets left="10.0" />
         </GridPane.margin>
     </CheckBox>
-   <Label text="Death Count:" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+   <Label style="-fx-font-family: &quot;Segoe UI&quot;;" text="Death Count:" GridPane.columnIndex="7" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
       <GridPane.margin>
          <Insets right="5.0" />
       </GridPane.margin>
    </Label>
-   <Label fx:id="labelKillCount" text="Kill Count:" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+   <Label fx:id="labelKillCount" style="-fx-font-family: &quot;Segoe UI&quot;;" text="Kill Count:" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
       <GridPane.margin>
          <Insets right="5.0" />
       </GridPane.margin>
    </Label>
-   <Label fx:id="labelKillCountValue" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-   <Label fx:id="labelDeathCountValue" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+   <Label fx:id="labelKillCountValue" style="-fx-font-family: &quot;Segoe UI&quot;;" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+   <Label fx:id="labelDeathCountValue" style="-fx-font-family: &quot;Segoe UI&quot;;" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+   <CheckBox fx:id="cbStreamerMode" mnemonicParsing="false" onAction="#onStreamerModeClicked" style="-fx-font-family: &quot;Segoe UI&quot;;" text="Streamer Mode" GridPane.columnIndex="3" GridPane.rowIndex="2" />
 </GridPane>
