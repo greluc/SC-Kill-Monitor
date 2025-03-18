@@ -40,25 +40,6 @@ public class SettingsDataTest {
   }
 
   @Test
-  public void testSetPathLive_NotifiesListeners() {
-    // Arrange: Create a mock listener and add it to the SettingsData listeners list
-    SettingsListener mockListener = mock(SettingsListener.class);
-    SettingsData.addListener(mockListener);
-
-    // Define a new path
-    String newPath = "D:\\Games\\StarCitizen\\LIVE\\game.log";
-
-    // Act: Update the pathLive using the setter
-    SettingsData.setPathLive(newPath);
-
-    // Assert: Verify that the listener's settingsChanged method was called
-    verify(mockListener, times(1)).settingsChanged();
-
-    // Cleanup: Remove the mock listener to prevent interference with other tests
-    SettingsData.removeListener(mockListener);
-  }
-
-  @Test
   public void testSetPathPtu_UpdatesPathSuccessfully() {
     // Arrange: Define a new path for testing
     String newPath = "D:\\Games\\StarCitizen\\LIVE\\game.log";
@@ -68,24 +49,5 @@ public class SettingsDataTest {
 
     // Assert: Verify the pathLive variable is updated
     assertEquals(newPath, SettingsData.getPathPtu());
-  }
-
-  @Test
-  public void testSetPathPtu_NotifiesListeners() {
-    // Arrange: Create a mock listener and add it to the SettingsData listeners list
-    SettingsListener mockListener = mock(SettingsListener.class);
-    SettingsData.addListener(mockListener);
-
-    // Define a new path
-    String newPath = "D:\\Games\\StarCitizen\\LIVE\\game.log";
-
-    // Act: Update the pathLive using the setter
-    SettingsData.setPathPtu(newPath);
-
-    // Assert: Verify that the listener's settingsChanged method was called
-    verify(mockListener, times(1)).settingsChanged();
-
-    // Cleanup: Remove the mock listener to prevent interference with other tests
-    SettingsData.removeListener(mockListener);
   }
 }

@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @since 1.0.0
- * @version 1.3.0
+ * @version 1.4.0
  */
 @Log4j2
 public class FileHandler {

@@ -1,10 +1,10 @@
 {
   "bomFormat" : "CycloneDX",
   "specVersion" : "1.6",
-  "serialNumber" : "urn:uuid:830dfad2-4b1b-4912-85f9-2d8c5e3b9e1f",
+  "serialNumber" : "urn:uuid:e78287ed-44ab-4397-87d7-71842ec05d69",
   "version" : 1,
   "metadata" : {
-    "timestamp" : "2025-03-04T16:07:57Z",
+    "timestamp" : "2025-03-18T13:20:42Z",
     "tools" : {
       "components" : [
         {
@@ -18,11 +18,11 @@
     },
     "component" : {
       "type" : "library",
-      "bom-ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.3.0?project_path=%3A",
+      "bom-ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.4.0?project_path=%3A",
       "group" : "de.greluc.sc",
       "name" : "sckillmonitor",
-      "version" : "1.3.0",
-      "purl" : "pkg:maven/de.greluc.sc/sckillmonitor@1.3.0?project_path=%3A",
+      "version" : "1.4.0",
+      "purl" : "pkg:maven/de.greluc.sc/sckillmonitor@1.4.0?project_path=%3A",
       "modified" : false,
       "externalReferences" : [
         {
@@ -4448,7 +4448,7 @@
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.3.0?project_path=%3A",
+      "ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.4.0?project_path=%3A",
       "dependsOn" : [
         "pkg:maven/io.github.mkpaz/atlantafx-base@2.0.1?type=jar",
         "pkg:maven/org.openjfx/javafx-fxml@23?type=jar",
@@ -4659,7 +4659,6 @@
       "dependsOn" : [
         "pkg:maven/org.junit/junit-bom@5.11.4?type=pom",
         "pkg:maven/org.junit.jupiter/junit-jupiter-api@5.11.4?type=jar",
-        "pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar",
         "pkg:maven/org.junit.platform/junit-platform-engine@1.11.4?type=jar"
       ]
     },
@@ -4675,7 +4674,6 @@
       "dependsOn" : [
         "pkg:maven/org.junit/junit-bom@5.11.4?type=pom",
         "pkg:maven/org.opentest4j/opentest4j@1.3.0?type=jar",
-        "pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar",
         "pkg:maven/org.junit.platform/junit-platform-commons@1.11.4?type=jar"
       ]
     },

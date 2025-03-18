@@ -32,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import lombok.extern.log4j.Log4j2;
@@ -40,30 +41,31 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The KillEventExtractor class is responsible for extracting and processing kill events from game
  * log files. These events are represented by {@link KillEvent} objects containing detailed
- * information about each kill event such as timestamp, killer, killed player, weapon used, and
+ * information about each kill event such as timestamp, killingPlayer, killed player, weapon used, and
  * location.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.3.0
+ * @version 1.4.0
  * @since 1.2.1
  */
 @Log4j2
 public class KillEventExtractor {
 
   /**
-   * Extracts kill events from a specified log file and populates the provided list with unique kill
-   * events relevant to the monitored player. The method scans the log file line by line, identifies
-   * lines containing a specific marker {@code <Actor Death>}, parses them into {@link KillEvent} objects,
-   * and adds the events to the list if they meet defined conditions.
+   * Extracts kill events from a log file and populates the provided list of {@link KillEvent}s. Only
+   * new kill events involving the user (as determined by the {@code SettingsData}) are added to the
+   * list. The extracted kill events are sorted in descending order by their timestamp.
    *
-   * <p>Kill events are sorted in reverse chronological order based on their timestamps after
-   * processing. Additionally, newly detected kill events may be logged and written to a file
-   * with a timestamp derived from the scan's start time.
+   * <p>If enabled in the {@code SettingsData}, new kill events are also written to an output file.
    *
-   * @param killEvents the list to populate with unique kill events; cannot be null
-   * @param inputFilePath the file path of the log file to scan; cannot be null
-   * @param scanStartTime the start time of the scan, used for logging and file naming; cannot be null
-   * @throws IOException if reading the specified log file fails
+   * <p>If the specified log file cannot be read, an error alert is displayed to the user and the
+   * method throws an {@link IOException}.
+   *
+   * @param killEvents A list of {@link KillEvent} to which detected kill events will be added.
+   * @param inputFilePath The file path to the log file to be read for extracting kill events.
+   * @param scanStartTime The start time of the scanning process, used for file naming when writing
+   *     kill events.
+   * @throws IOException If the log file cannot be accessed or read.
    */
   public static void extractKillEvents(
       @NotNull List<KillEvent> killEvents,
@@ -76,19 +78,10 @@ public class KillEventExtractor {
           Optional<KillEvent> event = parseKillEvent(line);
           event.ifPresent(
               killEvent -> {
-                if (killEvent.killedPlayer().equals(SettingsData.getHandle())
+                if ((killEvent.killedPlayer().equalsIgnoreCase(SettingsData.getHandle())
+                    || killEvent.killingPlayer().equalsIgnoreCase(SettingsData.getHandle()))
                     && !killEvents.contains(killEvent)) {
-                  killEvents.addFirst(killEvent);
-                  log.info("New kill event detected");
-                  log.debug("Kill Event:\n{}", killEvent);
-                  if (SettingsData.isWriteKillEventToFile()) {
-                    writeKillEventToFile(
-                        killEvent,
-                        scanStartTime.format(DateTimeFormatter.ofPattern("yyMMdd-HHmmss")));
-                  }
-                } else if (SettingsData.isKillerModeActive() && killEvent.killer().equals(SettingsData.getHandle())
-                    && !killEvents.contains(killEvent)) {
-                  killEvents.addFirst(killEvent);
+                  killEvents.add(killEvent);
                   log.info("New kill event detected");
                   log.debug("Kill Event:\n{}", killEvent);
                   if (SettingsData.isWriteKillEventToFile()) {
@@ -115,17 +108,16 @@ public class KillEventExtractor {
   }
 
   /**
-   * Parses a log line to create a KillEvent object.
+   * Parses a log line to extract and create a {@link KillEvent} object containing details about a
+   * kill event. The log line is expected to follow a specific format with markers indicating
+   * relevant information such as timestamps, players involved, weapons, and other details.
    *
-   * <p>The method attempts to extract various components from the provided log line, such as the
-   * timestamp, killed player, killer, weapon, damage type, and zone. If successful, it returns an
-   * Optional containing the constructed KillEvent object. If the parsing fails, it logs an error
-   * and returns an empty Optional.
+   * <p>If the log line cannot be parsed correctly, an empty {@link Optional} is returned, and an
+   * error is logged.
    *
-   * @param logLine the log line to be parsed, which should contain structured information about a
-   *     kill event in a specific format.
-   * @return an Optional containing a KillEvent object when the log line is successfully parsed, or
-   *     an empty Optional if the parsing fails.
+   * @param logLine the log line containing details of the kill event; must not be null
+   * @return an {@link Optional} containing the parsed {@link KillEvent} if successful, or an empty
+   *     {@link Optional} if parsing fails
    */
   private static @NotNull Optional<KillEvent> parseKillEvent(@NotNull String logLine) {
     try {
@@ -139,6 +131,7 @@ public class KillEventExtractor {
 
       return Optional.of(
           new KillEvent(
+              UUID.nameUUIDFromBytes(timestamp. getBytes()),
               ZonedDateTime.parse(timestamp, DateTimeFormatter.ISO_DATE_TIME),
               killedPlayer,
               killer,

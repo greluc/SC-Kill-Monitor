@@ -38,12 +38,12 @@
     </rowConstraints>
    <ImageView fx:id="imageViewBackground" fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
     <MenuBar GridPane.columnSpan="2147483647">
-        <Menu mnemonicParsing="false" text="Options">
-            <MenuItem mnemonicParsing="false" onAction="#onSettingsPressed" text="Settings" />
-            <MenuItem mnemonicParsing="false" onAction="#onClosePressed" text="Close" />
+        <Menu mnemonicParsing="false" style="-fx-font-family: &quot;Segoe UI&quot;;" text="Options">
+            <MenuItem mnemonicParsing="false" onAction="#onSettingsPressed" style="-fx-font-family: &quot;Segoe UI&quot;;" text="Settings" />
+            <MenuItem mnemonicParsing="false" onAction="#onClosePressed" style="-fx-font-family: &quot;Segoe UI&quot;;" text="Close" />
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" onAction="#onAboutPressed" text="About" />
+        <Menu mnemonicParsing="false" style="-fx-font-family: &quot;Segoe UI&quot;;" text="Help">
+            <MenuItem mnemonicParsing="false" onAction="#onAboutPressed" style="-fx-font-family: &quot;Segoe UI&quot;;" text="About" />
         </Menu>
     </MenuBar>
 </GridPane>

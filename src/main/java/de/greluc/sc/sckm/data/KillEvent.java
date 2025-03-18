@@ -21,32 +21,54 @@
 package de.greluc.sc.sckm.data;
 
 import java.time.ZonedDateTime;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
- * Represents an event in which a player is killed during gameplay.
+ * Represents a kill event in the game, encapsulating detailed information such as the players
+ * involved, weapon used, damage type, and the location where the event occurred.
  *
+ * <p>The {@code KillEvent} record provides immutable data regarding a notable event where one
+ * player kills another. It encapsulates all relevant details of the event to facilitate
+ * processing, storage, and analysis.
+ *
+ * <p>Fields:
  * <ul>
- *   <li><strong>timestamp</strong>: The date and time when the kill event occurred.
- *   <li><strong>killedPlayer</strong>: The name of the player who was killed.
- *   <li><strong>killer</strong>: The name of the player, NPC, or entity that performed the kill.
- *   <li><strong>weapon</strong>: The weapon or method used to perform the kill.
- *   <li><strong>weaponClass</strong>: The class of the weapon or method used to perform the kill.
- *   <li><strong>damageType</strong>: The type of damage inflicted (e.g., explosive, ballistic).
- *   <li><strong>zone</strong>: The location or area in the game where the kill occurred.
+ *   <li>{@code id}: A unique identifier for the kill event.</li>
+ *   <li>{@code timestamp}: The date and time when the event occurred.</li>
+ *   <li>{@code killedPlayer}: The player who was killed in this event.</li>
+ *   <li>{@code killingPlayer}: The player responsible for the kill.</li>
+ *   <li>{@code weapon}: The weapon used in the kill.</li>
+ *   <li>{@code weaponClass}: The classification of the weapon used.</li>
+ *   <li>{@code damageType}: The type of damage inflicted to execute the kill.</li>
+ *   <li>{@code zone}: The location or area within the game where the kill occurred.</li>
  * </ul>
  *
- * <p>This record provides a detailed representation of a kill event, storing all relevant details
- * for tracking or monitoring purposes.
+ * <p>Equality and hash code implementations are based solely on the {@code id} field, ensuring
+ * that two {@code KillEvent} instances with the same identifier are considered equal.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.3.0
+ * @version 1.4.0
  * @since 1.0.0
  */
 public record KillEvent(
+    UUID id,
     ZonedDateTime timestamp,
     String killedPlayer,
-    String killer,
+    String killingPlayer,
     String weapon,
     String weaponClass,
     String damageType,
-    String zone) {}
+    String zone) {
+
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof KillEvent killEvent)) return false;
+    return Objects.equals(id, killEvent.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
+  }
+}
