@@ -33,7 +33,7 @@ plugins {
   id("idea")
   id("jacoco")
   id("checkstyle")
-  id("io.freefair.lombok") version "8.13" // https://plugins.gradle.org/plugin/io.freefair.lombok
+  id("io.freefair.lombok") version "8.13.1" // https://plugins.gradle.org/plugin/io.freefair.lombok
   id("org.cyclonedx.bom") version "2.2.0" // https://github.com/CycloneDX/cyclonedx-gradle-plugin
   id("dev.hydraulic.conveyor") version "1.12" // https://plugins.gradle.org/plugin/dev.hydraulic.conveyor
   id("org.javamodularity.moduleplugin") version "1.8.15" // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
