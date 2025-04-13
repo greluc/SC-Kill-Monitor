@@ -45,7 +45,7 @@ public class AlertHandler {
   @Generated
   public static void showGeneralError() {
     showAlert(
-        Alert.AlertType.ERROR, "ERROR", "An error occurred while performing the desired action.");
+        Alert.AlertType.ERROR, "ERROR", "An error occurred while performing the desired action.", false);
   }
 
   /**
@@ -57,14 +57,19 @@ public class AlertHandler {
    */
   @Generated
   public static void showAlert(
-      @NotNull Alert.AlertType alertType, @NotNull String header, @NotNull String content) {
+      @NotNull Alert.AlertType alertType, @NotNull String header, @NotNull String content, boolean blocking) {
     var alert = new Alert(alertType);
     alert.titleProperty().set(APP_TITLE);
     alert.headerTextProperty().set(header);
     alert.contentTextProperty().set(content);
     alert.setResizable(true);
-    alert.show();
+    if (blocking) {
+      alert.showAndWait();
+    } else {
+      alert.show();
+    }
   }
+
   @Generated
   public static boolean showConfirmationAlert(@NotNull String header, @NotNull String content) {
     var alert = new Alert(Alert.AlertType.CONFIRMATION);

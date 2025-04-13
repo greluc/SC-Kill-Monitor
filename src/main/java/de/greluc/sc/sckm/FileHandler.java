@@ -109,7 +109,7 @@ public class FileHandler {
     objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
     if (SettingsData.getPathKillEvent().isBlank()) {
-      Platform.runLater(() -> AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "No path to save the KilLEvent file set."));
+      Platform.runLater(() -> AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "No path to save the KilLEvent file set.", false));
       return false;
     } else {
       File file = new File(String.format(SettingsData.getPathKillEvent() + "\\kill-events_%s.log", fileSuffix));

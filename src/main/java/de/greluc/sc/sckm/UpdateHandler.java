@@ -36,6 +36,8 @@ import java.net.URI;
 import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
@@ -96,8 +98,8 @@ public class UpdateHandler {
       new ProcessBuilder("update.exe").start();
       mainViewController.onClosePressed();
     } catch (IOException e) {
-      // TODO handle error
-      throw new RuntimeException(e);
+      AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "Failed to start the update process. Please try again later or contact the developer for support.", true);
+      mainViewController.onClosePressed();
     }
   }
 

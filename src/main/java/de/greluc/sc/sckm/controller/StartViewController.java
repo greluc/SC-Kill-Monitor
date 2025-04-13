@@ -150,18 +150,18 @@ public class StartViewController implements SettingsListener {
   protected void onStartButtonClicked() {
     if (inputHandle.getText().isEmpty()) {
       log.warn("Handle is empty");
-      AlertHandler.showAlert(Alert.AlertType.ERROR, "Handle is empty", "Please enter a handle");
+      AlertHandler.showAlert(Alert.AlertType.ERROR, "Handle is empty", "Please enter a handle", false);
       return;
     }
     if (inputInterval.getText().isEmpty()) {
       log.warn("Interval is empty");
       AlertHandler.showAlert(
-          Alert.AlertType.ERROR, "Interval is empty", "Please enter an interval");
+          Alert.AlertType.ERROR, "Interval is empty", "Please enter an interval", false);
       return;
     }
     if (selectedPathValue.getText().isEmpty()) {
       log.warn("Path is empty");
-      AlertHandler.showAlert(Alert.AlertType.ERROR, "Path is empty", "Please select a path");
+      AlertHandler.showAlert(Alert.AlertType.ERROR, "Path is empty", "Please select a path", false);
       return;
     }
 
@@ -175,7 +175,7 @@ public class StartViewController implements SettingsListener {
     } catch (NumberFormatException numberFormatException) {
       log.warn("Interval is invalid");
       AlertHandler.showAlert(
-          Alert.AlertType.ERROR, "Interval is invalid", "Please enter a valid interval");
+          Alert.AlertType.ERROR, "Interval is invalid", "Please enter a valid interval", false);
     }
   }
 

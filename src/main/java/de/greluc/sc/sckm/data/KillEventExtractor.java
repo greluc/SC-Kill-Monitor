@@ -102,7 +102,7 @@ public class KillEventExtractor {
               AlertHandler.showAlert(
                   Alert.AlertType.ERROR,
                   "Failed to read log file",
-                  "Please check if the file exists and the path is set correctly."));
+                  "Please check if the file exists and the path is set correctly.", false));
       log.error("Failed to find the specified log file: {}", inputFilePath);
       log.trace("Stacktrace:", ioException);
       return false;
