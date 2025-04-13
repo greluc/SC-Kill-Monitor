@@ -20,7 +20,6 @@
 
 package de.greluc.sc.sckm;
 
-import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.greluc.sc.sckm.controller.MainViewController;
@@ -31,20 +30,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
 import org.semver4j.Semver;
 
 /**
- * * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com) * @version 1.5.0 * @since 1.5.0
+ * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
+ * @version 1.5.0
+ * @since 1.5.0
  */
 @Log4j2
 public class UpdateHandler {

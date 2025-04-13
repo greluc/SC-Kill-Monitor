@@ -23,6 +23,11 @@ package de.greluc.sc.sckm.data;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
+/**
+ * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
+ * @version 1.5.0
+ * @since 1.5.0
+ */
 public class ReleaseData {
   public String name;
   @JsonProperty("assets")
