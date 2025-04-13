@@ -74,6 +74,7 @@ public class SettingsData {
       "C:\\Program Files\\Roberts Space Industries\\StarCitizen\\TECH-PREVIEW\\game.log";
 
   @Getter private static String pathCustom = "";
+  @Getter private static String pathKillEvent = "";
   @Getter private static String handle = "";
   @Getter private static int interval = 60;
   @Getter private static ChannelType selectedChannel = ChannelType.LIVE;
@@ -140,6 +141,15 @@ public class SettingsData {
    */
   public static void setPathCustom(@NotNull String pathCustom) {
     SettingsData.pathCustom = pathCustom;
+  }
+
+  /**
+   * Sets the KillEvent file path configuration for the application.
+   *
+   * @param pathKillEvent The new KillEvent file path to be set. Must not be null.
+   */
+  public static void setPathKillEvent(@NotNull String pathKillEvent) {
+    SettingsData.pathKillEvent = pathKillEvent;
   }
 
   /**

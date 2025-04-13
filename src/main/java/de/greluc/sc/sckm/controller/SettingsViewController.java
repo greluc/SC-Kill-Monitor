@@ -64,6 +64,7 @@ public class SettingsViewController {
   @FXML private TextField inputPathHotfix;
   @FXML private TextField inputPathTechPreview;
   @FXML private TextField inputPathCustom;
+  @FXML private TextField inputPathKillEvent;
   @FXML private CheckBox cbWriteKillEvent;
   @FXML private CheckBox cbKillerMode;
   @Setter private SettingsHandler settingsHandler;
@@ -91,6 +92,7 @@ public class SettingsViewController {
     inputPathHotfix.setText(SettingsData.getPathHotfix());
     inputPathTechPreview.setText(SettingsData.getPathTechPreview());
     inputPathCustom.setText(SettingsData.getPathCustom());
+    inputPathKillEvent.setText(SettingsData.getPathKillEvent());
     cbWriteKillEvent.setSelected(SettingsData.isWriteKillEventToFile());
     cbKillerMode.setSelected(SettingsData.isKillerModeActive());
   }
@@ -121,6 +123,7 @@ public class SettingsViewController {
     SettingsData.setPathHotfix(inputPathHotfix.getText());
     SettingsData.setPathTechPreview(inputPathTechPreview.getText());
     SettingsData.setPathCustom(inputPathCustom.getText());
+    SettingsData.setPathKillEvent(inputPathKillEvent.getText());
     SettingsData.setWriteKillEventToFile(cbWriteKillEvent.isSelected());
     SettingsData.setKillerModeActive(cbKillerMode.isSelected());
     SettingsData.settingsChanged();
@@ -140,52 +143,52 @@ public class SettingsViewController {
    * Handles the event when the "Live" button is clicked in the settings view. Updates the text
    * content of the {@code inputPathLive} field to reflect a selected file path.
    *
-   * <p>This method leverages the {@link #getPath()} method to open a file chooser dialog, allowing
+   * <p>This method leverages the {@link #getFilePath()} method to open a file chooser dialog, allowing
    * the user to select a file or directory. The selected path is then displayed in the {@code
    * inputPathLive} input field.
    */
   @FXML
   private void onLiveClicked() {
-    inputPathLive.setText(getPath());
+    inputPathLive.setText(getFilePath());
   }
 
   /**
    * Handles the event when the "PTU" button is clicked in the settings view. Updates the text
    * content of the {@code inputPathPtu} field with a selected file path.
    *
-   * <p>This method utilizes the {@link #getPath()} method to display a file chooser dialog,
+   * <p>This method utilizes the {@link #getFilePath()} method to display a file chooser dialog,
    * allowing the user to select a file or directory. The selected path is assigned to the {@code
    * inputPathPtu} input field.
    */
   @FXML
   private void onPtuClicked() {
-    inputPathPtu.setText(getPath());
+    inputPathPtu.setText(getFilePath());
   }
 
   /**
    * Handles the event when the "EPTU" button is clicked in the settings view. Updates the text
    * content of the {@code inputPathEptu} field with a selected file path.
    *
-   * <p>This method utilizes the {@link #getPath()} method to display a file chooser dialog,
+   * <p>This method utilizes the {@link #getFilePath()} method to display a file chooser dialog,
    * allowing the user to select a file or directory. The selected path is assigned to the {@code
    * inputPathEptu} input field.
    */
   @FXML
   private void onEptuClicked() {
-    inputPathEptu.setText(getPath());
+    inputPathEptu.setText(getFilePath());
   }
 
   /**
    * Handles the event triggered when the "Hotfix" button is clicked in the settings view. Updates
    * the text content of the {@code inputPathHotfix} field with a selected file path.
    *
-   * <p>This method uses the {@link #getPath()} method to open a file chooser dialog, allowing the
+   * <p>This method uses the {@link #getFilePath()} method to open a file chooser dialog, allowing the
    * user to select a file or directory. The chosen path is then displayed in the {@code
    * inputPathHotfix} input field.
    */
   @FXML
   private void onHotfixClicked() {
-    inputPathHotfix.setText(getPath());
+    inputPathHotfix.setText(getFilePath());
   }
 
   /**
@@ -198,20 +201,33 @@ public class SettingsViewController {
    */
   @FXML
   private void onTechPreviewClicked() {
-    inputPathTechPreview.setText(getPath());
+    inputPathTechPreview.setText(getFilePath());
   }
 
   /**
    * Handles the event when the "Custom" button is clicked in the settings view. Updates the text
    * content of the {@code inputPathCustom} field with a selected file path.
    *
-   * <p>This method utilizes the {@link #getPath()} method to display a file chooser dialog,
+   * <p>This method utilizes the {@link #getFilePath()} method to display a file chooser dialog,
    * allowing the user to select a file or directory. The selected path is then set as the value of
    * the {@code inputPathCustom} input field.
    */
   @FXML
   private void onCustomClicked() {
-    inputPathCustom.setText(getPath());
+    inputPathCustom.setText(getFilePath());
+  }
+
+  /**
+   * Handles the event when the "Custom" button is clicked in the settings view. Updates the text
+   * content of the {@code inputPathCustom} field with a selected file path.
+   *
+   * <p>This method utilizes the {@link #getFilePath()} method to display a file chooser dialog,
+   * allowing the user to select a file or directory. The selected path is then set as the value of
+   * the {@code inputPathCustom} input field.
+   */
+  @FXML
+  private void onKillEventClicked() {
+    inputPathKillEvent.setText(getDirectoryPath());
   }
 
   /**
@@ -287,14 +303,38 @@ public class SettingsViewController {
   }
 
   /**
+   * Clears the text content of the {@code inputPathCustom} field.
+   *
+   * <p>This method is triggered when the "Clear" action is performed for the custom environment
+   * path input. It resets the text of the {@code inputPathCustom} field to an empty string,
+   * ensuring no value is displayed in the corresponding input field.
+   */
+  @FXML
+  private void onKillEventClear() {
+    inputPathKillEvent.setText("");
+  }
+
+  /**
    * Opens a file chooser dialog to allow the user to select a file or directory and retrieves the
    * absolute path of the selected item.
    *
    * @return the absolute path of the selected file or directory as a non-null string. If no
    *     selection is made, returns an empty string.
    */
-  private @NotNull String getPath() {
+  private @NotNull String getFilePath() {
     Optional<File> fileContainer = FileHandler.openFileChooser();
+    return fileContainer.map(File::getAbsolutePath).orElse("");
+  }
+
+  /**
+   * Opens a file chooser dialog to allow the user to select a file or directory and retrieves the
+   * absolute path of the selected item.
+   *
+   * @return the absolute path of the selected file or directory as a non-null string. If no
+   *     selection is made, returns an empty string.
+   */
+  private @NotNull String getDirectoryPath() {
+    Optional<File> fileContainer = FileHandler.openDirectoryChooser();
     return fileContainer.map(File::getAbsolutePath).orElse("");
   }
 }

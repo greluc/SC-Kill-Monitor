@@ -25,6 +25,7 @@ val mockitoVersion = "5.15.2" // https://mvnrepository.com/artifact/org.mockito/
 val atlantaFxVersion = "2.0.1" // https://mvnrepository.com/artifact/io.github.mkpaz/atlantafx-base
 val log4j2Version = "2.24.3" // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
 val jacksonVersion = "2.18.3" // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+val semver4jVersion = "5.6.0" // https://mvnrepository.com/artifact/org.semver4j/semver4j
 val mockitoAgent = configurations.create("mockitoAgent")
 
 plugins {
@@ -51,6 +52,7 @@ dependencies {
   implementation("org.apache.logging.log4j:log4j-api:${log4j2Version}")
   implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
   implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
+  implementation("org.semver4j:semver4j:${semver4jVersion}")
   testImplementation("org.mockito:mockito-core:${mockitoVersion}")
   mockitoAgent("org.mockito:mockito-core:${mockitoVersion}") { isTransitive = false }
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")

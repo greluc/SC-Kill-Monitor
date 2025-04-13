@@ -22,7 +22,9 @@ package de.greluc.sc.sckm;
 
 import static de.greluc.sc.sckm.Constants.APP_TITLE;
 
+import java.util.Optional;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import lombok.Generated;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,5 +64,15 @@ public class AlertHandler {
     alert.contentTextProperty().set(content);
     alert.setResizable(true);
     alert.show();
+  }
+  @Generated
+  public static boolean showConfirmationAlert(@NotNull String header, @NotNull String content) {
+    var alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.titleProperty().set(APP_TITLE);
+    alert.headerTextProperty().set(header);
+    alert.contentTextProperty().set(content);
+    alert.setResizable(true);
+    Optional<ButtonType> result = alert.showAndWait();
+    return result.get() == ButtonType.OK;
   }
 }

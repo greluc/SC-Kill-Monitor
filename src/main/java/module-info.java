@@ -8,6 +8,7 @@ module de.greluc.sc.sckm {
   requires org.apache.logging.log4j;
   requires org.jetbrains.annotations;
   requires static lombok;
+  requires org.semver4j;
 
   opens de.greluc.sc.sckm to
       javafx.fxml;

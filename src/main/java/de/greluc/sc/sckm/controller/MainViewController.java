@@ -22,13 +22,19 @@ package de.greluc.sc.sckm.controller;
 
 import static de.greluc.sc.sckm.Constants.APP_TITLE;
 
+import de.greluc.sc.sckm.AlertHandler;
 import de.greluc.sc.sckm.ScKillMonitorApp;
+import de.greluc.sc.sckm.UpdateHandler;
+import de.greluc.sc.sckm.data.ReleaseData;
 import de.greluc.sc.sckm.settings.SettingsHandler;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
@@ -54,6 +60,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class MainViewController {
   private final SettingsHandler settingsHandler = new SettingsHandler();
+  private final UpdateHandler updateHandler = new UpdateHandler();
   @FXML private GridPane basePane;
   @FXML private ImageView imageViewBackground;
   private GridPane startPane;
@@ -90,6 +97,15 @@ public class MainViewController {
     startViewController.setMainViewController(this);
     GridPane.setConstraints(startPane, 0, 1);
     basePane.getChildren().add(startPane);
+
+    Optional<ReleaseData> releaseContainer = updateHandler.checkUpdate();
+    releaseContainer.ifPresent(releaseData ->  {
+      Platform.runLater(() -> {
+        if (AlertHandler.showConfirmationAlert("Update available", "A new update is available. The program will now exit to update to version " + releaseData.name.substring(1) + ".")) {
+          updateHandler.startUpdate(releaseData, this);
+        }
+      });
+    });
   }
 
   /**
@@ -147,7 +163,7 @@ public class MainViewController {
    * to indicate that it is tied to an associated UI component in an FXML layout.
    */
   @FXML
-  protected void onClosePressed() {
+  public void onClosePressed() {
     System.exit(0);
   }
 

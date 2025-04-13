@@ -21,6 +21,8 @@
 package de.greluc.sc.sckm.controller;
 
 import de.greluc.sc.sckm.ScKillMonitorApp;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;

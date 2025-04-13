@@ -165,16 +165,17 @@ public class ScanViewController implements SettingsListener {
   }
 
   /**
-   * Initiates the scanning process for tracking and logging kill events from a specified data source.
-   * This method identifies the relevant log file path based on the selected channel settings and
-   * continuously monitors the log file for events. Detected events are processed, and the results
-   * are displayed via the user interface.
+   * Initiates the scanning process for tracking and logging kill events from a specified data
+   * source. This method identifies the relevant log file path based on the selected channel
+   * settings and continuously monitors the log file for events. Detected events are processed, and
+   * the results are displayed via the user interface.
    *
    * <p>The scanning process will continue indefinitely in a loop until an external condition
-   * interrupts it, such as an I/O exception or a manual stop signal. The method also defines specific
-   * behaviors for handling exceptions or interruptions during the scan operation.
+   * interrupts it, such as an I/O exception or a manual stop signal. The method also defines
+   * specific behaviors for handling exceptions or interruptions during the scan operation.
    *
    * <p>Key actions performed by this method include:
+   *
    * <ul>
    *   <li>Retrieving the selected channel and its corresponding log file path
    *   <li>Logging initialization data such as the handle, interval, and channel information
@@ -184,9 +185,9 @@ public class ScanViewController implements SettingsListener {
    *   <li>Managing interruptions or input/output exceptions gracefully
    * </ul>
    *
-   * <p>The kill event extraction and GUI update logic are delegated to separate methods,
-   * ensuring modular and maintainable code. Any detected anomalies, such as I/O errors or
-   * interrupted threads, are appropriately logged and managed.
+   * <p>The kill event extraction and GUI update logic are delegated to separate methods, ensuring
+   * modular and maintainable code. Any detected anomalies, such as I/O errors or interrupted
+   * threads, are appropriately logged and managed.
    */
   public void startScan() {
     String selectedPathValue =
@@ -209,9 +210,7 @@ public class ScanViewController implements SettingsListener {
     deathCount = 0;
 
     while (true) {
-      try {
-        extractKillEvents(killEvents, selectedPathValue, scanStartTime);
-      } catch (IOException ioException) {
+      if (!extractKillEvents(killEvents, selectedPathValue, scanStartTime)) {
         Platform.runLater(this::onStopPressed);
         return;
       }
@@ -230,25 +229,23 @@ public class ScanViewController implements SettingsListener {
   }
 
   /**
-   * Displays kill events by iterating over the list of kill events and determining whether
-   * to show them based on certain conditions. Depending on the player's involvement in the
-   * kill event, updates the UI components, including the kill count, death count, and a
-   * displayed list of kill events.
+   * Displays kill events by iterating over the list of kill events and determining whether to show
+   * them based on certain conditions. Depending on the player's involvement in the kill event,
+   * updates the UI components, including the kill count, death count, and a displayed list of kill
+   * events.
    *
-   * <p>This method evaluates each kill event to ensure it has not been processed already.
-   * It applies filters based on player-related settings, such as whether to display events
-   * involving the player, all players, or specific roles. If the conditions are met, the
-   * method updates the kill and death counts accordingly and modifies the UI components.
+   * <p>This method evaluates each kill event to ensure it has not been processed already. It
+   * applies filters based on player-related settings, such as whether to display events involving
+   * the player, all players, or specific roles. If the conditions are met, the method updates the
+   * kill and death counts accordingly and modifies the UI components.
    *
-   * <p>Each kill event is added to the text pane if it passes the evaluation. The method
-   * ensures that the labels for kills and deaths are updated correctly after processing
-   * kill events.
+   * <p>Each kill event is added to the text pane if it passes the evaluation. The method ensures
+   * that the labels for kills and deaths are updated correctly after processing kill events.
    *
-   * <p>Important considerations:
-   * - Events are only processed if not already evaluated.
-   * - The method adheres to user-defined settings from {@code SettingsData}, such as
-   *   whether to show all events, killer mode, or specific player handles.
-   * - UI updates are executed on the JavaFX application thread using {@code Platform.runLater}.
+   * <p>Important considerations: - Events are only processed if not already evaluated. - The method
+   * adheres to user-defined settings from {@code SettingsData}, such as whether to show all events,
+   * killer mode, or specific player handles. - UI updates are executed on the JavaFX application
+   * thread using {@code Platform.runLater}.
    */
   private void displayKillEvents() {
     killEvents.forEach(
@@ -289,8 +286,9 @@ public class ScanViewController implements SettingsListener {
    * Streamer Mode setting.
    *
    * @param killEvent The KillEvent object containing information to be displayed in the TextArea.
-   *                  Must not be null.
-   * @return A VBox containing a TextArea with the formatted KillEvent details. Will never return null.
+   *     Must not be null.
+   * @return A VBox containing a TextArea with the formatted KillEvent details. Will never return
+   *     null.
    */
   private @NotNull VBox getKillEventPane(@NotNull KillEvent killEvent) {
     TextArea textArea =
@@ -344,12 +342,12 @@ public class ScanViewController implements SettingsListener {
   /**
    * Invoked when settings have been changed.
    *
-   * <p>This method is called to handle necessary actions after a change in settings.
-   * Upon invocation, it resets the display to ensure any updates or modifications
-   * are accurately reflected.
+   * <p>This method is called to handle necessary actions after a change in settings. Upon
+   * invocation, it resets the display to ensure any updates or modifications are accurately
+   * reflected.
    *
-   * <p>Subclasses overriding this method should ensure that they call the superclass
-   * implementation to maintain proper reset functionality unless explicitly intended otherwise.
+   * <p>Subclasses overriding this method should ensure that they call the superclass implementation
+   * to maintain proper reset functionality unless explicitly intended otherwise.
    */
   @Override
   public void settingsChanged() {
@@ -357,37 +355,38 @@ public class ScanViewController implements SettingsListener {
   }
 
   /**
-   * Resets the display by clearing relevant data structures and UI elements,
-   * and reinitializing key values for the kill and death counters. This method
-   * also updates the visibility of specific UI components based on the current
-   * application settings.
+   * Resets the display by clearing relevant data structures and UI elements, and reinitializing key
+   * values for the kill and death counters. This method also updates the visibility of specific UI
+   * components based on the current application settings.
    *
    * <p>Specifically, this method performs the following actions:
+   *
    * <ul>
-   *   <li>Clears the list of evaluated kill events.</li>
-   *   <li>Clears all child nodes from the text pane.</li>
-   *   <li>Resets kill and death counters to zero.</li>
-   *   <li>Updates the text of kill and death counter labels to reflect the reset values.</li>
-   *   <li>Adjusts the visibility of kill count labels based on whether killer mode is active.</li>
-   *   <li>Triggers re-display of the kill events.</li>
+   *   <li>Clears the list of evaluated kill events.
+   *   <li>Clears all child nodes from the text pane.
+   *   <li>Resets kill and death counters to zero.
+   *   <li>Updates the text of kill and death counter labels to reflect the reset values.
+   *   <li>Adjusts the visibility of kill count labels based on whether killer mode is active.
+   *   <li>Triggers re-display of the kill events.
    * </ul>
    */
   private void resetDisplay() {
     evaluatedKillEvents.clear();
     killCount = 0;
     deathCount = 0;
-    Platform.runLater(() -> {
-      textPane.getChildren().clear();
-      labelKillCountValue.setText(String.valueOf(killCount));
-      labelDeathCountValue.setText(String.valueOf(deathCount));
-      if (SettingsData.isKillerModeActive()) {
-        labelKillCount.setVisible(true);
-        labelKillCountValue.setVisible(true);
-      } else {
-        labelKillCount.setVisible(false);
-        labelKillCountValue.setVisible(false);
-      }
-    });
+    Platform.runLater(
+        () -> {
+          textPane.getChildren().clear();
+          labelKillCountValue.setText(String.valueOf(killCount));
+          labelDeathCountValue.setText(String.valueOf(deathCount));
+          if (SettingsData.isKillerModeActive()) {
+            labelKillCount.setVisible(true);
+            labelKillCountValue.setVisible(true);
+          } else {
+            labelKillCount.setVisible(false);
+            labelKillCountValue.setVisible(false);
+          }
+        });
     displayKillEvents();
   }
 }
