@@ -31,7 +31,7 @@ import lombok.Generated;
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @since 1.0.0
- * @version 1.4.0
+ * @version 1.5.0
  */
 public class Constants {
   public static final String LIVE = "LIVE";
@@ -54,7 +54,7 @@ public class Constants {
   public static final String SETTINGS_KILLER_MODE_ACTIVE = "killer_mode_active";
   public static final String SETTINGS_STREAMER_MODE_ACTIVE = "streamer_mode_active";
 
-  public static final String APP_TITLE = "SC Kill Monitor v1.4.0";
+  public static final String APP_TITLE = "SC Kill Monitor v1.5.0";
 
   public static final String UTILITY_CLASS = "Utility class";
 

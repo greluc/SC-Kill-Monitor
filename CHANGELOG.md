@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.5.0](https://github.com/greluc/SC-Kill-Monitor/releases/tag/v1.4.0)
+
+- FEATURE: Add installer. Use jlink and jpackage to create an installer for SC Kill Monitor.
+
 ## [v1.4.0](https://github.com/greluc/SC-Kill-Monitor/releases/tag/v1.4.0)
 
 - FEATURE: Add streamer mode.

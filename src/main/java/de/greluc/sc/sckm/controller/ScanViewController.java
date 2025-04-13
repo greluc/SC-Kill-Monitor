@@ -67,7 +67,7 @@ import org.jetbrains.annotations.NotNull;
  * project.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.4.0
+ * @version 1.5.0
  * @since 1.0.0
  */
 @Log4j2
@@ -302,7 +302,7 @@ public class ScanViewController implements SettingsListener {
     textArea
         .onMouseClickedProperty()
         .set(
-            _ -> {
+            event -> {
               if (SettingsData.isStreamerModeActive()) {
                 textArea.setText(KillEventFormatter.format(killEvent, false));
               }

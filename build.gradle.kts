@@ -18,7 +18,7 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-val checkstyleVersion="10.21.4" // https://github.com/checkstyle/checkstyle
+val checkstyleVersion="10.23.0" // https://github.com/checkstyle/checkstyle
 val annotationsVersion="26.0.2" // https://mvnrepository.com/artifact/org.jetbrains/annotations https://github.com/JetBrains/java-annotations
 val junitVersion = "5.11.4" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 val mockitoVersion = "5.15.2" // https://mvnrepository.com/artifact/org.mockito/mockito-core
@@ -33,9 +33,9 @@ plugins {
   id("idea")
   id("jacoco")
   id("checkstyle")
-  id("io.freefair.lombok") version "8.13" // https://plugins.gradle.org/plugin/io.freefair.lombok
+  id("org.beryx.jlink") version "3.1.1" // https://plugins.gradle.org/plugin/org.beryx.jlink
+  id("io.freefair.lombok") version "8.13.1" // https://plugins.gradle.org/plugin/io.freefair.lombok
   id("org.cyclonedx.bom") version "2.2.0" // https://github.com/CycloneDX/cyclonedx-gradle-plugin
-  id("dev.hydraulic.conveyor") version "1.12" // https://plugins.gradle.org/plugin/dev.hydraulic.conveyor
   id("org.javamodularity.moduleplugin") version "1.8.15" // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
   id("org.openjfx.javafxplugin") version "0.1.0" // https://plugins.gradle.org/plugin/org.openjfx.javafxplugin
 }
@@ -59,8 +59,8 @@ dependencies {
 
 base {
   group = "de.greluc.sc"
-  version = "1.4.0"
-  description = "SC Kill Monitor - See who griefed you!"
+  version = "1.5.0"
+  description = "See who griefed you!"
 }
 
 configurations {
@@ -106,7 +106,7 @@ checkstyle {
 tasks.cyclonedxBom {
   setProjectType("library")
   setSchemaVersion("1.6")
-  setDestination(project.file("docs/bom"))
+  setDestination(project.file("docs"))
   setOutputName("bom")
   setOutputFormat("all")
   setIncludeBomSerialNumber(true)
@@ -125,6 +125,10 @@ tasks.test {
   finalizedBy(tasks.jacocoTestReport)
 }
 
+tasks.build {
+  finalizedBy(tasks.cyclonedxBom)
+}
+
 tasks.jacocoTestReport {
   dependsOn(tasks.test)
   reports {
@@ -140,3 +144,26 @@ tasks {
   }
 }
 
+jlink {
+
+  options.addAll(listOf("--strip-debug", "--compress", "zip-6", "--no-header-files", "--no-man-pages"))
+  launcher{
+    name = "SC Kill Monitor"
+  }
+  jpackage {
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows) {
+      installerOptions.addAll(
+        listOf(
+          "--win-per-user-install",
+          "--win-dir-chooser",
+          "--win-menu",
+          "--win-shortcut",
+          "--vendor", "SC Kill Monitor Team",
+          "--about-url", "https://github.com/greluc/SC-Kill-Monitor/wiki",
+          "--app-version", version.toString(),
+          "--copyright", "Copyright (C) 2025-2025 SC Kill Monitor Team",
+          "--description", description))
+      //imageOptions.add("--win-console")
+    }
+  }
+}
