@@ -18,12 +18,4 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-pluginManagement {
-  repositories {
-    maven {
-      url = uri("https://raw.githubusercontent.com/graalvm/native-build-tools/snapshots")
-    }
-    gradlePluginPortal()
-  }
-}
 rootProject.name = "sckillmonitor"
