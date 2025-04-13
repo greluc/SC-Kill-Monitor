@@ -80,7 +80,7 @@ public class UpdateHandler {
     URL url = URI.create(release.releaseAssets.getFirst().browser_download_url).toURL();
     try (BufferedInputStream in = new BufferedInputStream(url.openStream());
          FileOutputStream fileOutputStream = new FileOutputStream("update.exe")) {
-      byte dataBuffer[] = new byte[1024];
+      byte[] dataBuffer = new byte[1024];
       int bytesRead;
       while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
         fileOutputStream.write(dataBuffer, 0, bytesRead);
@@ -116,7 +116,7 @@ public class UpdateHandler {
         String.format("https://api.github.com/repos/%s/%s/releases/latest", owner, repo);
 
     // Open a connection to the API endpoint
-    URL url = new URL(apiUrl);
+    URL url = URI.create(apiUrl).toURL();
     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("GET");
     connection.setRequestProperty("Accept", "application/vnd.github+json");
