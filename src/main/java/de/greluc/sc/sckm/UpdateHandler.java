@@ -85,20 +85,20 @@ public class UpdateHandler {
    */
   private void deleteOldUpdateFile() {
     try {
-      java.nio.file.Path updateFilePath = java.nio.file.Paths.get("update.exe");
+      java.nio.file.Path updateFilePath = java.nio.file.Paths.get("update.msi");
       if (java.nio.file.Files.exists(updateFilePath)) {
         java.nio.file.Files.delete(updateFilePath);
         log.debug("Deleted existing update.exe file from the current directory.");
       }
     } catch (IOException e) {
-      log.warn("Failed to delete update.exe file: {}", e.getMessage(), e);
+      log.warn("Failed to delete update.msi file: {}", e.getMessage(), e);
     }
   }
 
   public void downloadUpdate(@NotNull ReleaseData release) throws IOException {
     URL url = URI.create(release.releaseAssets.getFirst().browser_download_url).toURL();
     try (BufferedInputStream in = new BufferedInputStream(url.openStream());
-         FileOutputStream fileOutputStream = new FileOutputStream("update.exe")) {
+         FileOutputStream fileOutputStream = new FileOutputStream("update.msi")) {
       byte[] dataBuffer = new byte[1024];
       int bytesRead;
       while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
@@ -112,7 +112,7 @@ public class UpdateHandler {
   public void startUpdate(@NotNull ReleaseData release, @NotNull MainViewController mainViewController) {
     try {
       downloadUpdate(release);
-      new ProcessBuilder("update.exe").start();
+      new ProcessBuilder("update.msi").start();
       mainViewController.onClosePressed();
     } catch (IOException e) {
       AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "Failed to start the update process. Please try again later or contact the developer for support.", true);

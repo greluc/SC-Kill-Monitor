@@ -6,7 +6,7 @@
 - FEATURE: Add updater.
 - FEATURE: Add blocking alerts.
 - FEATURE: Add possibility to select location of ``KillEvent`` file in settings.
-- BUG: Fix logic for killing background task on settings change.
+- BUG: Fix logic for killing the background task on settings change.
 
 ## [v1.4.0](https://github.com/greluc/SC-Kill-Monitor/releases/tag/v1.4.0)
 
