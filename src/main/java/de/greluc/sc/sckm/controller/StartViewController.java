@@ -166,7 +166,7 @@ public class StartViewController implements SettingsListener {
     }
 
     try {
-      SettingsData.setHandle(inputHandle.getText());
+      SettingsData.setHandle(inputHandle.getText().toLowerCase().trim());
       SettingsData.setInterval(Integer.parseInt(inputInterval.getText()));
       SettingsData.settingsChanged();
       SettingsHandler settingsHandler = new SettingsHandler();
