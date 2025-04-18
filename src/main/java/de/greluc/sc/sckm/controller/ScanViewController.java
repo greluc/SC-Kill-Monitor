@@ -27,7 +27,6 @@ import de.greluc.sc.sckm.data.KillEventFormatter;
 import de.greluc.sc.sckm.settings.SettingsData;
 import de.greluc.sc.sckm.settings.SettingsHandler;
 import de.greluc.sc.sckm.settings.SettingsListener;
-import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +71,7 @@ import org.jetbrains.annotations.NotNull;
  */
 @Log4j2
 public class ScanViewController implements SettingsListener {
-  private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+  private ExecutorService executorService = Executors.newSingleThreadExecutor();
   private final List<KillEvent> killEvents = new ArrayList<>();
   private final List<KillEvent> evaluatedKillEvents = new ArrayList<>();
   @FXML private VBox textPane;
@@ -329,14 +328,16 @@ public class ScanViewController implements SettingsListener {
         || killEvent.killingPlayer().toLowerCase().contains("aimodule")
         || killEvent.killingPlayer().toLowerCase().contains("pu_")
         || killEvent.killingPlayer().toLowerCase().contains("npc_")
-        || killEvent.killingPlayer().toLowerCase().contains("kopion_")) {
+        || killEvent.killingPlayer().toLowerCase().contains("kopion_")
+        || killEvent.killingPlayer().toLowerCase().contains("missionentitystreamable_")) {
       return true;
     } else
       return killEvent.killedPlayer().toLowerCase().contains("unknown")
           || killEvent.killedPlayer().toLowerCase().contains("aimodule")
           || killEvent.killedPlayer().toLowerCase().contains("pu_")
           || killEvent.killedPlayer().toLowerCase().contains("npc_")
-          || killEvent.killedPlayer().toLowerCase().contains("kopion_");
+          || killEvent.killedPlayer().toLowerCase().contains("kopion_")
+          || killEvent.killedPlayer().toLowerCase().contains("missionentitystreamable_");
   }
 
   /**
@@ -371,11 +372,13 @@ public class ScanViewController implements SettingsListener {
    * </ul>
    */
   private void resetDisplay() {
-    evaluatedKillEvents.clear();
-    killCount = 0;
-    deathCount = 0;
+    executorService.shutdownNow();
+    executorService = Executors.newSingleThreadExecutor();
     Platform.runLater(
         () -> {
+          evaluatedKillEvents.clear();
+          killCount = 0;
+          deathCount = 0;
           textPane.getChildren().clear();
           labelKillCountValue.setText(String.valueOf(killCount));
           labelDeathCountValue.setText(String.valueOf(deathCount));
@@ -386,7 +389,7 @@ public class ScanViewController implements SettingsListener {
             labelKillCount.setVisible(false);
             labelKillCountValue.setVisible(false);
           }
+          executorService.submit(this::startScan);
         });
-    displayKillEvents();
   }
 }
