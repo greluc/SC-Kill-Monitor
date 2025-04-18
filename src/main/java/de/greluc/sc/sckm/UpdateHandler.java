@@ -48,15 +48,7 @@ import org.semver4j.Semver;
 public class UpdateHandler {
 
   public Optional<ReleaseData> checkUpdate() {
-    try {
-      java.nio.file.Path updateFilePath = java.nio.file.Paths.get("update.exe");
-      if (java.nio.file.Files.exists(updateFilePath)) {
-        java.nio.file.Files.delete(updateFilePath);
-        log.info("Deleted existing update.exe file from the current directory.");
-      }
-    } catch (IOException e) {
-      log.error("Failed to delete update.exe file: {}", e.getMessage(), e);
-    }
+    deleteOldUpdateFile();
 
     try {
       String releaseJson = fetchReleases("greluc", "SC-Kill-Monitor");
@@ -64,15 +56,42 @@ public class UpdateHandler {
       objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
       ReleaseData release = objectMapper.readValue(releaseJson, ReleaseData.class);
       Semver latestVersion = Semver.parse(release.name.substring(1));
-      if (latestVersion.isGreaterThan(Constants.APP_VERSION)) {
-        log.error("New version available: {}", latestVersion);
+      if (latestVersion != null && latestVersion.isGreaterThan(Constants.APP_VERSION)) {
+        log.info("New version available: {}", latestVersion);
         return Optional.of(release);
       } else {
-        log.error("No new version available.");
+        log.info("No new version available.");
         return Optional.empty();
       }
     } catch (NoSuchElementException | IOException e) {
+      log.error("Error while checking for update");
+      log.trace("Corresponding error:", e);
       return Optional.empty();
+    }
+  }
+
+  /**
+   * Deletes the existing `update.exe` file from the current directory if it exists.
+   *
+   * <p>This method checks for the presence of a file named `update.exe` in the working directory and
+   * attempts to delete it if found. It logs a debug message upon successful deletion and a warning
+   * message if the deletion fails due to an {@link IOException}.
+   *
+   * <p>The method is used to ensure that any outdated update files are removed before initiating a
+   * new update process.
+   *
+   * <p>Note: This method is private and intended solely for internal use within the {@code UpdateHandler}
+   * class.
+   */
+  private void deleteOldUpdateFile() {
+    try {
+      java.nio.file.Path updateFilePath = java.nio.file.Paths.get("update.exe");
+      if (java.nio.file.Files.exists(updateFilePath)) {
+        java.nio.file.Files.delete(updateFilePath);
+        log.debug("Deleted existing update.exe file from the current directory.");
+      }
+    } catch (IOException e) {
+      log.warn("Failed to delete update.exe file: {}", e.getMessage(), e);
     }
   }
 
