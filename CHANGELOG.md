@@ -1,8 +1,12 @@
 # Changelog
 
-## [v1.5.0](https://github.com/greluc/SC-Kill-Monitor/releases/tag/v1.4.0)
+## [v1.5.0](https://github.com/greluc/SC-Kill-Monitor/releases/tag/v1.5.0)
 
-- FEATURE: Add installer. Use jlink and jpackage to create an installer for SC Kill Monitor.
+- FEATURE: Add installer. Use ``jlink`` and ``jpackage`` to create an installer for SC Kill Monitor.
+- FEATURE: Add updater.
+- FEATURE: Add blocking alerts.
+- FEATURE: Add possibility to select location of ``KillEvent`` file in settings.
+- BUG: Fix logic for killing background task on settings change.
 
 ## [v1.4.0](https://github.com/greluc/SC-Kill-Monitor/releases/tag/v1.4.0)
 
