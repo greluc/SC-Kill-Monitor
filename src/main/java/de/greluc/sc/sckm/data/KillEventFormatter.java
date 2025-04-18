@@ -41,7 +41,7 @@ import org.jetbrains.annotations.NotNull;
  * </ul>
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.4.0
+ * @version 1.5.0
  * @since 1.2.1
  */
 public class KillEventFormatter {

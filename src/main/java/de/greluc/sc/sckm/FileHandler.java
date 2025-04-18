@@ -24,10 +24,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import de.greluc.sc.sckm.data.KillEvent;
+import de.greluc.sc.sckm.settings.SettingsData;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import lombok.Generated;
@@ -43,7 +46,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @since 1.0.0
- * @version 1.4.0
+ * @version 1.5.0
  */
 @Log4j2
 public class FileHandler {
@@ -74,6 +77,22 @@ public class FileHandler {
   }
 
   /**
+   * Displays a file chooser dialog that filters files based on a predefined extension.
+   * Specifically, it allows the user to select files with the ".log" extension.
+   *
+   * <p>The chosen file is wrapped in an {@link Optional}. If no file is selected, the returned
+   * {@link Optional} will be empty.
+   *
+   * @return an {@link Optional} containing the selected {@link File}, or an empty {@link Optional}
+   *     if no file is chosen.
+   */
+  public static @NotNull Optional<File> openDirectoryChooser() {
+    log.debug("Trying to choose a file!");
+    final var chooser = new DirectoryChooser();
+    return Optional.ofNullable(chooser.showDialog(null));
+  }
+
+  /**
    * Writes information about a KillEvent to a log file in JSON format. The log file name is
    * determined by appending the provided file suffix to a predefined file name pattern.
    *
@@ -81,7 +100,7 @@ public class FileHandler {
    * @param fileSuffix The suffix to append to the log file name, typically used to differentiate
    *     between different log files or contexts.
    */
-  public static void writeKillEventToFile(
+  public static boolean writeKillEventToFile(
       @NotNull KillEvent killEvent, @NotNull String fileSuffix) {
     log.debug("Appending KillEvent to file in JSON format.");
     ObjectMapper objectMapper = new ObjectMapper();
@@ -89,16 +108,23 @@ public class FileHandler {
     objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-    File file = new File(String.format("logs/kill-events_%s.log", fileSuffix));
-    try (FileWriter writer = new FileWriter(file, true)) {
-      String json = objectMapper.writeValueAsString(killEvent);
-      if (file.length() > 0) {
-        writer.write("," + System.lineSeparator());
+    if (SettingsData.getPathKillEvent().isBlank()) {
+      Platform.runLater(() -> AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "No path to save the KilLEvent file set.", false));
+      return false;
+    } else {
+      File file = new File(String.format(SettingsData.getPathKillEvent() + "\\kill-events_%s.log", fileSuffix));
+      try (FileWriter writer = new FileWriter(file, true)) {
+        String json = objectMapper.writeValueAsString(killEvent);
+        if (file.length() > 0) {
+          writer.write("," + System.lineSeparator());
+        }
+        writer.write(json);
+        log.info("KillEvent successfully written to file: {}", file.getAbsolutePath());
+        return true;
+      } catch (IOException e) {
+        log.error("Error while writing KillEvent to file", e);
+        return false;
       }
-      writer.write(json);
-      log.info("KillEvent successfully written to file: {}", file.getAbsolutePath());
-    } catch (IOException e) {
-      log.error("Error while writing KillEvent to file", e);
     }
   }
 }

@@ -22,7 +22,9 @@ package de.greluc.sc.sckm;
 
 import static de.greluc.sc.sckm.Constants.APP_TITLE;
 
+import java.util.Optional;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import lombok.Generated;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
  * as displaying general error alerts.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.4.0
+ * @version 1.5.0
  * @since 1.0.0
  */
 public class AlertHandler {
@@ -43,7 +45,7 @@ public class AlertHandler {
   @Generated
   public static void showGeneralError() {
     showAlert(
-        Alert.AlertType.ERROR, "ERROR", "An error occurred while performing the desired action.");
+        Alert.AlertType.ERROR, "ERROR", "An error occurred while performing the desired action.", false);
   }
 
   /**
@@ -55,12 +57,27 @@ public class AlertHandler {
    */
   @Generated
   public static void showAlert(
-      @NotNull Alert.AlertType alertType, @NotNull String header, @NotNull String content) {
+      @NotNull Alert.AlertType alertType, @NotNull String header, @NotNull String content, boolean blocking) {
     var alert = new Alert(alertType);
     alert.titleProperty().set(APP_TITLE);
     alert.headerTextProperty().set(header);
     alert.contentTextProperty().set(content);
     alert.setResizable(true);
-    alert.show();
+    if (blocking) {
+      alert.showAndWait();
+    } else {
+      alert.show();
+    }
+  }
+
+  @Generated
+  public static boolean showConfirmationAlert(@NotNull String header, @NotNull String content) {
+    var alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.titleProperty().set(APP_TITLE);
+    alert.headerTextProperty().set(header);
+    alert.contentTextProperty().set(content);
+    alert.setResizable(true);
+    Optional<ButtonType> result = alert.showAndWait();
+    return result.get() == ButtonType.OK;
   }
 }

@@ -33,6 +33,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import lombok.extern.log4j.Log4j2;
@@ -45,7 +46,7 @@ import org.jetbrains.annotations.NotNull;
  * location.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.4.0
+ * @version 1.5.0
  * @since 1.2.1
  */
 @Log4j2
@@ -65,45 +66,46 @@ public class KillEventExtractor {
    * @param inputFilePath The file path to the log file to be read for extracting kill events.
    * @param scanStartTime The start time of the scanning process, used for file naming when writing
    *     kill events.
-   * @throws IOException If the log file cannot be accessed or read.
    */
-  public static void extractKillEvents(
+  public static boolean extractKillEvents(
       @NotNull List<KillEvent> killEvents,
       @NotNull String inputFilePath,
-      @NotNull ZonedDateTime scanStartTime) throws IOException {
+      @NotNull ZonedDateTime scanStartTime) {
+    AtomicBoolean isWriteSuccesfull = new AtomicBoolean(true);
     try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath))) {
       String line;
       while ((line = reader.readLine()) != null) {
-        if (line.contains("<Actor Death>")) {
+        if (line.contains("<Actor Death>") && isWriteSuccesfull.get()) {
           Optional<KillEvent> event = parseKillEvent(line);
           event.ifPresent(
               killEvent -> {
                 if ((killEvent.killedPlayer().equalsIgnoreCase(SettingsData.getHandle())
-                    || killEvent.killingPlayer().equalsIgnoreCase(SettingsData.getHandle()))
+                        || killEvent.killingPlayer().equalsIgnoreCase(SettingsData.getHandle()))
                     && !killEvents.contains(killEvent)) {
                   killEvents.add(killEvent);
                   log.info("New kill event detected");
                   log.debug("Kill Event:\n{}", killEvent);
                   if (SettingsData.isWriteKillEventToFile()) {
-                    writeKillEventToFile(
+                    isWriteSuccesfull.set(writeKillEventToFile(
                         killEvent,
-                        scanStartTime.format(DateTimeFormatter.ofPattern("yyMMdd-HHmmss")));
+                        scanStartTime.format(DateTimeFormatter.ofPattern("yyMMdd-HHmmss"))));
                   }
                 }
               });
         }
       }
       killEvents.sort(Comparator.comparing(KillEvent::timestamp, Comparator.reverseOrder()));
+      return isWriteSuccesfull.get();
     } catch (IOException ioException) {
       Platform.runLater(
           () ->
               AlertHandler.showAlert(
                   Alert.AlertType.ERROR,
                   "Failed to read log file",
-                  "Please check if the file exists and the path is set correctly."));
+                  "Please check if the file exists and the path is set correctly.", false));
       log.error("Failed to find the specified log file: {}", inputFilePath);
       log.trace("Stacktrace:", ioException);
-      throw ioException;
+      return false;
     }
   }
 

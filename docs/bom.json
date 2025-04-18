@@ -1,10 +1,10 @@
 {
   "bomFormat" : "CycloneDX",
   "specVersion" : "1.6",
-  "serialNumber" : "urn:uuid:e78287ed-44ab-4397-87d7-71842ec05d69",
+  "serialNumber" : "urn:uuid:8282c498-a006-4292-b411-ac774f04bf68",
   "version" : 1,
   "metadata" : {
-    "timestamp" : "2025-03-18T13:20:42Z",
+    "timestamp" : "2025-04-13T12:54:14Z",
     "tools" : {
       "components" : [
         {
@@ -18,11 +18,11 @@
     },
     "component" : {
       "type" : "library",
-      "bom-ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.4.0?project_path=%3A",
+      "bom-ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.5.0?project_path=%3A",
       "group" : "de.greluc.sc",
       "name" : "sckillmonitor",
-      "version" : "1.4.0",
-      "purl" : "pkg:maven/de.greluc.sc/sckillmonitor@1.4.0?project_path=%3A",
+      "version" : "1.5.0",
+      "purl" : "pkg:maven/de.greluc.sc/sckillmonitor@1.5.0?project_path=%3A",
       "modified" : false,
       "externalReferences" : [
         {
@@ -470,43 +470,43 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/com.google.guava/failureaccess@1.0.2?type=jar",
+      "bom-ref" : "pkg:maven/com.google.guava/failureaccess@1.0.3?type=jar",
       "group" : "com.google.guava",
       "name" : "failureaccess",
-      "version" : "1.0.2",
+      "version" : "1.0.3",
       "description" : "Contains com.google.common.util.concurrent.internal.InternalFutureFailureAccess and InternalFutures. Most users will never need to use this artifact. Its classes are conceptually a part of Guava, but they're in this separate artifact so that Android libraries can use them without pulling in all of Guava (just as they can use ListenableFuture by depending on the listenablefuture artifact).",
       "hashes" : [
         {
           "alg" : "MD5",
-          "content" : "3f75955b49b6758fd6d1e1bd9bf777b3"
+          "content" : "29a782e90f6b37218b18bb880d2a8f4a"
         },
         {
           "alg" : "SHA-1",
-          "content" : "c4a06a64e650562f30b7bf9aaec1bfed43aca12b"
+          "content" : "aeaffd00d57023a2c947393ed251f0354f0985fc"
         },
         {
           "alg" : "SHA-256",
-          "content" : "8a8f81cf9b359e3f6dfa691a1e776985c061ef2f223c9b2c80753e1b458e8064"
+          "content" : "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb"
         },
         {
           "alg" : "SHA-512",
-          "content" : "ff4ee76aa661708989d53d45576cff3beea9ebbd86481dbbf2ee8c81bb22f882097b430588312b711025f0e890f22c6799d722ccd422a6a7278de08660fe2f51"
+          "content" : "72be228e7805da5623e42bf024ded7d9147023c66b22f4dbd04ac6898201af46ee82e1f92ea51eb0595f1b49151c4b8ecb862653d4906c17609c42544ee97abf"
         },
         {
           "alg" : "SHA-384",
-          "content" : "85a7bd379da27ad57a4e5c02099fef206083caa52244597ac858a921b48e2912cfa7ef0e7d0c7a10ab2dd8d0f7d6ada0"
+          "content" : "9dd1a2a08efda311604992d3e7cee64873bc8c64de3b423b1b3a3dcc1f7f0810bb03901fbfe39a5f835accb0646f4ad8"
         },
         {
           "alg" : "SHA3-384",
-          "content" : "652b22d09b297320e62ac254801e7d3a0fd2a8038461c5cbf7a53a27d681f62b768b964aa62c864453c4e7af217c8c4a"
+          "content" : "ffd67766c165ee77e96824e06de2c19864a6e61f785b2085eb825f308f173d71f2555559d90d910f33f3367378ace0e3"
         },
         {
           "alg" : "SHA3-256",
-          "content" : "a650b2f7982affc2dbb7e2807fbb0fbf58b74fd8dc111cc6dc5e95a00179b7e3"
+          "content" : "08a77b528a72ca412b36e4004692705ebfd75cfb4897c88632d367d08a34b09f"
         },
         {
           "alg" : "SHA3-512",
-          "content" : "2c5ee7629a8fb1c952f437b80fcd1cff86c54ff81de02eda1eb73c0bbfe38d3f072946f8c6396c7f1e46e16a6d44ad393dfe6fd2dd96f75ebb854263d36bb193"
+          "content" : "7cba6c266babbe8272f029eea6e2cbddadee96eb1a16916a6eb2441a55837867ce717385d4388735fd83f2f6555931077c0ebda011a1ee9a37ac38c8c0c43a65"
         }
       ],
       "licenses" : [
@@ -521,7 +521,7 @@
           }
         }
       ],
-      "purl" : "pkg:maven/com.google.guava/failureaccess@1.0.2?type=jar",
+      "purl" : "pkg:maven/com.google.guava/failureaccess@1.0.3?type=jar",
       "modified" : false,
       "properties" : [
         {
@@ -532,43 +532,43 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/com.google.guava/guava@33.4.0-jre?type=jar",
+      "bom-ref" : "pkg:maven/com.google.guava/guava@33.4.6-jre?type=jar",
       "group" : "com.google.guava",
       "name" : "guava",
-      "version" : "33.4.0-jre",
+      "version" : "33.4.6-jre",
       "description" : "Guava is a suite of core and expanded libraries that include utility classes, Google's collections, I/O classes, and much more.",
       "hashes" : [
         {
           "alg" : "MD5",
-          "content" : "5732af16367192820c7bf177e9b29512"
+          "content" : "b676432575a564378de197062e060afe"
         },
         {
           "alg" : "SHA-1",
-          "content" : "03fcc0a259f724c7de54a6a55ea7e26d3d5c0cac"
+          "content" : "4437fb72c3cc5d29554b588d9a97bea12d6a42e1"
         },
         {
           "alg" : "SHA-256",
-          "content" : "b918c98a7e44dbe94ebd9fe3e40cddaadb5a93e6a78eb6008b42df237241e538"
+          "content" : "958a035b74ff6c7d0cdff9c384524b645eb618f7117b60e1ee915f9cffd0e716"
         },
         {
           "alg" : "SHA-512",
-          "content" : "778bd20c3ad83dd17d742368814cf97f28f3ec5723ef952a634290dbe0b4ced8c2a8f878d710fed10223d4393c510df39583c78921c592f605a0bb7003d98f84"
+          "content" : "21d4e09c3d3d7263938658d6f78a794b017505faa07b2c51190d72a1967cd8347c98f6d6390cc88f51488e20622dc8484beb6d99bcbeef504d21299c5b804e73"
         },
         {
           "alg" : "SHA-384",
-          "content" : "4beba310b95d9d0d6ecceec863b056ec84a3b4d8a6591b8ee3c85e4cbaf6d744a70021b1e5779d90bdb66aa6e2b9c69e"
+          "content" : "87b166e9e2ee0cadc7b51915123f6034c0ad8f969de27e854bb55c7d33363787e16a8a7bb0620e02d71ed89217ef69f9"
         },
         {
           "alg" : "SHA3-384",
-          "content" : "8ba470051b86bda40cf096d27f11f887f4080a8fff36b7823b0dd63a8875b043f33ebb649f44f6f2f3fcc749f61357ce"
+          "content" : "cf168be40761b6e1a7dacbec1bcc551ff75675784d3f7fa6a23786576960b332ee32b028d2115490fcf1470fd5c855cf"
         },
         {
           "alg" : "SHA3-256",
-          "content" : "05caa13e6a20cec5bf02c6e49dfd9863f43edbd6778ae39dc8c89d7d3b4f559b"
+          "content" : "1aa6efce4c6099959848f483f4d884248787deea5de561908df4b8dffce6fe83"
         },
         {
           "alg" : "SHA3-512",
-          "content" : "d829570cb2b9e446cd3afa17d523501fc4c13736ff0d1e59167bd9f0a83e2eebd489dc6e728ea06b24695d53db91fce5bc265f8a127852082a194b8a006628dd"
+          "content" : "d3840cbb5514ce88adb3c8d7323a1fbef457d04492049ea64a7cb3d588d7202c7be8811a3765804bc3abe607c90fcdb983eed5e658d12e53f70719e4bd2bbda6"
         }
       ],
       "licenses" : [
@@ -583,7 +583,7 @@
           }
         }
       ],
-      "purl" : "pkg:maven/com.google.guava/guava@33.4.0-jre?type=jar",
+      "purl" : "pkg:maven/com.google.guava/guava@33.4.6-jre?type=jar",
       "modified" : false,
       "properties" : [
         {
@@ -728,43 +728,43 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/com.puppycrawl.tools/checkstyle@10.21.4?type=jar",
+      "bom-ref" : "pkg:maven/com.puppycrawl.tools/checkstyle@10.23.0?type=jar",
       "group" : "com.puppycrawl.tools",
       "name" : "checkstyle",
-      "version" : "10.21.4",
+      "version" : "10.23.0",
       "description" : "Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard",
       "hashes" : [
         {
           "alg" : "MD5",
-          "content" : "70c76e8cf0096c543fa7975441a6aaaa"
+          "content" : "813696cce48ca7e6f7b13c84c4229300"
         },
         {
           "alg" : "SHA-1",
-          "content" : "dcf2b66bd9ecb93ebe156f50487d795144dc3134"
+          "content" : "45c95c438e5f0d45e9b68fbdae1ec88f9a83f660"
         },
         {
           "alg" : "SHA-256",
-          "content" : "f28de131138bd7f9491e276b7ce3f7738f7906130b779fd53c93c2758d8153d7"
+          "content" : "a29ce52bebd07d364efc8639ca3813f87941deb63fa1e4f821558def872999a1"
         },
         {
           "alg" : "SHA-512",
-          "content" : "67648d044aae8f82d34ecc7d49c9f682d20901d985d1dd03bafd67563ce897cc9f61a0bf8d4c1ad1a6b6ffe9e1c73cdfc7e147eb179727965ed219bf77feea93"
+          "content" : "23dd2f689b58cda3cf98331edb5431c6742213d6363d4bf25be17810ddb6c4616b79aacc780c4fd72336e80e16a5e40f0902036a56430c94907df5c604fe7962"
         },
         {
           "alg" : "SHA-384",
-          "content" : "977e0b731dbcc2c92b0c4b94cdede67125191c8e61dc9b1060534acc9de18123edebc6ff34d802d5e1b69bec38939395"
+          "content" : "45ccb29e22e0c772f815865bacb94e0f10b71d2a9d3269d6d93059ae5c4a95cf7144ae0fdd57d7de545a0c11be32fccf"
         },
         {
           "alg" : "SHA3-384",
-          "content" : "10c5ef1eca063ccc2dfdd67263c96ae4da11126bd270a7b4cbf669d63971403ea07601c1d88e0d8c66c9d6dd2365d902"
+          "content" : "0b1ee6fdc39e7556a0706339ba338355ab165d6aff54ae300654ca37ba3a1c20e827a319818f1c0d0f8c0c2a3cf11467"
         },
         {
           "alg" : "SHA3-256",
-          "content" : "11ef243b519c1ef69fe04dec58e879644bdcaa15e0be2de876306f2d19f7f52c"
+          "content" : "ede86cff0a1c74529b2da8e150154d9bd4ce704c69929891c74374ac91dd4b48"
         },
         {
           "alg" : "SHA3-512",
-          "content" : "30bf9ba2a7285a94f7063ed3dfe52ad347e44dc4792979f652d490e0de9c2b472cfb2ddad0c9ef8927b11621258ab826fc88dd9bf3c37fe22f33a906ea1cc920"
+          "content" : "4a2403517c905c9d50a09b70f0ff6d2dc525b79b8f45a5559d0b21adf0bd2482ad6961d84500b012f5032a5979c64029aaac45fbf0ed6b7034bbdeb702d1ba04"
         }
       ],
       "licenses" : [
@@ -780,7 +780,7 @@
           }
         }
       ],
-      "purl" : "pkg:maven/com.puppycrawl.tools/checkstyle@10.21.4?type=jar",
+      "purl" : "pkg:maven/com.puppycrawl.tools/checkstyle@10.23.0?type=jar",
       "modified" : false,
       "externalReferences" : [
         {
@@ -2375,43 +2375,43 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/org.checkerframework/checker-qual@3.48.4?type=jar",
+      "bom-ref" : "pkg:maven/org.checkerframework/checker-qual@3.49.1?type=jar",
       "group" : "org.checkerframework",
       "name" : "checker-qual",
-      "version" : "3.48.4",
+      "version" : "3.49.1",
       "description" : "checker-qual contains annotations (type qualifiers) that a programmerwrites to specify Java code for type-checking by the Checker Framework.",
       "hashes" : [
         {
           "alg" : "MD5",
-          "content" : "9ddea4cc13a0136fbe14770a17c73cb9"
+          "content" : "5ed2a4f18614eba638abfe3ade7634f4"
         },
         {
           "alg" : "SHA-1",
-          "content" : "6b5d69a61012211d581e68699baf3beb1fd382da"
+          "content" : "5181d3a1bdd678c4ef5e95501c0400aa3cc58a1d"
         },
         {
           "alg" : "SHA-256",
-          "content" : "e1baf9f682dbca23fbe90667a4b32fe348a5118b4fd0d42a63b73d50b2bb0f3f"
+          "content" : "1a77cff4a701597c8a848303d84b40d42280ed2824e108397fdcfa07fa51de0d"
         },
         {
           "alg" : "SHA-512",
-          "content" : "87d5b46721f02397e7d96aeeea9c13a3e74ebece1aaf9c7ae487acf1aed369e9016d04fbf7fc08625d43b87f0821da14d323f1b8957b4373fe0bffe4bb47cf3b"
+          "content" : "e88fa8a21ba06926c6fa8720d651df3a80dcf46369b255478b28e424cdc075d6cb3f464ed88af1ea0d4fb2c4510117edfea02b798ed39517422d85b1ed54a00a"
         },
         {
           "alg" : "SHA-384",
-          "content" : "5bc95c7b4c8a8bd404bddb4f6e3fc72d314174ed4a83b6cc318c7ee3407f3a5cdee9f9a3f754239ae1a839c4e457df02"
+          "content" : "bee2c6f1414facb100c699317eaf162bbed8464c506d1f52a7f48b653072bb0c62bb8b3ff13114a735772f037cd3494f"
         },
         {
           "alg" : "SHA3-384",
-          "content" : "66b77bfeb3a8643248aa22c808799d2e1a88da5a8eed70fefc096cb3192b4cbd772db42460f3512ea61694a820d9631c"
+          "content" : "f50d55511d5a888b21eb5bce78aa0c951cc7ed725fc5e87d9f72a90799e8d5bb0f5e0c129e582d87d4250e83a754ea76"
         },
         {
           "alg" : "SHA3-256",
-          "content" : "4fd8cb38d4c5f0479c3edea23a0e87fa0a641cdcce7313914c7f4550571baeb8"
+          "content" : "be1ae9725c6b7daa9b71882e6730092689347c404650fadc9741cb58cf3ad7a9"
         },
         {
           "alg" : "SHA3-512",
-          "content" : "ac3f94581b4e7e17942da77b352f644c26d0bddfd7ab644d0c07076f844be96fd7d0d293fea166ffab4787bcd653b6572725d4c72583057658cabe5c5da87f85"
+          "content" : "7c7ad28e253b30f319fe79168f418750b130ec1853e084c6ea08d9c9d315ac455335106489396ecf12a80c7be07b6e49bbed20fdb7b925d9114a7af2ddbe235b"
         }
       ],
       "licenses" : [
@@ -2426,7 +2426,7 @@
           }
         }
       ],
-      "purl" : "pkg:maven/org.checkerframework/checker-qual@3.48.4?type=jar",
+      "purl" : "pkg:maven/org.checkerframework/checker-qual@3.49.1?type=jar",
       "modified" : false,
       "externalReferences" : [
         {
@@ -3114,6 +3114,74 @@
         {
           "type" : "vcs",
           "url" : "https://github.com/JetBrains/java-annotations"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "cdx:maven:package:test",
+          "value" : "false"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.jspecify/jspecify@1.0.0?type=jar",
+      "group" : "org.jspecify",
+      "name" : "jspecify",
+      "version" : "1.0.0",
+      "description" : "An artifact of well-named and well-specified annotations to power static analysis checks",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "9133aba420d0ca3b001dbb6ae9992cf6"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "7425a601c1c7ec76645a78d22b8c6a627edee507"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "efded31ef5b342f09422935076e599789076431e93a746685c0607e7de5592719ba6aacde0be670b3f064d1e85630d58d5bce6b34aed2a288fdb34f745efb7bc"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "814f860e5a44ead6c457676841eef471a8b87be31b84c60a8a4477a18a9cbcb6e3c2ae700969d5c5e52309d961e0537a"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "c8844e5b71e5ecfbb7366097ce34af2f5863d86d5ccc3f9ec384d8ade4b60ccc8124c7fc88664f1afd2b0962fc8775bf"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "4b4f08ad7606a3ac62997779484919a302267b26d26ee19125f8a7eea60e8a71"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "65c6845ebae981cb81b61107707ced39f5b377dae970b47606ef482aaf10e3729def0da40d9377c43abbfb483a5ceae039b0d51c129c50a6d36ad351a5d6b01e"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0",
+            "text" : {
+              "contentType" : "text/plain",
+              "encoding" : "base64",
+              "content" : "QXBhY2hlIExpY2Vuc2UKVmVyc2lvbiAyLjAsIEphbnVhcnkgMjAwNApodHRwOi8vd3d3LmFwYWNoZS5vcmcvbGljZW5zZXMvCgpURVJNUyBBTkQgQ09ORElUSU9OUyBGT1IgVVNFLCBSRVBST0RVQ1RJT04sIEFORCBESVNUUklCVVRJT04KCjEuIERlZmluaXRpb25zLgoKIkxpY2Vuc2UiIHNoYWxsIG1lYW4gdGhlIHRlcm1zIGFuZCBjb25kaXRpb25zIGZvciB1c2UsIHJlcHJvZHVjdGlvbiwgYW5kIGRpc3RyaWJ1dGlvbiBhcyBkZWZpbmVkIGJ5IFNlY3Rpb25zIDEgdGhyb3VnaCA5IG9mIHRoaXMgZG9jdW1lbnQuCgoiTGljZW5zb3IiIHNoYWxsIG1lYW4gdGhlIGNvcHlyaWdodCBvd25lciBvciBlbnRpdHkgYXV0aG9yaXplZCBieSB0aGUgY29weXJpZ2h0IG93bmVyIHRoYXQgaXMgZ3JhbnRpbmcgdGhlIExpY2Vuc2UuCgoiTGVnYWwgRW50aXR5IiBzaGFsbCBtZWFuIHRoZSB1bmlvbiBvZiB0aGUgYWN0aW5nIGVudGl0eSBhbmQgYWxsIG90aGVyIGVudGl0aWVzIHRoYXQgY29udHJvbCwgYXJlIGNvbnRyb2xsZWQgYnksIG9yIGFyZSB1bmRlciBjb21tb24gY29udHJvbCB3aXRoIHRoYXQgZW50aXR5LiBGb3IgdGhlIHB1cnBvc2VzIG9mIHRoaXMgZGVmaW5pdGlvbiwgImNvbnRyb2wiIG1lYW5zIChpKSB0aGUgcG93ZXIsIGRpcmVjdCBvciBpbmRpcmVjdCwgdG8gY2F1c2UgdGhlIGRpcmVjdGlvbiBvciBtYW5hZ2VtZW50IG9mIHN1Y2ggZW50aXR5LCB3aGV0aGVyIGJ5IGNvbnRyYWN0IG9yIG90aGVyd2lzZSwgb3IgKGlpKSBvd25lcnNoaXAgb2YgZmlmdHkgcGVyY2VudCAoNTAlKSBvciBtb3JlIG9mIHRoZSBvdXRzdGFuZGluZyBzaGFyZXMsIG9yIChpaWkpIGJlbmVmaWNpYWwgb3duZXJzaGlwIG9mIHN1Y2ggZW50aXR5LgoKIllvdSIgKG9yICJZb3VyIikgc2hhbGwgbWVhbiBhbiBpbmRpdmlkdWFsIG9yIExlZ2FsIEVudGl0eSBleGVyY2lzaW5nIHBlcm1pc3Npb25zIGdyYW50ZWQgYnkgdGhpcyBMaWNlbnNlLgoKIlNvdXJjZSIgZm9ybSBzaGFsbCBtZWFuIHRoZSBwcmVmZXJyZWQgZm9ybSBmb3IgbWFraW5nIG1vZGlmaWNhdGlvbnMsIGluY2x1ZGluZyBidXQgbm90IGxpbWl0ZWQgdG8gc29mdHdhcmUgc291cmNlIGNvZGUsIGRvY3VtZW50YXRpb24gc291cmNlLCBhbmQgY29uZmlndXJhdGlvbiBmaWxlcy4KCiJPYmplY3QiIGZvcm0gc2hhbGwgbWVhbiBhbnkgZm9ybSByZXN1bHRpbmcgZnJvbSBtZWNoYW5pY2FsIHRyYW5zZm9ybWF0aW9uIG9yIHRyYW5zbGF0aW9uIG9mIGEgU291cmNlIGZvcm0sIGluY2x1ZGluZyBidXQgbm90IGxpbWl0ZWQgdG8gY29tcGlsZWQgb2JqZWN0IGNvZGUsIGdlbmVyYXRlZCBkb2N1bWVudGF0aW9uLCBhbmQgY29udmVyc2lvbnMgdG8gb3RoZXIgbWVkaWEgdHlwZXMuCgoiV29yayIgc2hhbGwgbWVhbiB0aGUgd29yayBvZiBhdXRob3JzaGlwLCB3aGV0aGVyIGluIFNvdXJjZSBvciBPYmplY3QgZm9ybSwgbWFkZSBhdmFpbGFibGUgdW5kZXIgdGhlIExpY2Vuc2UsIGFzIGluZGljYXRlZCBieSBhIGNvcHlyaWdodCBub3RpY2UgdGhhdCBpcyBpbmNsdWRlZCBpbiBvciBhdHRhY2hlZCB0byB0aGUgd29yayAoYW4gZXhhbXBsZSBpcyBwcm92aWRlZCBpbiB0aGUgQXBwZW5kaXggYmVsb3cpLgoKIkRlcml2YXRpdmUgV29ya3MiIHNoYWxsIG1lYW4gYW55IHdvcmssIHdoZXRoZXIgaW4gU291cmNlIG9yIE9iamVjdCBmb3JtLCB0aGF0IGlzIGJhc2VkIG9uIChvciBkZXJpdmVkIGZyb20pIHRoZSBXb3JrIGFuZCBmb3Igd2hpY2ggdGhlIGVkaXRvcmlhbCByZXZpc2lvbnMsIGFubm90YXRpb25zLCBlbGFib3JhdGlvbnMsIG9yIG90aGVyIG1vZGlmaWNhdGlvbnMgcmVwcmVzZW50LCBhcyBhIHdob2xlLCBhbiBvcmlnaW5hbCB3b3JrIG9mIGF1dGhvcnNoaXAuIEZvciB0aGUgcHVycG9zZXMgb2YgdGhpcyBMaWNlbnNlLCBEZXJpdmF0aXZlIFdvcmtzIHNoYWxsIG5vdCBpbmNsdWRlIHdvcmtzIHRoYXQgcmVtYWluIHNlcGFyYWJsZSBmcm9tLCBvciBtZXJlbHkgbGluayAob3IgYmluZCBieSBuYW1lKSB0byB0aGUgaW50ZXJmYWNlcyBvZiwgdGhlIFdvcmsgYW5kIERlcml2YXRpdmUgV29ya3MgdGhlcmVvZi4KCiJDb250cmlidXRpb24iIHNoYWxsIG1lYW4gYW55IHdvcmsgb2YgYXV0aG9yc2hpcCwgaW5jbHVkaW5nIHRoZSBvcmlnaW5hbCB2ZXJzaW9uIG9mIHRoZSBXb3JrIGFuZCBhbnkgbW9kaWZpY2F0aW9ucyBvciBhZGRpdGlvbnMgdG8gdGhhdCBXb3JrIG9yIERlcml2YXRpdmUgV29ya3MgdGhlcmVvZiwgdGhhdCBpcyBpbnRlbnRpb25hbGx5IHN1Ym1pdHRlZCB0byBMaWNlbnNvciBmb3IgaW5jbHVzaW9uIGluIHRoZSBXb3JrIGJ5IHRoZSBjb3B5cmlnaHQgb3duZXIgb3IgYnkgYW4gaW5kaXZpZHVhbCBvciBMZWdhbCBFbnRpdHkgYXV0aG9yaXplZCB0byBzdWJtaXQgb24gYmVoYWxmIG9mIHRoZSBjb3B5cmlnaHQgb3duZXIuIEZvciB0aGUgcHVycG9zZXMgb2YgdGhpcyBkZWZpbml0aW9uLCAic3VibWl0dGVkIiBtZWFucyBhbnkgZm9ybSBvZiBlbGVjdHJvbmljLCB2ZXJiYWwsIG9yIHdyaXR0ZW4gY29tbXVuaWNhdGlvbiBzZW50IHRvIHRoZSBMaWNlbnNvciBvciBpdHMgcmVwcmVzZW50YXRpdmVzLCBpbmNsdWRpbmcgYnV0IG5vdCBsaW1pdGVkIHRvIGNvbW11bmljYXRpb24gb24gZWxlY3Ryb25pYyBtYWlsaW5nIGxpc3RzLCBzb3VyY2UgY29kZSBjb250cm9sIHN5c3RlbXMsIGFuZCBpc3N1ZSB0cmFja2luZyBzeXN0ZW1zIHRoYXQgYXJlIG1hbmFnZWQgYnksIG9yIG9uIGJlaGFsZiBvZiwgdGhlIExpY2Vuc29yIGZvciB0aGUgcHVycG9zZSBvZiBkaXNjdXNzaW5nIGFuZCBpbXByb3ZpbmcgdGhlIFdvcmssIGJ1dCBleGNsdWRpbmcgY29tbXVuaWNhdGlvbiB0aGF0IGlzIGNvbnNwaWN1b3VzbHkgbWFya2VkIG9yIG90aGVyd2lzZSBkZXNpZ25hdGVkIGluIHdyaXRpbmcgYnkgdGhlIGNvcHlyaWdodCBvd25lciBhcyAiTm90IGEgQ29udHJpYnV0aW9uLiIKCiJDb250cmlidXRvciIgc2hhbGwgbWVhbiBMaWNlbnNvciBhbmQgYW55IGluZGl2aWR1YWwgb3IgTGVnYWwgRW50aXR5IG9uIGJlaGFsZiBvZiB3aG9tIGEgQ29udHJpYnV0aW9uIGhhcyBiZWVuIHJlY2VpdmVkIGJ5IExpY2Vuc29yIGFuZCBzdWJzZXF1ZW50bHkgaW5jb3Jwb3JhdGVkIHdpdGhpbiB0aGUgV29yay4KCjIuIEdyYW50IG9mIENvcHlyaWdodCBMaWNlbnNlLiBTdWJqZWN0IHRvIHRoZSB0ZXJtcyBhbmQgY29uZGl0aW9ucyBvZiB0aGlzIExpY2Vuc2UsIGVhY2ggQ29udHJpYnV0b3IgaGVyZWJ5IGdyYW50cyB0byBZb3UgYSBwZXJwZXR1YWwsIHdvcmxkd2lkZSwgbm9uLWV4Y2x1c2l2ZSwgbm8tY2hhcmdlLCByb3lhbHR5LWZyZWUsIGlycmV2b2NhYmxlIGNvcHlyaWdodCBsaWNlbnNlIHRvIHJlcHJvZHVjZSwgcHJlcGFyZSBEZXJpdmF0aXZlIFdvcmtzIG9mLCBwdWJsaWNseSBkaXNwbGF5LCBwdWJsaWNseSBwZXJmb3JtLCBzdWJsaWNlbnNlLCBhbmQgZGlzdHJpYnV0ZSB0aGUgV29yayBhbmQgc3VjaCBEZXJpdmF0aXZlIFdvcmtzIGluIFNvdXJjZSBvciBPYmplY3QgZm9ybS4KCjMuIEdyYW50IG9mIFBhdGVudCBMaWNlbnNlLiBTdWJqZWN0IHRvIHRoZSB0ZXJtcyBhbmQgY29uZGl0aW9ucyBvZiB0aGlzIExpY2Vuc2UsIGVhY2ggQ29udHJpYnV0b3IgaGVyZWJ5IGdyYW50cyB0byBZb3UgYSBwZXJwZXR1YWwsIHdvcmxkd2lkZSwgbm9uLWV4Y2x1c2l2ZSwgbm8tY2hhcmdlLCByb3lhbHR5LWZyZWUsIGlycmV2b2NhYmxlIChleGNlcHQgYXMgc3RhdGVkIGluIHRoaXMgc2VjdGlvbikgcGF0ZW50IGxpY2Vuc2UgdG8gbWFrZSwgaGF2ZSBtYWRlLCB1c2UsIG9mZmVyIHRvIHNlbGwsIHNlbGwsIGltcG9ydCwgYW5kIG90aGVyd2lzZSB0cmFuc2ZlciB0aGUgV29yaywgd2hlcmUgc3VjaCBsaWNlbnNlIGFwcGxpZXMgb25seSB0byB0aG9zZSBwYXRlbnQgY2xhaW1zIGxpY2Vuc2FibGUgYnkgc3VjaCBDb250cmlidXRvciB0aGF0IGFyZSBuZWNlc3NhcmlseSBpbmZyaW5nZWQgYnkgdGhlaXIgQ29udHJpYnV0aW9uKHMpIGFsb25lIG9yIGJ5IGNvbWJpbmF0aW9uIG9mIHRoZWlyIENvbnRyaWJ1dGlvbihzKSB3aXRoIHRoZSBXb3JrIHRvIHdoaWNoIHN1Y2ggQ29udHJpYnV0aW9uKHMpIHdhcyBzdWJtaXR0ZWQuIElmIFlvdSBpbnN0aXR1dGUgcGF0ZW50IGxpdGlnYXRpb24gYWdhaW5zdCBhbnkgZW50aXR5IChpbmNsdWRpbmcgYSBjcm9zcy1jbGFpbSBvciBjb3VudGVyY2xhaW0gaW4gYSBsYXdzdWl0KSBhbGxlZ2luZyB0aGF0IHRoZSBXb3JrIG9yIGEgQ29udHJpYnV0aW9uIGluY29ycG9yYXRlZCB3aXRoaW4gdGhlIFdvcmsgY29uc3RpdHV0ZXMgZGlyZWN0IG9yIGNvbnRyaWJ1dG9yeSBwYXRlbnQgaW5mcmluZ2VtZW50LCB0aGVuIGFueSBwYXRlbnQgbGljZW5zZXMgZ3JhbnRlZCB0byBZb3UgdW5kZXIgdGhpcyBMaWNlbnNlIGZvciB0aGF0IFdvcmsgc2hhbGwgdGVybWluYXRlIGFzIG9mIHRoZSBkYXRlIHN1Y2ggbGl0aWdhdGlvbiBpcyBmaWxlZC4KCjQuIFJlZGlzdHJpYnV0aW9uLiBZb3UgbWF5IHJlcHJvZHVjZSBhbmQgZGlzdHJpYnV0ZSBjb3BpZXMgb2YgdGhlIFdvcmsgb3IgRGVyaXZhdGl2ZSBXb3JrcyB0aGVyZW9mIGluIGFueSBtZWRpdW0sIHdpdGggb3Igd2l0aG91dCBtb2RpZmljYXRpb25zLCBhbmQgaW4gU291cmNlIG9yIE9iamVjdCBmb3JtLCBwcm92aWRlZCB0aGF0IFlvdSBtZWV0IHRoZSBmb2xsb3dpbmcgY29uZGl0aW9uczoKCiAgICAgKGEpIFlvdSBtdXN0IGdpdmUgYW55IG90aGVyIHJlY2lwaWVudHMgb2YgdGhlIFdvcmsgb3IgRGVyaXZhdGl2ZSBXb3JrcyBhIGNvcHkgb2YgdGhpcyBMaWNlbnNlOyBhbmQKCiAgICAgKGIpIFlvdSBtdXN0IGNhdXNlIGFueSBtb2RpZmllZCBmaWxlcyB0byBjYXJyeSBwcm9taW5lbnQgbm90aWNlcyBzdGF0aW5nIHRoYXQgWW91IGNoYW5nZWQgdGhlIGZpbGVzOyBhbmQKCiAgICAgKGMpIFlvdSBtdXN0IHJldGFpbiwgaW4gdGhlIFNvdXJjZSBmb3JtIG9mIGFueSBEZXJpdmF0aXZlIFdvcmtzIHRoYXQgWW91IGRpc3RyaWJ1dGUsIGFsbCBjb3B5cmlnaHQsIHBhdGVudCwgdHJhZGVtYXJrLCBhbmQgYXR0cmlidXRpb24gbm90aWNlcyBmcm9tIHRoZSBTb3VyY2UgZm9ybSBvZiB0aGUgV29yaywgZXhjbHVkaW5nIHRob3NlIG5vdGljZXMgdGhhdCBkbyBub3QgcGVydGFpbiB0byBhbnkgcGFydCBvZiB0aGUgRGVyaXZhdGl2ZSBXb3JrczsgYW5kCgogICAgIChkKSBJZiB0aGUgV29yayBpbmNsdWRlcyBhICJOT1RJQ0UiIHRleHQgZmlsZSBhcyBwYXJ0IG9mIGl0cyBkaXN0cmlidXRpb24sIHRoZW4gYW55IERlcml2YXRpdmUgV29ya3MgdGhhdCBZb3UgZGlzdHJpYnV0ZSBtdXN0IGluY2x1ZGUgYSByZWFkYWJsZSBjb3B5IG9mIHRoZSBhdHRyaWJ1dGlvbiBub3RpY2VzIGNvbnRhaW5lZCB3aXRoaW4gc3VjaCBOT1RJQ0UgZmlsZSwgZXhjbHVkaW5nIHRob3NlIG5vdGljZXMgdGhhdCBkbyBub3QgcGVydGFpbiB0byBhbnkgcGFydCBvZiB0aGUgRGVyaXZhdGl2ZSBXb3JrcywgaW4gYXQgbGVhc3Qgb25lIG9mIHRoZSBmb2xsb3dpbmcgcGxhY2VzOiB3aXRoaW4gYSBOT1RJQ0UgdGV4dCBmaWxlIGRpc3RyaWJ1dGVkIGFzIHBhcnQgb2YgdGhlIERlcml2YXRpdmUgV29ya3M7IHdpdGhpbiB0aGUgU291cmNlIGZvcm0gb3IgZG9jdW1lbnRhdGlvbiwgaWYgcHJvdmlkZWQgYWxvbmcgd2l0aCB0aGUgRGVyaXZhdGl2ZSBXb3Jrczsgb3IsIHdpdGhpbiBhIGRpc3BsYXkgZ2VuZXJhdGVkIGJ5IHRoZSBEZXJpdmF0aXZlIFdvcmtzLCBpZiBhbmQgd2hlcmV2ZXIgc3VjaCB0aGlyZC1wYXJ0eSBub3RpY2VzIG5vcm1hbGx5IGFwcGVhci4gVGhlIGNvbnRlbnRzIG9mIHRoZSBOT1RJQ0UgZmlsZSBhcmUgZm9yIGluZm9ybWF0aW9uYWwgcHVycG9zZXMgb25seSBhbmQgZG8gbm90IG1vZGlmeSB0aGUgTGljZW5zZS4gWW91IG1heSBhZGQgWW91ciBvd24gYXR0cmlidXRpb24gbm90aWNlcyB3aXRoaW4gRGVyaXZhdGl2ZSBXb3JrcyB0aGF0IFlvdSBkaXN0cmlidXRlLCBhbG9uZ3NpZGUgb3IgYXMgYW4gYWRkZW5kdW0gdG8gdGhlIE5PVElDRSB0ZXh0IGZyb20gdGhlIFdvcmssIHByb3ZpZGVkIHRoYXQgc3VjaCBhZGRpdGlvbmFsIGF0dHJpYnV0aW9uIG5vdGljZXMgY2Fubm90IGJlIGNvbnN0cnVlZCBhcyBtb2RpZnlpbmcgdGhlIExpY2Vuc2UuCgogICAgIFlvdSBtYXkgYWRkIFlvdXIgb3duIGNvcHlyaWdodCBzdGF0ZW1lbnQgdG8gWW91ciBtb2RpZmljYXRpb25zIGFuZCBtYXkgcHJvdmlkZSBhZGRpdGlvbmFsIG9yIGRpZmZlcmVudCBsaWNlbnNlIHRlcm1zIGFuZCBjb25kaXRpb25zIGZvciB1c2UsIHJlcHJvZHVjdGlvbiwgb3IgZGlzdHJpYnV0aW9uIG9mIFlvdXIgbW9kaWZpY2F0aW9ucywgb3IgZm9yIGFueSBzdWNoIERlcml2YXRpdmUgV29ya3MgYXMgYSB3aG9sZSwgcHJvdmlkZWQgWW91ciB1c2UsIHJlcHJvZHVjdGlvbiwgYW5kIGRpc3RyaWJ1dGlvbiBvZiB0aGUgV29yayBvdGhlcndpc2UgY29tcGxpZXMgd2l0aCB0aGUgY29uZGl0aW9ucyBzdGF0ZWQgaW4gdGhpcyBMaWNlbnNlLgoKNS4gU3VibWlzc2lvbiBvZiBDb250cmlidXRpb25zLiBVbmxlc3MgWW91IGV4cGxpY2l0bHkgc3RhdGUgb3RoZXJ3aXNlLCBhbnkgQ29udHJpYnV0aW9uIGludGVudGlvbmFsbHkgc3VibWl0dGVkIGZvciBpbmNsdXNpb24gaW4gdGhlIFdvcmsgYnkgWW91IHRvIHRoZSBMaWNlbnNvciBzaGFsbCBiZSB1bmRlciB0aGUgdGVybXMgYW5kIGNvbmRpdGlvbnMgb2YgdGhpcyBMaWNlbnNlLCB3aXRob3V0IGFueSBhZGRpdGlvbmFsIHRlcm1zIG9yIGNvbmRpdGlvbnMuIE5vdHdpdGhzdGFuZGluZyB0aGUgYWJvdmUsIG5vdGhpbmcgaGVyZWluIHNoYWxsIHN1cGVyc2VkZSBvciBtb2RpZnkgdGhlIHRlcm1zIG9mIGFueSBzZXBhcmF0ZSBsaWNlbnNlIGFncmVlbWVudCB5b3UgbWF5IGhhdmUgZXhlY3V0ZWQgd2l0aCBMaWNlbnNvciByZWdhcmRpbmcgc3VjaCBDb250cmlidXRpb25zLgoKNi4gVHJhZGVtYXJrcy4gVGhpcyBMaWNlbnNlIGRvZXMgbm90IGdyYW50IHBlcm1pc3Npb24gdG8gdXNlIHRoZSB0cmFkZSBuYW1lcywgdHJhZGVtYXJrcywgc2VydmljZSBtYXJrcywgb3IgcHJvZHVjdCBuYW1lcyBvZiB0aGUgTGljZW5zb3IsIGV4Y2VwdCBhcyByZXF1aXJlZCBmb3IgcmVhc29uYWJsZSBhbmQgY3VzdG9tYXJ5IHVzZSBpbiBkZXNjcmliaW5nIHRoZSBvcmlnaW4gb2YgdGhlIFdvcmsgYW5kIHJlcHJvZHVjaW5nIHRoZSBjb250ZW50IG9mIHRoZSBOT1RJQ0UgZmlsZS4KCjcuIERpc2NsYWltZXIgb2YgV2FycmFudHkuIFVubGVzcyByZXF1aXJlZCBieSBhcHBsaWNhYmxlIGxhdyBvciBhZ3JlZWQgdG8gaW4gd3JpdGluZywgTGljZW5zb3IgcHJvdmlkZXMgdGhlIFdvcmsgKGFuZCBlYWNoIENvbnRyaWJ1dG9yIHByb3ZpZGVzIGl0cyBDb250cmlidXRpb25zKSBvbiBhbiAiQVMgSVMiIEJBU0lTLCBXSVRIT1VUIFdBUlJBTlRJRVMgT1IgQ09ORElUSU9OUyBPRiBBTlkgS0lORCwgZWl0aGVyIGV4cHJlc3Mgb3IgaW1wbGllZCwgaW5jbHVkaW5nLCB3aXRob3V0IGxpbWl0YXRpb24sIGFueSB3YXJyYW50aWVzIG9yIGNvbmRpdGlvbnMgb2YgVElUTEUsIE5PTi1JTkZSSU5HRU1FTlQsIE1FUkNIQU5UQUJJTElUWSwgb3IgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuIFlvdSBhcmUgc29sZWx5IHJlc3BvbnNpYmxlIGZvciBkZXRlcm1pbmluZyB0aGUgYXBwcm9wcmlhdGVuZXNzIG9mIHVzaW5nIG9yIHJlZGlzdHJpYnV0aW5nIHRoZSBXb3JrIGFuZCBhc3N1bWUgYW55IHJpc2tzIGFzc29jaWF0ZWQgd2l0aCBZb3VyIGV4ZXJjaXNlIG9mIHBlcm1pc3Npb25zIHVuZGVyIHRoaXMgTGljZW5zZS4KCjguIExpbWl0YXRpb24gb2YgTGlhYmlsaXR5LiBJbiBubyBldmVudCBhbmQgdW5kZXIgbm8gbGVnYWwgdGhlb3J5LCB3aGV0aGVyIGluIHRvcnQgKGluY2x1ZGluZyBuZWdsaWdlbmNlKSwgY29udHJhY3QsIG9yIG90aGVyd2lzZSwgdW5sZXNzIHJlcXVpcmVkIGJ5IGFwcGxpY2FibGUgbGF3IChzdWNoIGFzIGRlbGliZXJhdGUgYW5kIGdyb3NzbHkgbmVnbGlnZW50IGFjdHMpIG9yIGFncmVlZCB0byBpbiB3cml0aW5nLCBzaGFsbCBhbnkgQ29udHJpYnV0b3IgYmUgbGlhYmxlIHRvIFlvdSBmb3IgZGFtYWdlcywgaW5jbHVkaW5nIGFueSBkaXJlY3QsIGluZGlyZWN0LCBzcGVjaWFsLCBpbmNpZGVudGFsLCBvciBjb25zZXF1ZW50aWFsIGRhbWFnZXMgb2YgYW55IGNoYXJhY3RlciBhcmlzaW5nIGFzIGEgcmVzdWx0IG9mIHRoaXMgTGljZW5zZSBvciBvdXQgb2YgdGhlIHVzZSBvciBpbmFiaWxpdHkgdG8gdXNlIHRoZSBXb3JrIChpbmNsdWRpbmcgYnV0IG5vdCBsaW1pdGVkIHRvIGRhbWFnZXMgZm9yIGxvc3Mgb2YgZ29vZHdpbGwsIHdvcmsgc3RvcHBhZ2UsIGNvbXB1dGVyIGZhaWx1cmUgb3IgbWFsZnVuY3Rpb24sIG9yIGFueSBhbmQgYWxsIG90aGVyIGNvbW1lcmNpYWwgZGFtYWdlcyBvciBsb3NzZXMpLCBldmVuIGlmIHN1Y2ggQ29udHJpYnV0b3IgaGFzIGJlZW4gYWR2aXNlZCBvZiB0aGUgcG9zc2liaWxpdHkgb2Ygc3VjaCBkYW1hZ2VzLgoKOS4gQWNjZXB0aW5nIFdhcnJhbnR5IG9yIEFkZGl0aW9uYWwgTGlhYmlsaXR5LiBXaGlsZSByZWRpc3RyaWJ1dGluZyB0aGUgV29yayBvciBEZXJpdmF0aXZlIFdvcmtzIHRoZXJlb2YsIFlvdSBtYXkgY2hvb3NlIHRvIG9mZmVyLCBhbmQgY2hhcmdlIGEgZmVlIGZvciwgYWNjZXB0YW5jZSBvZiBzdXBwb3J0LCB3YXJyYW50eSwgaW5kZW1uaXR5LCBvciBvdGhlciBsaWFiaWxpdHkgb2JsaWdhdGlvbnMgYW5kL29yIHJpZ2h0cyBjb25zaXN0ZW50IHdpdGggdGhpcyBMaWNlbnNlLiBIb3dldmVyLCBpbiBhY2NlcHRpbmcgc3VjaCBvYmxpZ2F0aW9ucywgWW91IG1heSBhY3Qgb25seSBvbiBZb3VyIG93biBiZWhhbGYgYW5kIG9uIFlvdXIgc29sZSByZXNwb25zaWJpbGl0eSwgbm90IG9uIGJlaGFsZiBvZiBhbnkgb3RoZXIgQ29udHJpYnV0b3IsIGFuZCBvbmx5IGlmIFlvdSBhZ3JlZSB0byBpbmRlbW5pZnksIGRlZmVuZCwgYW5kIGhvbGQgZWFjaCBDb250cmlidXRvciBoYXJtbGVzcyBmb3IgYW55IGxpYWJpbGl0eSBpbmN1cnJlZCBieSwgb3IgY2xhaW1zIGFzc2VydGVkIGFnYWluc3QsIHN1Y2ggQ29udHJpYnV0b3IgYnkgcmVhc29uIG9mIHlvdXIgYWNjZXB0aW5nIGFueSBzdWNoIHdhcnJhbnR5IG9yIGFkZGl0aW9uYWwgbGlhYmlsaXR5LgoKRU5EIE9GIFRFUk1TIEFORCBDT05ESVRJT05TCgpBUFBFTkRJWDogSG93IHRvIGFwcGx5IHRoZSBBcGFjaGUgTGljZW5zZSB0byB5b3VyIHdvcmsuCgpUbyBhcHBseSB0aGUgQXBhY2hlIExpY2Vuc2UgdG8geW91ciB3b3JrLCBhdHRhY2ggdGhlIGZvbGxvd2luZyBib2lsZXJwbGF0ZSBub3RpY2UsIHdpdGggdGhlIGZpZWxkcyBlbmNsb3NlZCBieSBicmFja2V0cyAiW10iIHJlcGxhY2VkIHdpdGggeW91ciBvd24gaWRlbnRpZnlpbmcgaW5mb3JtYXRpb24uIChEb24ndCBpbmNsdWRlIHRoZSBicmFja2V0cyEpICBUaGUgdGV4dCBzaG91bGQgYmUgZW5jbG9zZWQgaW4gdGhlIGFwcHJvcHJpYXRlIGNvbW1lbnQgc3ludGF4IGZvciB0aGUgZmlsZSBmb3JtYXQuIFdlIGFsc28gcmVjb21tZW5kIHRoYXQgYSBmaWxlIG9yIGNsYXNzIG5hbWUgYW5kIGRlc2NyaXB0aW9uIG9mIHB1cnBvc2UgYmUgaW5jbHVkZWQgb24gdGhlIHNhbWUgInByaW50ZWQgcGFnZSIgYXMgdGhlIGNvcHlyaWdodCBub3RpY2UgZm9yIGVhc2llciBpZGVudGlmaWNhdGlvbiB3aXRoaW4gdGhpcmQtcGFydHkgYXJjaGl2ZXMuCgpDb3B5cmlnaHQgW3l5eXldIFtuYW1lIG9mIGNvcHlyaWdodCBvd25lcl0KCkxpY2Vuc2VkIHVuZGVyIHRoZSBBcGFjaGUgTGljZW5zZSwgVmVyc2lvbiAyLjAgKHRoZSAiTGljZW5zZSIpOwp5b3UgbWF5IG5vdCB1c2UgdGhpcyBmaWxlIGV4Y2VwdCBpbiBjb21wbGlhbmNlIHdpdGggdGhlIExpY2Vuc2UuCllvdSBtYXkgb2J0YWluIGEgY29weSBvZiB0aGUgTGljZW5zZSBhdAoKaHR0cDovL3d3dy5hcGFjaGUub3JnL2xpY2Vuc2VzL0xJQ0VOU0UtMi4wCgpVbmxlc3MgcmVxdWlyZWQgYnkgYXBwbGljYWJsZSBsYXcgb3IgYWdyZWVkIHRvIGluIHdyaXRpbmcsIHNvZnR3YXJlCmRpc3RyaWJ1dGVkIHVuZGVyIHRoZSBMaWNlbnNlIGlzIGRpc3RyaWJ1dGVkIG9uIGFuICJBUyBJUyIgQkFTSVMsCldJVEhPVVQgV0FSUkFOVElFUyBPUiBDT05ESVRJT05TIE9GIEFOWSBLSU5ELCBlaXRoZXIgZXhwcmVzcyBvciBpbXBsaWVkLgpTZWUgdGhlIExpY2Vuc2UgZm9yIHRoZSBzcGVjaWZpYyBsYW5ndWFnZSBnb3Zlcm5pbmcgcGVybWlzc2lvbnMgYW5kCmxpbWl0YXRpb25zIHVuZGVyIHRoZSBMaWNlbnNlLgo="
+            }
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.jspecify/jspecify@1.0.0?type=jar",
+      "modified" : false,
+      "externalReferences" : [
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/jspecify/jspecify/"
         }
       ],
       "properties" : [
@@ -4398,15 +4466,15 @@
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/com.google.guava/failureaccess@1.0.2?type=jar",
+      "ref" : "pkg:maven/com.google.guava/failureaccess@1.0.3?type=jar",
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/com.google.guava/guava@33.4.0-jre?type=jar",
+      "ref" : "pkg:maven/com.google.guava/guava@33.4.6-jre?type=jar",
       "dependsOn" : [
-        "pkg:maven/com.google.code.findbugs/jsr305@3.0.2?type=jar",
         "pkg:maven/com.google.guava/listenablefuture@9999.0-empty-to-avoid-conflict-with-guava?type=jar",
-        "pkg:maven/com.google.guava/failureaccess@1.0.2?type=jar",
+        "pkg:maven/org.jspecify/jspecify@1.0.0?type=jar",
+        "pkg:maven/com.google.guava/failureaccess@1.0.3?type=jar",
         "pkg:maven/com.google.j2objc/j2objc-annotations@3.0.0?type=jar",
         "pkg:maven/com.google.errorprone/error_prone_annotations@2.36.0?type=jar"
       ]
@@ -4420,17 +4488,17 @@
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/com.puppycrawl.tools/checkstyle@10.21.4?type=jar",
+      "ref" : "pkg:maven/com.puppycrawl.tools/checkstyle@10.23.0?type=jar",
       "dependsOn" : [
         "pkg:maven/org.apache.maven.doxia/doxia-core@1.12.0?type=jar",
         "pkg:maven/commons-beanutils/commons-beanutils@1.10.1?type=jar",
+        "pkg:maven/com.google.guava/guava@33.4.6-jre?type=jar",
         "pkg:maven/net.sf.saxon/Saxon-HE@12.5?type=jar",
         "pkg:maven/org.apache.maven.doxia/doxia-module-xdoc@1.12.0?type=jar",
-        "pkg:maven/org.checkerframework/checker-qual@3.48.4?type=jar",
         "pkg:maven/info.picocli/picocli@4.7.6?type=jar",
         "pkg:maven/org.reflections/reflections@0.10.2?type=jar",
-        "pkg:maven/com.google.guava/guava@33.4.0-jre?type=jar",
-        "pkg:maven/org.antlr/antlr4-runtime@4.13.2?type=jar"
+        "pkg:maven/org.antlr/antlr4-runtime@4.13.2?type=jar",
+        "pkg:maven/org.checkerframework/checker-qual@3.49.1?type=jar"
       ]
     },
     {
@@ -4448,12 +4516,12 @@
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.4.0?project_path=%3A",
+      "ref" : "pkg:maven/de.greluc.sc/sckillmonitor@1.5.0?project_path=%3A",
       "dependsOn" : [
         "pkg:maven/io.github.mkpaz/atlantafx-base@2.0.1?type=jar",
         "pkg:maven/org.openjfx/javafx-fxml@23?type=jar",
         "pkg:maven/org.junit.jupiter/junit-jupiter-api@5.11.4?type=jar",
-        "pkg:maven/com.puppycrawl.tools/checkstyle@10.21.4?type=jar",
+        "pkg:maven/com.puppycrawl.tools/checkstyle@10.23.0?type=jar",
         "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.18.3?type=jar",
         "pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3?type=jar",
         "pkg:maven/org.projectlombok/lombok@1.18.36?type=jar",
@@ -4588,7 +4656,7 @@
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/org.checkerframework/checker-qual@3.48.4?type=jar",
+      "ref" : "pkg:maven/org.checkerframework/checker-qual@3.49.1?type=jar",
       "dependsOn" : [ ]
     },
     {
@@ -4643,6 +4711,10 @@
     },
     {
       "ref" : "pkg:maven/org.jetbrains/annotations@26.0.2?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/org.jspecify/jspecify@1.0.0?type=jar",
       "dependsOn" : [ ]
     },
     {

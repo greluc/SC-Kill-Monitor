@@ -39,7 +39,7 @@ import lombok.extern.log4j.Log4j2;
  * updated in {@link SettingsData} when loaded from persistent storage.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.4.0
+ * @version 1.5.0
  * @since 1.0.0
  */
 @Log4j2
@@ -71,6 +71,7 @@ public class SettingsHandler {
     preferences.put(SETTINGS_PATH_HOTFIX, SettingsData.getPathHotfix());
     preferences.put(SETTINGS_PATH_TECH_PREVIEW, SettingsData.getPathTechPreview());
     preferences.put(SETTINGS_PATH_CUSTOM, SettingsData.getPathCustom());
+    preferences.put(SETTINGS_PATH_KILLEVENT, SettingsData.getPathKillEvent());
     preferences.put(SETTINGS_PLAYER_HANDLE, SettingsData.getHandle());
     preferences.putInt(SETTINGS_SCAN_INTERVAL_SECONDS, SettingsData.getInterval());
     preferences.putBoolean(SETTINGS_SHOW_ALL, SettingsData.isShowAllActive());
@@ -127,6 +128,7 @@ public class SettingsHandler {
             SETTINGS_PATH_TECH_PREVIEW,
             "C:\\Program Files\\Roberts Space Industries\\StarCitizen\\TECH-PREVIEW\\game.log"));
     SettingsData.setPathCustom(preferences.get(SETTINGS_PATH_CUSTOM, ""));
+    SettingsData.setPathKillEvent(preferences.get(SETTINGS_PATH_KILLEVENT, ""));
     SettingsData.setHandle(preferences.get(SETTINGS_PLAYER_HANDLE, ""));
     SettingsData.setInterval(
         Integer.parseInt(preferences.get(SETTINGS_SCAN_INTERVAL_SECONDS, "60")));

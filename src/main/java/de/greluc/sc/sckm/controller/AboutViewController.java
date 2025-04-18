@@ -21,6 +21,8 @@
 package de.greluc.sc.sckm.controller;
 
 import de.greluc.sc.sckm.ScKillMonitorApp;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -36,7 +38,7 @@ import javafx.scene.image.ImageView;
  * application's description and setting the application's logos into an image view.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.4.0
+ * @version 1.5.0
  * @since 1.0.1
  */
 public class AboutViewController {

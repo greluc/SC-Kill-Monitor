@@ -48,7 +48,7 @@ import java.util.UUID;
  * that two {@code KillEvent} instances with the same identifier are considered equal.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.4.0
+ * @version 1.5.0
  * @since 1.0.0
  */
 public record KillEvent(
