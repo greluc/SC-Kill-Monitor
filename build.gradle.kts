@@ -36,9 +36,13 @@ plugins {
   id("checkstyle")
   id("org.beryx.jlink") version "3.1.1" // https://plugins.gradle.org/plugin/org.beryx.jlink
   id("io.freefair.lombok") version "8.13.1" // https://plugins.gradle.org/plugin/io.freefair.lombok
-  id("org.cyclonedx.bom") version "2.2.0" // https://github.com/CycloneDX/cyclonedx-gradle-plugin
+  id("org.cyclonedx.bom") version "2.3.1" // https://github.com/CycloneDX/cyclonedx-gradle-plugin
   id("org.javamodularity.moduleplugin") version "1.8.15" // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
   id("org.openjfx.javafxplugin") version "0.1.0" // https://plugins.gradle.org/plugin/org.openjfx.javafxplugin
+}
+
+lombok {
+  version.set("1.18.38")
 }
 
 repositories {
@@ -61,7 +65,7 @@ dependencies {
 
 base {
   group = "de.greluc.sc"
-  version = "1.5.0"
+  version = "1.6.0"
   description = "See who griefed you!"
 }
 
@@ -72,9 +76,9 @@ configurations {
 }
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_23
-  targetCompatibility = JavaVersion.VERSION_23
-  toolchain.languageVersion.set(JavaLanguageVersion.of(23))
+  sourceCompatibility = JavaVersion.VERSION_24
+  targetCompatibility = JavaVersion.VERSION_24
+  toolchain.languageVersion.set(JavaLanguageVersion.of(24))
   modularity.inferModulePath = true
   withSourcesJar()
 }
@@ -97,7 +101,7 @@ application {
 }
 
 javafx {
-  version = "23"
+  version = "24"
   modules = listOf("javafx.controls", "javafx.fxml")
 }
 
@@ -147,7 +151,6 @@ tasks {
 }
 
 jlink {
-
   options.addAll(listOf("--strip-debug", "--compress", "zip-6", "--no-header-files", "--no-man-pages"))
   launcher{
     name = "SC Kill Monitor"

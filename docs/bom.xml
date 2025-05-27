@@ -19,15 +19,15 @@
   ~ along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                         ~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<bom serialNumber="urn:uuid:8282c498-a006-4292-b411-ac774f04bf68" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
+<bom serialNumber="urn:uuid:984e3518-7fa9-4fbd-aaa2-75bda6d80866" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
   <metadata>
-    <timestamp>2025-04-13T12:54:14Z</timestamp>
+    <timestamp>2025-05-26T09:33:12Z</timestamp>
     <tools>
       <components>
         <component type="application">
           <author>CycloneDX</author>
           <name>cyclonedx-gradle-plugin</name>
-          <version>2.2.0</version>
+          <version>2.3.1</version>
         </component>
       </components>
     </tools>
@@ -1319,20 +1319,20 @@ of Jackson components maintained by FasterXML.com</description>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.jacoco/org.jacoco.agent@0.8.12?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.jacoco/org.jacoco.agent@0.8.13?type=jar">
       <group>org.jacoco</group>
       <name>org.jacoco.agent</name>
-      <version>0.8.12</version>
+      <version>0.8.13</version>
       <description>JaCoCo Agent</description>
       <hashes>
-        <hash alg="MD5">3a9cf378b3e5027d1438a2a179cc834e</hash>
-        <hash alg="SHA-1">4f24f7fc6d471fcbad4ce0c9bf3f5ea8f79675d6</hash>
-        <hash alg="SHA-256">ab29507b750d325bbaf7ea094860fff26d27170038d8ee5f00c3074489f14637</hash>
-        <hash alg="SHA-512">baa934098695dcfe3d705623d3c2b4ece458c79e1fe85c9ca8df04e972cb1ffb9d436e580dc6ffe3c050186a1b0c59297c93bcad13f79d49e1e8f5d084ac4b43</hash>
-        <hash alg="SHA-384">c17eaad6355b8310ddbcfebe737e07e25698e24840f79656e90264a769a6fe02606b64ac4f369c465a10f60c88e03a86</hash>
-        <hash alg="SHA3-384">5b6a78e5c1832c42a649684bfe28be346951e2082d699319c19a0f7d1d743d6a619ed97e086ad4bafd9317d76aef8d5e</hash>
-        <hash alg="SHA3-256">965c9e77c5edb52b780e66e2f7d8ad0f0377b346d97f0cf923c7e30831289664</hash>
-        <hash alg="SHA3-512">a40008f229b72f22a167f5b493e9350258bed696882b6050c976c169398cd03ea149f1fb382e83ad7f2773301a19b9d7a9b2431eff6bcd6beb75cf516df8a2d9</hash>
+        <hash alg="MD5">acabd23d4233b0288ae940fae5019992</hash>
+        <hash alg="SHA-1">67f868b464f1e619d81cc398c9f19a91802253e5</hash>
+        <hash alg="SHA-256">9db3c9d5d74fa870b261b64a3082412e1bd6e22e9fa98f4737b1bff8af9cc64d</hash>
+        <hash alg="SHA-512">03457b31b349a6fb43643a1663ac82c8a229e9a12352c84611b5bd201193933f48d78652a16ae7d348e9ae20932542d050c64c6f92a0ed6e02e70183ce626c94</hash>
+        <hash alg="SHA-384">d651a3c4d4016a2fa65ec58d2034c87b3cf7a2f9f0e4865db4ca841136af40f05f4cbc531b600e994dd007d586c2269f</hash>
+        <hash alg="SHA3-384">108ed852c1d03295c02393e7c588ef56ed37030613a6ecf469285650467cc836c8bc2ad023c6b1a5c5c8118d44576262</hash>
+        <hash alg="SHA3-256">5b124fd1e4c875efd663a375761d89ccd91851df1c6eec489f02059cb9f12187</hash>
+        <hash alg="SHA3-512">c1f70211dd4a96c09ad26a4a3d14f1e7cc84b2b627a462696c4a504ff44dfc07a4afd7650d6ab8b95e9b8d403eb6e66a4d1475728c3545354b82730ab1fa0984</hash>
       </hashes>
       <licenses>
         <license>
@@ -1341,26 +1341,26 @@ of Jackson components maintained by FasterXML.com</description>
           <url>https://www.eclipse.org/legal/epl-2.0</url>
         </license>
       </licenses>
-      <purl>pkg:maven/org.jacoco/org.jacoco.agent@0.8.12?type=jar</purl>
+      <purl>pkg:maven/org.jacoco/org.jacoco.agent@0.8.13?type=jar</purl>
       <modified>false</modified>
       <properties>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.jacoco/org.jacoco.ant@0.8.12?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.jacoco/org.jacoco.ant@0.8.13?type=jar">
       <group>org.jacoco</group>
       <name>org.jacoco.ant</name>
-      <version>0.8.12</version>
+      <version>0.8.13</version>
       <description>JaCoCo Ant Tasks</description>
       <hashes>
-        <hash alg="MD5">230ad8f7c5a4cba55cbd75acf13a77eb</hash>
-        <hash alg="SHA-1">67765683a5880f9604e4a7329f5c4ff888ade13b</hash>
-        <hash alg="SHA-256">43f81e03dd6f5190aecb88a6236b694adade484b0402447c320fc6e94d685f41</hash>
-        <hash alg="SHA-512">b917c3f6e1ce904fe1517702a089485494e11aa02801002344922377ecfb32e9a23f8001577ccc5f32d8ccb939cedecba65fbc96340a65060d746f42ab33a957</hash>
-        <hash alg="SHA-384">8f6edc458c537b757314f3a830e0dbd3d084378a74a24fb9474afafdabb00f114daf16a71e734d1f3f3ca719df554962</hash>
-        <hash alg="SHA3-384">5f0b581f411322abaa408ede3a5d9769430a38d2330dbcc0a4efc8d16dc279b9e90d52996c5d1dd322352593bb89014e</hash>
-        <hash alg="SHA3-256">552c1d331d56fb84ebc3634c1aa4f13e1efea1e3109b5ba106746b8b090da372</hash>
-        <hash alg="SHA3-512">323bda711f44e975deb84665d2d7e4c6aa3e88c32bf08a94e56dbf36214eef9430c7114234601676ea266b20c61ebb36adaef7adc45a96cda0e5c2e4def5b721</hash>
+        <hash alg="MD5">1ee7ebee869d93211c8363336f8c9e84</hash>
+        <hash alg="SHA-1">0c797c8d22c6276f7f10dae9fd43c63c320530ab</hash>
+        <hash alg="SHA-256">6434b8552ff3d0e4a2fbbd13a6efb124e0c9ca453817c62c03de8390d87ffd11</hash>
+        <hash alg="SHA-512">615a6579a37d0dde30bc0b87637a661a721b44bffdeaa774ad6594fa480195e55bc6ee2c9b1fb88d0fd81d5f832acd2f2ebdba46839eb7fb773aa50f65717e54</hash>
+        <hash alg="SHA-384">b6f6f69284d9648c54d879f4019b1805f6e56f864cfd337f3fa37f063a5066509c462d0a36f87e822343f0f07f5cdf9f</hash>
+        <hash alg="SHA3-384">2d46e271e35b6c7a67f0f68e36410855f1fc5ea2a084464209d4ca89478956d7fca89e3cdd4761906b8b0f7f5fced6b5</hash>
+        <hash alg="SHA3-256">fc2a25bc4a719204ad200320467abf807e22fccd2d91870f8b898d2e3e9a40c9</hash>
+        <hash alg="SHA3-512">0a2a43422d0e414f08621457f4e9038f42f9004d8098b889d5160e31742be43c39607947000d5c300bcce0cfc9b375e00b076c1844892f446f5b4a4a4f6ab426</hash>
       </hashes>
       <licenses>
         <license>
@@ -1369,26 +1369,26 @@ of Jackson components maintained by FasterXML.com</description>
           <url>https://www.eclipse.org/legal/epl-2.0</url>
         </license>
       </licenses>
-      <purl>pkg:maven/org.jacoco/org.jacoco.ant@0.8.12?type=jar</purl>
+      <purl>pkg:maven/org.jacoco/org.jacoco.ant@0.8.13?type=jar</purl>
       <modified>false</modified>
       <properties>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.jacoco/org.jacoco.core@0.8.12?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.jacoco/org.jacoco.core@0.8.13?type=jar">
       <group>org.jacoco</group>
       <name>org.jacoco.core</name>
-      <version>0.8.12</version>
+      <version>0.8.13</version>
       <description>JaCoCo Core</description>
       <hashes>
-        <hash alg="MD5">b48b0f4d9cf937450de8d2f6b920dcce</hash>
-        <hash alg="SHA-1">c2a45bd054bbacfe9998cbbf1a49010c62e48cbc</hash>
-        <hash alg="SHA-256">fca26db37c0c5fbd5dc4985237eb82866df9799d5082af899475a73f91f5b035</hash>
-        <hash alg="SHA-512">c65d236a444bd8e298b1f3532977edf07730a91866b8fce8c9fdf495f16454746b63d6edde086eb53b14cb53deb582cab5f9ed6b51333744647fb86dfddc63dc</hash>
-        <hash alg="SHA-384">aa058ca724d1e728d685e511cbe0ce11e730743cde0327b213e1fe9a10ec884a832fd534e50bfe4340f43c204a974efe</hash>
-        <hash alg="SHA3-384">50c91055f8981ee11a1685c9c006f9f37ab53d0b247b446a8919d0f8976cea72c29afaedfeed85e9d3fe86ff24e0be1c</hash>
-        <hash alg="SHA3-256">dcfd47f06248609a14e452d07e3e615ee21b683193e78b9785ff827c7742e50d</hash>
-        <hash alg="SHA3-512">4d8e46386411721d689e62cc8eb6e6864391ab07d2fd0879813420374a4aadab50b1f3dcacbe437db2d0b01db7f27e0e5bd9339e5200541faf669c84a8c42717</hash>
+        <hash alg="MD5">a744ac46e98efe9ef72e0a2116748b04</hash>
+        <hash alg="SHA-1">4424d689f0738cd4445e948270e3f2f2d0e5cdb8</hash>
+        <hash alg="SHA-256">514c23df6cfd015d7d83c10a792e35ab68a7b7e82f3d6a3a4481762c132e33a9</hash>
+        <hash alg="SHA-512">72659a6242537f09ec1f1c836d66988133924b1ddea60c74f82728106f9d1240273d4f7ee7b37f742b2acaa94c7da8062cf648811d0fa5c311ecea77607510c7</hash>
+        <hash alg="SHA-384">8170bb1dc2968295767df9b03c648c946006576b1b4a2cd8ad9c3f4e9517a3fca2ddd0e8f83401ee4e7d11a9a8329d99</hash>
+        <hash alg="SHA3-384">0a6d3288459ac8539c4652dab52fca738f640775da4873530764812e80a75e946094ed1448bc61834abe34344cea7a2f</hash>
+        <hash alg="SHA3-256">cc8784461e4ee4debd7ddec6c34c2e81c60744e3e758b80d6a6d50ca34f01f09</hash>
+        <hash alg="SHA3-512">7f876ebbf58df1eb6304d5ff820126bd078343c86bf084c6179239e2aeffb11ae8fcea20ff50be60d5dd325ad55355efb752689cd42390d8645992d393e8dfc7</hash>
       </hashes>
       <licenses>
         <license>
@@ -1397,26 +1397,26 @@ of Jackson components maintained by FasterXML.com</description>
           <url>https://www.eclipse.org/legal/epl-2.0</url>
         </license>
       </licenses>
-      <purl>pkg:maven/org.jacoco/org.jacoco.core@0.8.12?type=jar</purl>
+      <purl>pkg:maven/org.jacoco/org.jacoco.core@0.8.13?type=jar</purl>
       <modified>false</modified>
       <properties>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.jacoco/org.jacoco.report@0.8.12?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.jacoco/org.jacoco.report@0.8.13?type=jar">
       <group>org.jacoco</group>
       <name>org.jacoco.report</name>
-      <version>0.8.12</version>
+      <version>0.8.13</version>
       <description>JaCoCo Report</description>
       <hashes>
-        <hash alg="MD5">2dcdcd05335135386a65225161468581</hash>
-        <hash alg="SHA-1">d3df59a453cbc44c939f74868fb6c82127290c0c</hash>
-        <hash alg="SHA-256">f9c79ad66a66a0337c57849ad1287a2ab23b9b232d35314443e5ec49e6e3d20f</hash>
-        <hash alg="SHA-512">30cfe3e1a3b1ce29fcaf3d5ed7dd10f67e2ba2ef1f561e9627491ab7439c3ec8fe0735bb4f6dcbe39528b3208ed7695e2272cab7c39b251ac10dabd01c9c8e9e</hash>
-        <hash alg="SHA-384">33db43a0da95ae07d725c59b08c411ffb0c4b48e654904daac3bcd2c68e27bd12562b4da716faf150cff46d8fbb39250</hash>
-        <hash alg="SHA3-384">eab4fd2e2eaad38ade10921f794f6374663abe36e58e6aec81bd27e30311e9842c99ec4873bdde3e7c75c27f2d622a1b</hash>
-        <hash alg="SHA3-256">5ebcbcd885360cb4b07aa81204e4acb2a8592dbdbcb14f3188582a4b2e77fd56</hash>
-        <hash alg="SHA3-512">5cd49fafc58ec4fbda1749627a0cf938b2e638bcace216ac7f5f5a769e078cd6024691eb66ad274393a028a49e7d96994509ef7796a37124992720f500a83d1d</hash>
+        <hash alg="MD5">e7b18fffabb0ddd7502fd4b76c6e0b00</hash>
+        <hash alg="SHA-1">44d475e169049322b081db376933bad859ec6526</hash>
+        <hash alg="SHA-256">8133280a0aa44358be9d136b52370342f455ccb944aae07438220a77662578a2</hash>
+        <hash alg="SHA-512">12fed977103bf4574af77ba614c81c6e92ea0fddd982c43ba6b57bd5b39bc212892ce6fc5d1182426b3fc152040d9da1b091798762ab6eb6c1e3da6d8a9f1962</hash>
+        <hash alg="SHA-384">e1e2b4b427a91d93869cf6ee4a07da1f7a35f912dab52b094b21b4c3074f1bcb3cc79ed9151047b9f2a015315ae270cc</hash>
+        <hash alg="SHA3-384">48198ee52d5d0355df329913ec3bc7cc0d14577f1c05db15648cbbc071b06a57a829aa76aee0303e5d51830d46d60d3f</hash>
+        <hash alg="SHA3-256">f6ac4984ef513bbed344705472138812c441042a488d05fff940d06db6d8d420</hash>
+        <hash alg="SHA3-512">0fde58b3358f27c109d417bb641377f02170e3d00ca383ce59b4e57813a644c18b43b067372a2715803174c5ba1b58e066497289e1272873359f4adec7ef3b0e</hash>
       </hashes>
       <licenses>
         <license>
@@ -1425,7 +1425,7 @@ of Jackson components maintained by FasterXML.com</description>
           <url>https://www.eclipse.org/legal/epl-2.0</url>
         </license>
       </licenses>
-      <purl>pkg:maven/org.jacoco/org.jacoco.report@0.8.12?type=jar</purl>
+      <purl>pkg:maven/org.jacoco/org.jacoco.report@0.8.13?type=jar</purl>
       <modified>false</modified>
       <properties>
         <property name="cdx:maven:package:test">false</property>
@@ -1760,19 +1760,19 @@ of Jackson components maintained by FasterXML.com</description>
         <property name="cdx:maven:package:test">true</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.openjfx/javafx-base@23?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.openjfx/javafx-base@24?type=jar">
       <group>org.openjfx</group>
       <name>javafx-base</name>
-      <version>23</version>
+      <version>24</version>
       <hashes>
-        <hash alg="MD5">253445d53347a3f5ecf624c304794ff5</hash>
-        <hash alg="SHA-1">cfefa13bc23dedcba9d720a42679b8d63adf83c9</hash>
-        <hash alg="SHA-256">568e38426651d0476809bfc9014d771a49d4614e3d971e4e1c35f958bd2d6b6f</hash>
-        <hash alg="SHA-512">29a68bc3c05f1d88ec1bf88ea166a1d26585bd270a5bf85da2a5eae031cad453a8ee2f29d3bfeffa7ff7851be8e7653958d8a437c01061bde67bfed2b48a0fdb</hash>
-        <hash alg="SHA-384">07dafdcd89b2c140831577f47ae4656c1b292918e777e1fa2c368caca7577fb61f1cc5d9c56a85d55366409b332294bc</hash>
-        <hash alg="SHA3-384">79289fa180eee3d5a372f79ddd363df69a174fbf1da2238cb338cc0aa18789d68b5393e5580222e585cdd54d319bf96d</hash>
-        <hash alg="SHA3-256">cb35992a20d9e14627bc3b76b900d4e183d7ae1336cd0f937f72bf76d89b23da</hash>
-        <hash alg="SHA3-512">adde317b036027d49bed78cdb8deb9c9fbdd9b020b9f0e687f59a1b042a083ccc82da62e699e2a8ddaf223ba3d23151f996e993afe5a6bc10e1de19bf649ce90</hash>
+        <hash alg="MD5">c936bfa32fda76e165a130422ab1359d</hash>
+        <hash alg="SHA-1">c843bfdf43a9b6285eff252d268f84adc2bdea71</hash>
+        <hash alg="SHA-256">c9e8999a4015dd72682f6e62958f2579952024cfc2423959a55471ffc617d989</hash>
+        <hash alg="SHA-512">359ce7b4f3b780fd17c650e69a50bb1b205f397a16bcb0e527b867a37a7db61a9a9b328ba890b1987373cfa9d0bcfab37fc8fbdec66cdac10b20d14acc901940</hash>
+        <hash alg="SHA-384">968defaa33a28c9964a59b7eeed6e2c7a949d4d8d1bf5bfe980ce40fd8aa51bfe42b8089af1db4108363b7ccfdcc240a</hash>
+        <hash alg="SHA3-384">11d00a7ea09eecdd46a12eac9799092762049c3c24fff3a6bd0e81c0f500466f4df79ad971db3bdaa03a0f78f9ad1740</hash>
+        <hash alg="SHA3-256">387cbe93cf3807e81eceb0f07680a4970e40c911b6e2b8edf3346a08d9ab9283</hash>
+        <hash alg="SHA3-512">7125c48a8728566627896a60cd9afadf50e8d9edc6730022d82c9bb88fb66c245c80b9222d15628ac000ee184df1b9c809217656427183bec91a46039960f3a3</hash>
       </hashes>
       <licenses>
         <license>
@@ -1780,25 +1780,25 @@ of Jackson components maintained by FasterXML.com</description>
           <text content-type="text/plain" encoding="base64">NDA0OiBOb3QgRm91bmQ=</text>
         </license>
       </licenses>
-      <purl>pkg:maven/org.openjfx/javafx-base@23?type=jar</purl>
+      <purl>pkg:maven/org.openjfx/javafx-base@24?type=jar</purl>
       <modified>false</modified>
       <properties>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.openjfx/javafx-controls@23?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.openjfx/javafx-controls@24?type=jar">
       <group>org.openjfx</group>
       <name>javafx-controls</name>
-      <version>23</version>
+      <version>24</version>
       <hashes>
-        <hash alg="MD5">de6dc91bfe0e8f136c9f58b24a54fd8c</hash>
-        <hash alg="SHA-1">953bc543e4949437103d9d12310c4a96846fbb94</hash>
-        <hash alg="SHA-256">35811a2d7a7e92308fbd5e5ca048f3eb57637fa855a6415bec756b367a3ba5f8</hash>
-        <hash alg="SHA-512">f6e98d75ade9527ced4c293be6469a37ee849843be3e14a464501ed00b637b842bd1b8a6b1ab4ea7f6e90a2fc10ce1e4ae5c56fd05e188d040d51773c013a1b0</hash>
-        <hash alg="SHA-384">51e37d72adcf140a501a9b5b31d9f3b91a3b090a3f7fd52d40b96c5e2a07e6ddd3cf3f164dab756d7b7208c05e3c7a9c</hash>
-        <hash alg="SHA3-384">952d90345359c788129c478772166c5630b4fe96309048aa3d293434e3a908189175b90b2df65241785b42a27f53d2db</hash>
-        <hash alg="SHA3-256">3b950b4b703a5b340213434c6994168c34c2112f8a8a045a00b12c88105e1317</hash>
-        <hash alg="SHA3-512">d171ef8234a575c7ba2b0fd8da2f9cf98685b95f3f74d87cb248b3d21de003c113aadcef12c769cd6ea75e0e788a98788c440999135259238f97e30780c9dff5</hash>
+        <hash alg="MD5">a056d7ada4b4882624208b7f18849232</hash>
+        <hash alg="SHA-1">a483be72c28ee64cf2a6112a8b4707421f67733b</hash>
+        <hash alg="SHA-256">08acf07108e7d68a8d296c0376a3f218cf1f8fd4bd991647dee1c3b6027aed59</hash>
+        <hash alg="SHA-512">0dd8a131e774ff32df090dde0fb3a5872ad4a3cb5de55fd81d3141de51a2d5290426ee0238eaa89ac3e8ecf5694c2746462295cbe9b87e81a4be4b5bb8838314</hash>
+        <hash alg="SHA-384">23202751a22b3ba2d941e3fd7d2b38ee56bdb518de6becc463c235e6e11beab7972470c0e52ac028ffb5da3dff3d354e</hash>
+        <hash alg="SHA3-384">2059bdfcd3d95f0d3c8dcdf02aaca7dba27cca238236e5639269ae3a58ad3b1fb5edd20be800c579f2a4c851eafe4977</hash>
+        <hash alg="SHA3-256">7f203bf5c8d4045c6e7c03ef67948325af244758fc686d73e3165f1408e08fd1</hash>
+        <hash alg="SHA3-512">ef08eb5230d1a2e68131d0dc9ccf59485b68f441b910d80012e4a359cae72e626260cca15abb808ba4fc82cc2480d35dbf452af718ac0be094214aa29740c8b0</hash>
       </hashes>
       <licenses>
         <license>
@@ -1806,25 +1806,25 @@ of Jackson components maintained by FasterXML.com</description>
           <text content-type="text/plain" encoding="base64">NDA0OiBOb3QgRm91bmQ=</text>
         </license>
       </licenses>
-      <purl>pkg:maven/org.openjfx/javafx-controls@23?type=jar</purl>
+      <purl>pkg:maven/org.openjfx/javafx-controls@24?type=jar</purl>
       <modified>false</modified>
       <properties>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.openjfx/javafx-fxml@23?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.openjfx/javafx-fxml@24?type=jar">
       <group>org.openjfx</group>
       <name>javafx-fxml</name>
-      <version>23</version>
+      <version>24</version>
       <hashes>
-        <hash alg="MD5">5ccc96b9b69b67b2c6c7bc24301cbf32</hash>
-        <hash alg="SHA-1">f8f33c215eb9c172d62e1646cb5dc351bc5d918e</hash>
-        <hash alg="SHA-256">8a397ab28b8958484210d3e20b835ad144766cd206b5a7c9af94c9565284f256</hash>
-        <hash alg="SHA-512">78d6fa7852ec13ae0872bd0f1a6d13c8243ff9d6cdab2ec85844b97d85fc83af058684bd869c8b56220bdabdddc425bb87901e0103563cf0ab1db56de3653f7b</hash>
-        <hash alg="SHA-384">74f07327a94c3f50809e5e052cc83e4b218d4322592270009b7ff18aa12f5d17240152a15886d7ede065648b53f616d7</hash>
-        <hash alg="SHA3-384">6a53a512401a2e5e8d3edc53223efdcb5f300b276a73cc198fee77f61cf6ccc4ef30c41947b5aab2766f8716e9171d92</hash>
-        <hash alg="SHA3-256">4b8760c4265fd84fcb54058cd608479aa1dc9f9bd0851b1bfc3e0613ec8ee04d</hash>
-        <hash alg="SHA3-512">18a8a2325d82a7d052b2559d5bd5122ec8e1a29c7f173eee5c17cbd180aa1a1db59c8ae8bd8e11de694ffbba58855a671c9e0026179edd95e1ce260cf3bc3029</hash>
+        <hash alg="MD5">dc36d0a194042cef24f45fb258b05d80</hash>
+        <hash alg="SHA-1">5532187f0e082f351b250f198df3dabdc3b5d8ac</hash>
+        <hash alg="SHA-256">b1a237fdd93382980f50463f821cb6814e261123b501134ac3645dc415e6f0ae</hash>
+        <hash alg="SHA-512">a2a751deb533c97e61b6e7b3025d16cb21464ae2e15f49a5277cf811b5a4a84b326d52f4ddea4a08152bde70aef1f62a27a0a2180451ffe7f704aa07a0f3f86f</hash>
+        <hash alg="SHA-384">c278526f4202a07ecbf622747854c4040d6ce9b1b0a8cffdfbe38141cff4f4ab820fde6ae8e71351f1d48297f2a9e17d</hash>
+        <hash alg="SHA3-384">f1aaccc45f4b40a46acc09b089893cc5c4cdfe43b6108cfca8b21f059d6093960d12e25255983ce35f24a84d353034ed</hash>
+        <hash alg="SHA3-256">8e681f69e847facd0f36ea3349bc6ea2abdb3c6df1ac3da1ad74080dba42537a</hash>
+        <hash alg="SHA3-512">59c628153417ba034111752cee4d7dad412f63e4e40ead913f0f78017a85b9513461f680a1114654d6ec7f8f66790dd5aafd0a8a234c24126980ec9fbf4643c8</hash>
       </hashes>
       <licenses>
         <license>
@@ -1832,25 +1832,25 @@ of Jackson components maintained by FasterXML.com</description>
           <text content-type="text/plain" encoding="base64">NDA0OiBOb3QgRm91bmQ=</text>
         </license>
       </licenses>
-      <purl>pkg:maven/org.openjfx/javafx-fxml@23?type=jar</purl>
+      <purl>pkg:maven/org.openjfx/javafx-fxml@24?type=jar</purl>
       <modified>false</modified>
       <properties>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.openjfx/javafx-graphics@23?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.openjfx/javafx-graphics@24?type=jar">
       <group>org.openjfx</group>
       <name>javafx-graphics</name>
-      <version>23</version>
+      <version>24</version>
       <hashes>
-        <hash alg="MD5">4b5d03cd90ad15366812ed215de4049e</hash>
-        <hash alg="SHA-1">160bad2ba0b248ecc31412ca4b6ef77510e717d1</hash>
-        <hash alg="SHA-256">b4765e56b7c2b80cf20e9a1b86e9626097001d6cfb84b243da2f58a64ac82129</hash>
-        <hash alg="SHA-512">b5a3f83a2ebf37fdda0c0ec39545babcbcbeb288458504becdbb89dfe59725c1c2586f0c07d49d4bda6a28bac73f0d77eda7cc74987d283119b70a857bcad388</hash>
-        <hash alg="SHA-384">9a98e200359f1d0cb87d15309e2edfe58388ff9e20b5c87048deb08fa9143f280e72046d6fbf2a1fa5eca09a45d4b0e7</hash>
-        <hash alg="SHA3-384">b869709a3b6d9df6ffa6ddc64cb91f508437daf73921ee11b2860f8684d3b36e7f28f4200c4abbf162988f85a8bef356</hash>
-        <hash alg="SHA3-256">91d489ffd727e999901f486597f8963b5cac8e7a9c4765c4740fe5fe77f2d2e7</hash>
-        <hash alg="SHA3-512">8636745d2096cadd36b3907cc89eb989d7f8898be60db8882a67a47ac4318d546170edabbba82737dc0d82e670b0dd743020848e2ac57d5163160b50e43c07f7</hash>
+        <hash alg="MD5">68b6728fb19e63dbc90db8d80423fbcb</hash>
+        <hash alg="SHA-1">bd6af15d47d15f3c8b1ed6feb404c22865d17161</hash>
+        <hash alg="SHA-256">573bcf589ffcd47cd8392bf86146ba4c213f966a7eb9aa77a491c27aa6778c5a</hash>
+        <hash alg="SHA-512">8d1adc9c87c150dfa0b53c387855e33e4438d803b026547e2f4a3409fbb8d24017b9c59f5c03606255b0c45790100826191478a4b860cdf7e13700d423985baa</hash>
+        <hash alg="SHA-384">1153aeda75e594d12435594cf67005ad13b59dc0b149f19312a075cae9ba107853d5f102f13a17ce3429d16331d70faf</hash>
+        <hash alg="SHA3-384">acdc2951623bf54a98ca2add5bef81b1ea993931b543f0fe42a0d4599dba05f378db3cfe970f74f9bd5a8920e5cc4f2b</hash>
+        <hash alg="SHA3-256">c5433f513f9da7ff3b99a4f25547ef1ca2479543e78d3fb0e5035116eb4cd93e</hash>
+        <hash alg="SHA3-512">2d29c47328b6776b368a63bfa894d7f7e8161e4277c2a41aa7f4ae920e7462c6dbb3afe5e9e7cdd1210c2a54b7ed597b5c11983218c86509429f6209c12e9e85</hash>
       </hashes>
       <licenses>
         <license>
@@ -1858,7 +1858,7 @@ of Jackson components maintained by FasterXML.com</description>
           <text content-type="text/plain" encoding="base64">NDA0OiBOb3QgRm91bmQ=</text>
         </license>
       </licenses>
-      <purl>pkg:maven/org.openjfx/javafx-graphics@23?type=jar</purl>
+      <purl>pkg:maven/org.openjfx/javafx-graphics@24?type=jar</purl>
       <modified>false</modified>
       <properties>
         <property name="cdx:maven:package:test">false</property>
@@ -1896,21 +1896,21 @@ of Jackson components maintained by FasterXML.com</description>
         <property name="cdx:maven:package:test">true</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.ow2.asm/asm-commons@9.7?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.ow2.asm/asm-commons@9.8?type=jar">
       <publisher>OW2</publisher>
       <group>org.ow2.asm</group>
       <name>asm-commons</name>
-      <version>9.7</version>
+      <version>9.8</version>
       <description>Usefull class adapters based on ASM, a very small and fast Java bytecode manipulation framework</description>
       <hashes>
-        <hash alg="MD5">53a46610df6a8dbc4ff85b8fd4cdea66</hash>
-        <hash alg="SHA-1">e86dda4696d3c185fcc95d8d311904e7ce38a53f</hash>
-        <hash alg="SHA-256">389bc247958e049fc9a0408d398c92c6d370c18035120395d4cba1d9d9304b7a</hash>
-        <hash alg="SHA-512">64544d7515aa4582ebf40e9a5ec32cbcee3ef0e3e15448bd56e6adb583d4ff764a34bba866816e4415298da939b029384a6ccf887c70b5fe98ac23589e626f79</hash>
-        <hash alg="SHA-384">341c31b9113151038127dd84a7147396b671028b3e093b698a73ac908e03afd7a2e14ca231963b24bd97e4fbd610d184</hash>
-        <hash alg="SHA3-384">0e92d55bbeee69d94499dbaf58413e71e6d7422082ed29c40c0b149155d77de933486d1cf3766c92c234e8f97a4e8ffb</hash>
-        <hash alg="SHA3-256">379bef4f4dc55ccb161a765145bff3e00b256453c9c0ab26e9f6e933ac8dcda8</hash>
-        <hash alg="SHA3-512">11c337cd943e835838e306948b1d1fa0077396b7779fa55606e3dba079ed4c72af5f0fad99f5145ed87364c47faf188573f3e7556070edd82cc684153411afff</hash>
+        <hash alg="MD5">c8c3d9ccf240144e74d94ff658b024c9</hash>
+        <hash alg="SHA-1">36e4d212970388e5bd2c5180292012502df461bb</hash>
+        <hash alg="SHA-256">3301a1c1cb4c59fcc5292648dac1d7c5aed4c0f067dfbe88873b8cdfe77404f4</hash>
+        <hash alg="SHA-512">d2add10e25416b701bd84651b42161e090df2f32940de5e06e0e2a41c6106734db2fe5136f661d8a8af55e80dc958bc7b385a1004f0ebe550828dfa1e9d70d41</hash>
+        <hash alg="SHA-384">9b336362598ff8a94ea3a0378b03c8b2c7a171dfd61df8821c3830996d68df57259fb8d54d21986e0f147c633f3588ae</hash>
+        <hash alg="SHA3-384">863bc8af9784f49a9201439f0308ca7740d366db2b294d308cf568c362532ace1b97be3495f8db8e0ddba87f427a6a00</hash>
+        <hash alg="SHA3-256">1441f325afc4006dd8cf66fa8da539033ea3a07fdd11f9e56f4e4d429f709c0b</hash>
+        <hash alg="SHA3-512">72a6798417c362ad973a27cd1f0a43edee6069651385256d796c25f6876a0479234eb236990ec50cee60162d244ea2d6586160daec1741fa1bfe46f8f9d5a19b</hash>
       </hashes>
       <licenses>
         <license>
@@ -1919,7 +1919,7 @@ of Jackson components maintained by FasterXML.com</description>
           <url>https://opensource.org/licenses/BSD-3-Clause</url>
         </license>
       </licenses>
-      <purl>pkg:maven/org.ow2.asm/asm-commons@9.7?type=jar</purl>
+      <purl>pkg:maven/org.ow2.asm/asm-commons@9.8?type=jar</purl>
       <modified>false</modified>
       <externalReferences>
         <reference type="website">
@@ -1939,21 +1939,21 @@ of Jackson components maintained by FasterXML.com</description>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.ow2.asm/asm-tree@9.7?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.ow2.asm/asm-tree@9.8?type=jar">
       <publisher>OW2</publisher>
       <group>org.ow2.asm</group>
       <name>asm-tree</name>
-      <version>9.7</version>
+      <version>9.8</version>
       <description>Tree API of ASM, a very small and fast Java bytecode manipulation framework</description>
       <hashes>
-        <hash alg="MD5">ea5cad3e0cbd2520688e4b0b5c4218e7</hash>
-        <hash alg="SHA-1">e446a17b175bfb733b87c5c2560ccb4e57d69f1a</hash>
-        <hash alg="SHA-256">62f4b3bc436045c1acb5c3ba2d8ec556ec3369093d7f5d06c747eb04b56d52b1</hash>
-        <hash alg="SHA-512">60c548f80af02ea8da5866104921ca818a8de846504faebac5cf016becba6b277a33bf594a7fd783443856310864b2ffc99aa11cd6f4e439c086734923ef823b</hash>
-        <hash alg="SHA-384">2872f70f10ee0831786b255a6302d77e62405be1e06b4cfcea6b484b2c1b2f7e76155025616b8a9616efc0b41346d212</hash>
-        <hash alg="SHA3-384">d0e084f3d1438f99a2940947816dc3f6694d843f070c57b3e69a49e6e9b1bc120e3f218c1053e0d6bf5238712a646c57</hash>
-        <hash alg="SHA3-256">6eded18da3930d5fb22bfaf5985bfabb6d4d65a8297ff20e18d5b447a8f90f08</hash>
-        <hash alg="SHA3-512">a286ed6edf9a59b9e87e245a31da446bc82a000ea2757236bf13a1314b1d15587997aedf35e99b61d0bbb87412f5d87071ae4df0990a061e45cd67462fc42e17</hash>
+        <hash alg="MD5">4ab1aaec43c77a2d9b56e6d6d496f705</hash>
+        <hash alg="SHA-1">018419ca5b77a2f81097c741e7872e6ab8d2f40d</hash>
+        <hash alg="SHA-256">14b7880cb7c85eed101e2710432fc3ffb83275532a6a894dc4c4095d49ad59f1</hash>
+        <hash alg="SHA-512">4493f573d9f0cfc8837db9be25a8b61a825a06aafc0e02f0363875584ff184a5a14600e53793c09866300859e44f153faffd0e050de4a7fba1a63b5fb010a9a7</hash>
+        <hash alg="SHA-384">4a55e2ab6ca640007e1635706c7deb22ddc1ffed5e64f1d37ed67571df94690e1071f8a747e8d1c56830267f5c09efbb</hash>
+        <hash alg="SHA3-384">4dd6774bcda54db494ea52edc3652a0b8432cc4d14f9f7dce9f9e96f9594b76e1d04edbb997573719e42794d48c9ab46</hash>
+        <hash alg="SHA3-256">cf7a748e9e60367c2e8e96ec264ee903d846a374d94b6cdc599c782259090b57</hash>
+        <hash alg="SHA3-512">f3c5a6af04845467ee67384a8a2bf083441d4af40ca1b96619227c24c7ea1aabb10ce6b9b29914c53674974f9e4d694c94237584357a92f7b943cca1bd9fc625</hash>
       </hashes>
       <licenses>
         <license>
@@ -1962,7 +1962,7 @@ of Jackson components maintained by FasterXML.com</description>
           <url>https://opensource.org/licenses/BSD-3-Clause</url>
         </license>
       </licenses>
-      <purl>pkg:maven/org.ow2.asm/asm-tree@9.7?type=jar</purl>
+      <purl>pkg:maven/org.ow2.asm/asm-tree@9.8?type=jar</purl>
       <modified>false</modified>
       <externalReferences>
         <reference type="website">
@@ -1982,21 +1982,21 @@ of Jackson components maintained by FasterXML.com</description>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.ow2.asm/asm@9.7?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.ow2.asm/asm@9.8?type=jar">
       <publisher>OW2</publisher>
       <group>org.ow2.asm</group>
       <name>asm</name>
-      <version>9.7</version>
+      <version>9.8</version>
       <description>ASM, a very small and fast Java bytecode manipulation framework</description>
       <hashes>
-        <hash alg="MD5">3957b18bf02a62edcb6726d074b90b08</hash>
-        <hash alg="SHA-1">073d7b3086e14beb604ced229c302feff6449723</hash>
-        <hash alg="SHA-256">adf46d5e34940bdf148ecdd26a9ee8eea94496a72034ff7141066b3eea5c4e9d</hash>
-        <hash alg="SHA-512">ada37fcc95884a4d2cbc64495f5f67556c847e7724e26ccfbb15cc42a476436fa54b5d4fd4d9ed340241d848999d415e1cff07045d9e97d451c16aeed4911045</hash>
-        <hash alg="SHA-384">b34c6230cd1c46e34067ae8429f72c7e031a1c0fc75b93ef6accf18fd5fe6a74c3659160b3199652d88bd916cbd63d4a</hash>
-        <hash alg="SHA3-384">9a89b843fededac03bb2448087468814e1214c3de8e754a3456b8b6f518fff1db41b2e787a0a255b6d2a99906f3d2890</hash>
-        <hash alg="SHA3-256">a8377efe9c0ccba595a223feb3a90bbfcb0a3f9b1ac30975abf1f2493d864f50</hash>
-        <hash alg="SHA3-512">aeb8e1002420c8998b59c44c27574205a55730e7f8e299b88e730bb187d9fff3723347441f0e1adebb12839e1bd7c418ea1275b81c12a2cdb510faac76fc5369</hash>
+        <hash alg="MD5">f5adf3bfc54fb3d2cd8e3a1f275084bc</hash>
+        <hash alg="SHA-1">dc19ecb3f7889b7860697215cae99c0f9b6f6b4b</hash>
+        <hash alg="SHA-256">876eab6a83daecad5ca67eb9fcabb063c97b5aeb8cf1fca7a989ecde17522051</hash>
+        <hash alg="SHA-512">cbd250b9c698a48a835e655f5f5262952cc6dd1a434ec0bc3429a9de41f2ce08fcd3c4f569daa7d50321ca6ad1d32e131e4199aa4fe54bce9e9691b37e45060e</hash>
+        <hash alg="SHA-384">b4ad6e6c1afe432ce8a60367c743107cfc9d1d2f1f1c6b7be4b6ba625cca862cc7ffff404566086bce4b6650556df953</hash>
+        <hash alg="SHA3-384">f51a3b7cee5543672cc2a4d71dda7aa992fb900cb68b79908efbd1efcc3e731f4ab8e2c1099e7b905f4aea6350489e08</hash>
+        <hash alg="SHA3-256">3c66be179e6b4881b1901a6a8c6fc980d773d1faa6edb54ed878e5985615a831</hash>
+        <hash alg="SHA3-512">ccbf812616e5997ba7cf59704cf78e360650d773ac53581243da6c47fe884560db5ec48f8f4b71ccd4b8c2b332619c19aea053458d14abe443fcdd4fa313d5dc</hash>
       </hashes>
       <licenses>
         <license>
@@ -2005,7 +2005,7 @@ of Jackson components maintained by FasterXML.com</description>
           <url>https://opensource.org/licenses/BSD-3-Clause</url>
         </license>
       </licenses>
-      <purl>pkg:maven/org.ow2.asm/asm@9.7?type=jar</purl>
+      <purl>pkg:maven/org.ow2.asm/asm@9.8?type=jar</purl>
       <modified>false</modified>
       <externalReferences>
         <reference type="website">
@@ -2025,20 +2025,20 @@ of Jackson components maintained by FasterXML.com</description>
         <property name="cdx:maven:package:test">false</property>
       </properties>
     </component>
-    <component type="library" bom-ref="pkg:maven/org.projectlombok/lombok@1.18.36?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.projectlombok/lombok@1.18.38?type=jar">
       <group>org.projectlombok</group>
       <name>lombok</name>
-      <version>1.18.36</version>
+      <version>1.18.38</version>
       <description>Spice up your java: Automatic Resource Management, automatic generation of getters, setters, equals, hashCode and toString, and more!</description>
       <hashes>
-        <hash alg="MD5">92c08153ae16c161c8cc2cc8185d2724</hash>
-        <hash alg="SHA-1">5a30490a6e14977d97d9c73c924c1f1b5311ea95</hash>
-        <hash alg="SHA-256">73b6b05b6a2d365b700bab08d30f94de9d336490bc0acce5b6181fef48cbf18e</hash>
-        <hash alg="SHA-512">c551a534ad8b4275ac881001b233e3abf32d5267b14eb19a3497f477e3752ebe0b09a55b1bf59bb6e4feb17c1b9c6d8c0554a5b63fbb8b5d441f66fc038bd8d6</hash>
-        <hash alg="SHA-384">1588ecc4497fcc1193fba639a6da89dd7edc9bddcb88b4ed8253fa9e13ca62bab1e26f65064d7cbfd8cb5c70689dd3b7</hash>
-        <hash alg="SHA3-384">66206ea59c5c3048cc1b720e5c558500515f83df79215ed0ae63deaa5b711fe2aa3dcaeea3adbec8241b341ff4a7516b</hash>
-        <hash alg="SHA3-256">5c50c613749455f1ca9fae5320ba305c68abedb72ec9632634249fc6e18e9829</hash>
-        <hash alg="SHA3-512">57ccfb3a9865e68a076bce2d3e6e1cc38edae8eff3eb6d62403e5e45d971a338b575038e55b62d74fb27c1533cdf9b19061a62bb0d1a3544331cb55543183463</hash>
+        <hash alg="MD5">789cacd8d3969e9d23e6e6baec747f70</hash>
+        <hash alg="SHA-1">57f8f5e02e92a30fd21b80cbd426a4172b5f8e29</hash>
+        <hash alg="SHA-256">1e1e427c36ff63c44fd30ef292d9e773ea3154460ab6265d3fed7e6f5bc50fb9</hash>
+        <hash alg="SHA-512">0b0b63aadb705eded6da00cd3960fc888e1ee1a2bf2feb896e4f0015ab429257ad6f974817b63e94cc2aed7fb80b22e9544584dfdba69197ec512d1ab4d2a69f</hash>
+        <hash alg="SHA-384">e3f37487119be4c842b5a9b585074e674f1895fd2f5175235fcd79d30a091e87a5b051750ec9e6ea163f49557141bcb6</hash>
+        <hash alg="SHA3-384">7a9400db0abb3e20de09f68044a08017d9731fd897436b75f4b83de32df885d9763c0c790668145942d9aa69f38a5122</hash>
+        <hash alg="SHA3-256">764b72cfb6320d43d95e422e6fea5ef32bc73128e10421f7c9854e518f0e8a29</hash>
+        <hash alg="SHA3-512">2ae71758b1e569d90ad1e270e7ab6b3de30ab89c3cce2e09707f853e09442d174c519512d655f7b1c3c2dbba1f3a05aa391792bab84c1663c18cb02cf3f64070</hash>
       </hashes>
       <licenses>
         <license>
@@ -2046,7 +2046,7 @@ of Jackson components maintained by FasterXML.com</description>
           <text content-type="text/plain" encoding="base64">TUlUIExpY2Vuc2UKCkNvcHlyaWdodCAoYykgPHllYXI+IDxjb3B5cmlnaHQgaG9sZGVycz4KClBlcm1pc3Npb24gaXMgaGVyZWJ5IGdyYW50ZWQsIGZyZWUgb2YgY2hhcmdlLCB0byBhbnkgcGVyc29uIG9idGFpbmluZyBhIGNvcHkgb2YgdGhpcyBzb2Z0d2FyZSBhbmQgYXNzb2NpYXRlZCBkb2N1bWVudGF0aW9uIGZpbGVzICh0aGUgIlNvZnR3YXJlIiksIHRvIGRlYWwgaW4gdGhlIFNvZnR3YXJlIHdpdGhvdXQgcmVzdHJpY3Rpb24sIGluY2x1ZGluZyB3aXRob3V0IGxpbWl0YXRpb24gdGhlIHJpZ2h0cyB0byB1c2UsIGNvcHksIG1vZGlmeSwgbWVyZ2UsIHB1Ymxpc2gsIGRpc3RyaWJ1dGUsIHN1YmxpY2Vuc2UsIGFuZC9vciBzZWxsIGNvcGllcyBvZiB0aGUgU29mdHdhcmUsIGFuZCB0byBwZXJtaXQgcGVyc29ucyB0byB3aG9tIHRoZSBTb2Z0d2FyZSBpcyBmdXJuaXNoZWQgdG8gZG8gc28sIHN1YmplY3QgdG8gdGhlIGZvbGxvd2luZyBjb25kaXRpb25zOgoKVGhlIGFib3ZlIGNvcHlyaWdodCBub3RpY2UgYW5kIHRoaXMgcGVybWlzc2lvbiBub3RpY2Ugc2hhbGwgYmUgaW5jbHVkZWQgaW4gYWxsIGNvcGllcyBvciBzdWJzdGFudGlhbCBwb3J0aW9ucyBvZiB0aGUgU29mdHdhcmUuCgpUSEUgU09GVFdBUkUgSVMgUFJPVklERUQgIkFTIElTIiwgV0lUSE9VVCBXQVJSQU5UWSBPRiBBTlkgS0lORCwgRVhQUkVTUyBPUiBJTVBMSUVELCBJTkNMVURJTkcgQlVUIE5PVCBMSU1JVEVEIFRPIFRIRSBXQVJSQU5USUVTIE9GIE1FUkNIQU5UQUJJTElUWSwgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UgQU5EIE5PTklORlJJTkdFTUVOVC4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFIEFVVEhPUlMgT1IgQ09QWVJJR0hUIEhPTERFUlMgQkUgTElBQkxFIEZPUiBBTlkgQ0xBSU0sIERBTUFHRVMgT1IgT1RIRVIgTElBQklMSVRZLCBXSEVUSEVSIElOIEFOIEFDVElPTiBPRiBDT05UUkFDVCwgVE9SVCBPUiBPVEhFUldJU0UsIEFSSVNJTkcgRlJPTSwgT1VUIE9GIE9SIElOIENPTk5FQ1RJT04gV0lUSCBUSEUgU09GVFdBUkUgT1IgVEhFIFVTRSBPUiBPVEhFUiBERUFMSU5HUyBJTiBUSEUgU09GVFdBUkUuCg==</text>
         </license>
       </licenses>
-      <purl>pkg:maven/org.projectlombok/lombok@1.18.36?type=jar</purl>
+      <purl>pkg:maven/org.projectlombok/lombok@1.18.38?type=jar</purl>
       <modified>false</modified>
       <externalReferences>
         <reference type="issue-tracker">
@@ -2094,6 +2094,41 @@ of Jackson components maintained by FasterXML.com</description>
         </reference>
         <reference type="vcs">
           <url>https://github.com/ronmamo/reflections/issues</url>
+        </reference>
+      </externalReferences>
+      <properties>
+        <property name="cdx:maven:package:test">false</property>
+      </properties>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.semver4j/semver4j@5.6.0?type=jar">
+      <group>org.semver4j</group>
+      <name>semver4j</name>
+      <version>5.6.0</version>
+      <description>Semantic versioning for Java apps.</description>
+      <hashes>
+        <hash alg="MD5">de8e8127bca81b23cd2830eb337fab75</hash>
+        <hash alg="SHA-1">87417032df0effa5d247ff4ddfa6a43bf2ed550d</hash>
+        <hash alg="SHA-256">e66744e33e556f12816c50abec041488b348f922d29819cf4f6ab09ed252a755</hash>
+        <hash alg="SHA-512">dfaebc0cc62ae0ce490e6f3c51685304e107044d85b4f61c69e2912e49b7bb083c3f4f44d68ac712ae480891ef0fc02174b0ecb901f3cc3eb6c754f28a39b9ff</hash>
+        <hash alg="SHA-384">4ecae4b1c3fb116409173874f2389d0e4163a6f1a90ac284b2880d1791ce6652c178192b51fe352c77650f9dbd1c7f5b</hash>
+        <hash alg="SHA3-384">cb26ea53b8fc7b7a74b510e7d8fa6f091dc88a2a39e240c34fed25ee4f1d8cc832b864a023a016e8371c69e8f7d449bd</hash>
+        <hash alg="SHA3-256">08399f2792b456323e2f515522c714a99022157beb26e1e8a83efcb483b8850a</hash>
+        <hash alg="SHA3-512">b5ad6a7dbaf46ae501477533cbc34c459eafa86925f376ede9d6786f06fc0cb74c6dcbcefc0b44dc581aed62098c80de9f3f59ea4ed5bd2471a0897bc7995d54</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>MIT</id>
+          <text content-type="text/plain" encoding="base64">TUlUIExpY2Vuc2UKCkNvcHlyaWdodCAoYykgPHllYXI+IDxjb3B5cmlnaHQgaG9sZGVycz4KClBlcm1pc3Npb24gaXMgaGVyZWJ5IGdyYW50ZWQsIGZyZWUgb2YgY2hhcmdlLCB0byBhbnkgcGVyc29uIG9idGFpbmluZyBhIGNvcHkgb2YgdGhpcyBzb2Z0d2FyZSBhbmQgYXNzb2NpYXRlZCBkb2N1bWVudGF0aW9uIGZpbGVzICh0aGUgIlNvZnR3YXJlIiksIHRvIGRlYWwgaW4gdGhlIFNvZnR3YXJlIHdpdGhvdXQgcmVzdHJpY3Rpb24sIGluY2x1ZGluZyB3aXRob3V0IGxpbWl0YXRpb24gdGhlIHJpZ2h0cyB0byB1c2UsIGNvcHksIG1vZGlmeSwgbWVyZ2UsIHB1Ymxpc2gsIGRpc3RyaWJ1dGUsIHN1YmxpY2Vuc2UsIGFuZC9vciBzZWxsIGNvcGllcyBvZiB0aGUgU29mdHdhcmUsIGFuZCB0byBwZXJtaXQgcGVyc29ucyB0byB3aG9tIHRoZSBTb2Z0d2FyZSBpcyBmdXJuaXNoZWQgdG8gZG8gc28sIHN1YmplY3QgdG8gdGhlIGZvbGxvd2luZyBjb25kaXRpb25zOgoKVGhlIGFib3ZlIGNvcHlyaWdodCBub3RpY2UgYW5kIHRoaXMgcGVybWlzc2lvbiBub3RpY2Ugc2hhbGwgYmUgaW5jbHVkZWQgaW4gYWxsIGNvcGllcyBvciBzdWJzdGFudGlhbCBwb3J0aW9ucyBvZiB0aGUgU29mdHdhcmUuCgpUSEUgU09GVFdBUkUgSVMgUFJPVklERUQgIkFTIElTIiwgV0lUSE9VVCBXQVJSQU5UWSBPRiBBTlkgS0lORCwgRVhQUkVTUyBPUiBJTVBMSUVELCBJTkNMVURJTkcgQlVUIE5PVCBMSU1JVEVEIFRPIFRIRSBXQVJSQU5USUVTIE9GIE1FUkNIQU5UQUJJTElUWSwgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UgQU5EIE5PTklORlJJTkdFTUVOVC4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFIEFVVEhPUlMgT1IgQ09QWVJJR0hUIEhPTERFUlMgQkUgTElBQkxFIEZPUiBBTlkgQ0xBSU0sIERBTUFHRVMgT1IgT1RIRVIgTElBQklMSVRZLCBXSEVUSEVSIElOIEFOIEFDVElPTiBPRiBDT05UUkFDVCwgVE9SVCBPUiBPVEhFUldJU0UsIEFSSVNJTkcgRlJPTSwgT1VUIE9GIE9SIElOIENPTk5FQ1RJT04gV0lUSCBUSEUgU09GVFdBUkUgT1IgVEhFIFVTRSBPUiBPVEhFUiBERUFMSU5HUyBJTiBUSEUgU09GVFdBUkUuCg==</text>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.semver4j/semver4j@5.6.0?type=jar</purl>
+      <modified>false</modified>
+      <externalReferences>
+        <reference type="distribution">
+          <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </reference>
+        <reference type="issue-tracker">
+          <url>https://github.com/semver4j/semver4j/issues</url>
         </reference>
       </externalReferences>
       <properties>
@@ -2186,25 +2221,26 @@ of Jackson components maintained by FasterXML.com</description>
     <dependency ref="pkg:maven/commons-codec/commons-codec@1.15?type=jar"/>
     <dependency ref="pkg:maven/commons-collections/commons-collections@3.2.2?type=jar"/>
     <dependency ref="pkg:maven/de.greluc.sc/sckillmonitor@1.5.0?project_path=%3A">
+      <dependency ref="pkg:maven/org.openjfx/javafx-fxml@24?type=jar"/>
       <dependency ref="pkg:maven/io.github.mkpaz/atlantafx-base@2.0.1?type=jar"/>
-      <dependency ref="pkg:maven/org.openjfx/javafx-fxml@23?type=jar"/>
+      <dependency ref="pkg:maven/org.semver4j/semver4j@5.6.0?type=jar"/>
+      <dependency ref="pkg:maven/org.jacoco/org.jacoco.ant@0.8.13?type=jar"/>
       <dependency ref="pkg:maven/org.junit.jupiter/junit-jupiter-api@5.11.4?type=jar"/>
       <dependency ref="pkg:maven/com.puppycrawl.tools/checkstyle@10.23.0?type=jar"/>
       <dependency ref="pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.18.3?type=jar"/>
       <dependency ref="pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3?type=jar"/>
-      <dependency ref="pkg:maven/org.projectlombok/lombok@1.18.36?type=jar"/>
-      <dependency ref="pkg:maven/org.jacoco/org.jacoco.agent@0.8.12?type=jar"/>
+      <dependency ref="pkg:maven/org.projectlombok/lombok@1.18.38?type=jar"/>
+      <dependency ref="pkg:maven/org.jacoco/org.jacoco.agent@0.8.13?type=jar"/>
       <dependency ref="pkg:maven/com.fasterxml.jackson.datatype/jackson-datatype-jsr310@2.18.3?type=jar"/>
-      <dependency ref="pkg:maven/org.openjfx/javafx-controls@23?type=jar"/>
+      <dependency ref="pkg:maven/org.openjfx/javafx-controls@24?type=jar"/>
       <dependency ref="pkg:maven/org.junit.jupiter/junit-jupiter-engine@5.11.4?type=jar"/>
       <dependency ref="pkg:maven/org.mockito/mockito-core@5.15.2?type=jar"/>
       <dependency ref="pkg:maven/org.jetbrains/annotations@26.0.2?type=jar"/>
-      <dependency ref="pkg:maven/org.jacoco/org.jacoco.ant@0.8.12?type=jar"/>
       <dependency ref="pkg:maven/org.apache.logging.log4j/log4j-core@2.24.3?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/info.picocli/picocli@4.7.6?type=jar"/>
     <dependency ref="pkg:maven/io.github.mkpaz/atlantafx-base@2.0.1?type=jar">
-      <dependency ref="pkg:maven/org.openjfx/javafx-controls@23?type=jar"/>
+      <dependency ref="pkg:maven/org.openjfx/javafx-controls@24?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/net.bytebuddy/byte-buddy-agent@1.15.11?type=jar"/>
     <dependency ref="pkg:maven/net.bytebuddy/byte-buddy@1.15.11?type=jar"/>
@@ -2268,19 +2304,19 @@ of Jackson components maintained by FasterXML.com</description>
       <dependency ref="pkg:maven/org.codehaus.plexus/plexus-utils@3.3.0?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/org.codehaus.plexus/plexus-utils@3.3.0?type=jar"/>
-    <dependency ref="pkg:maven/org.jacoco/org.jacoco.agent@0.8.12?type=jar"/>
-    <dependency ref="pkg:maven/org.jacoco/org.jacoco.ant@0.8.12?type=jar">
-      <dependency ref="pkg:maven/org.jacoco/org.jacoco.agent@0.8.12?type=jar"/>
-      <dependency ref="pkg:maven/org.jacoco/org.jacoco.core@0.8.12?type=jar"/>
-      <dependency ref="pkg:maven/org.jacoco/org.jacoco.report@0.8.12?type=jar"/>
+    <dependency ref="pkg:maven/org.jacoco/org.jacoco.agent@0.8.13?type=jar"/>
+    <dependency ref="pkg:maven/org.jacoco/org.jacoco.ant@0.8.13?type=jar">
+      <dependency ref="pkg:maven/org.jacoco/org.jacoco.agent@0.8.13?type=jar"/>
+      <dependency ref="pkg:maven/org.jacoco/org.jacoco.report@0.8.13?type=jar"/>
+      <dependency ref="pkg:maven/org.jacoco/org.jacoco.core@0.8.13?type=jar"/>
     </dependency>
-    <dependency ref="pkg:maven/org.jacoco/org.jacoco.core@0.8.12?type=jar">
-      <dependency ref="pkg:maven/org.ow2.asm/asm@9.7?type=jar"/>
-      <dependency ref="pkg:maven/org.ow2.asm/asm-tree@9.7?type=jar"/>
-      <dependency ref="pkg:maven/org.ow2.asm/asm-commons@9.7?type=jar"/>
+    <dependency ref="pkg:maven/org.jacoco/org.jacoco.core@0.8.13?type=jar">
+      <dependency ref="pkg:maven/org.ow2.asm/asm-tree@9.8?type=jar"/>
+      <dependency ref="pkg:maven/org.ow2.asm/asm-commons@9.8?type=jar"/>
+      <dependency ref="pkg:maven/org.ow2.asm/asm@9.8?type=jar"/>
     </dependency>
-    <dependency ref="pkg:maven/org.jacoco/org.jacoco.report@0.8.12?type=jar">
-      <dependency ref="pkg:maven/org.jacoco/org.jacoco.core@0.8.12?type=jar"/>
+    <dependency ref="pkg:maven/org.jacoco/org.jacoco.report@0.8.13?type=jar">
+      <dependency ref="pkg:maven/org.jacoco/org.jacoco.core@0.8.13?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/org.javassist/javassist@3.28.0-GA?type=jar"/>
     <dependency ref="pkg:maven/org.jetbrains/annotations@26.0.2?type=jar"/>
@@ -2317,29 +2353,32 @@ of Jackson components maintained by FasterXML.com</description>
       <dependency ref="pkg:maven/net.bytebuddy/byte-buddy@1.15.11?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/org.objenesis/objenesis@3.3?type=jar"/>
-    <dependency ref="pkg:maven/org.openjfx/javafx-base@23?type=jar"/>
-    <dependency ref="pkg:maven/org.openjfx/javafx-controls@23?type=jar">
-      <dependency ref="pkg:maven/org.openjfx/javafx-graphics@23?type=jar"/>
+    <dependency ref="pkg:maven/org.openjfx/javafx-base@24?type=jar"/>
+    <dependency ref="pkg:maven/org.openjfx/javafx-controls@24?type=jar">
+      <dependency ref="pkg:maven/org.openjfx/javafx-graphics@24?type=jar"/>
     </dependency>
-    <dependency ref="pkg:maven/org.openjfx/javafx-fxml@23?type=jar">
-      <dependency ref="pkg:maven/org.openjfx/javafx-controls@23?type=jar"/>
+    <dependency ref="pkg:maven/org.openjfx/javafx-fxml@24?type=jar">
+      <dependency ref="pkg:maven/org.openjfx/javafx-controls@24?type=jar"/>
     </dependency>
-    <dependency ref="pkg:maven/org.openjfx/javafx-graphics@23?type=jar">
-      <dependency ref="pkg:maven/org.openjfx/javafx-base@23?type=jar"/>
+    <dependency ref="pkg:maven/org.openjfx/javafx-graphics@24?type=jar">
+      <dependency ref="pkg:maven/org.openjfx/javafx-base@24?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/org.opentest4j/opentest4j@1.3.0?type=jar"/>
-    <dependency ref="pkg:maven/org.ow2.asm/asm-commons@9.7?type=jar">
-      <dependency ref="pkg:maven/org.ow2.asm/asm@9.7?type=jar"/>
-      <dependency ref="pkg:maven/org.ow2.asm/asm-tree@9.7?type=jar"/>
+    <dependency ref="pkg:maven/org.ow2.asm/asm-commons@9.8?type=jar">
+      <dependency ref="pkg:maven/org.ow2.asm/asm-tree@9.8?type=jar"/>
+      <dependency ref="pkg:maven/org.ow2.asm/asm@9.8?type=jar"/>
     </dependency>
-    <dependency ref="pkg:maven/org.ow2.asm/asm-tree@9.7?type=jar">
-      <dependency ref="pkg:maven/org.ow2.asm/asm@9.7?type=jar"/>
+    <dependency ref="pkg:maven/org.ow2.asm/asm-tree@9.8?type=jar">
+      <dependency ref="pkg:maven/org.ow2.asm/asm@9.8?type=jar"/>
     </dependency>
-    <dependency ref="pkg:maven/org.ow2.asm/asm@9.7?type=jar"/>
-    <dependency ref="pkg:maven/org.projectlombok/lombok@1.18.36?type=jar"/>
+    <dependency ref="pkg:maven/org.ow2.asm/asm@9.8?type=jar"/>
+    <dependency ref="pkg:maven/org.projectlombok/lombok@1.18.38?type=jar"/>
     <dependency ref="pkg:maven/org.reflections/reflections@0.10.2?type=jar">
       <dependency ref="pkg:maven/com.google.code.findbugs/jsr305@3.0.2?type=jar"/>
       <dependency ref="pkg:maven/org.javassist/javassist@3.28.0-GA?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.semver4j/semver4j@5.6.0?type=jar">
+      <dependency ref="pkg:maven/org.jspecify/jspecify@1.0.0?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/org.xmlresolver/xmlresolver@5.2.2?type=jar">
       <dependency ref="pkg:maven/org.apache.httpcomponents.client5/httpclient5@5.1.3?type=jar"/>

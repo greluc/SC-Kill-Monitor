@@ -22,7 +22,7 @@ package de.greluc.sc.sckm.data;
 
 /**
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
- * @version 1.5.0
+ * @version 1.6.0
  * @since 1.5.0
  */
 public class ReleaseAsset {
