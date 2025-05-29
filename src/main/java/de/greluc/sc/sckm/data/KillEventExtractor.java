@@ -24,6 +24,7 @@ import static de.greluc.sc.sckm.FileHandler.writeKillEventToFile;
 
 import de.greluc.sc.sckm.AlertHandler;
 import de.greluc.sc.sckm.settings.SettingsData;
+import de.greluc.sc.sckm.util.PathSanitizer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -72,7 +73,21 @@ public class KillEventExtractor {
       @NotNull String inputFilePath,
       @NotNull ZonedDateTime scanStartTime) {
     AtomicBoolean isWriteSuccesfull = new AtomicBoolean(true);
-    try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath))) {
+
+    // Sanitize the input file path to prevent path traversal attacks
+    String sanitizedPath = PathSanitizer.sanitizePath(inputFilePath);
+    if (sanitizedPath.isEmpty()) {
+      Platform.runLater(
+          () ->
+              AlertHandler.showAlert(
+                  Alert.AlertType.ERROR,
+                  "Invalid log file path",
+                  "The specified log file path is invalid or contains illegal characters.", false));
+      log.error("Invalid log file path: {}", inputFilePath);
+      return false;
+    }
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(sanitizedPath))) {
       String line;
       while ((line = reader.readLine()) != null) {
         if (line.contains("<Actor Death>") && isWriteSuccesfull.get()) {
@@ -103,7 +118,7 @@ public class KillEventExtractor {
                   Alert.AlertType.ERROR,
                   "Failed to read log file",
                   "Please check if the file exists and the path is set correctly.", false));
-      log.error("Failed to find the specified log file: {}", inputFilePath);
+      log.error("Failed to find the specified log file: {}", sanitizedPath);
       log.trace("Stacktrace:", ioException);
       return false;
     }

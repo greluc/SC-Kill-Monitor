@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import de.greluc.sc.sckm.data.KillEvent;
 import de.greluc.sc.sckm.settings.SettingsData;
+import de.greluc.sc.sckm.util.PathSanitizer;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -112,7 +113,17 @@ public class FileHandler {
       Platform.runLater(() -> AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "No path to save the KilLEvent file set.", false));
       return false;
     } else {
-      File file = new File(String.format(SettingsData.getPathKillEvent() + "\\kill-events_%s.log", fileSuffix));
+      // Create a safe file path using PathSanitizer
+      String fileName = String.format("kill-events_%s.log", fileSuffix);
+      String safePath = PathSanitizer.createSafeFilePath(SettingsData.getPathKillEvent(), fileName);
+
+      if (safePath.isEmpty()) {
+        Platform.runLater(() -> AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "Invalid path for KillEvent file.", false));
+        log.error("Failed to create a safe file path for KillEvent file");
+        return false;
+      }
+
+      File file = new File(safePath);
       try (FileWriter writer = new FileWriter(file, true)) {
         String json = objectMapper.writeValueAsString(killEvent);
         if (file.length() > 0) {
