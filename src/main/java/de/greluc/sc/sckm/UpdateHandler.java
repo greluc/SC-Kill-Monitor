@@ -32,6 +32,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import javafx.scene.control.Alert;
@@ -71,9 +72,9 @@ public class UpdateHandler {
   }
 
   /**
-   * Deletes the existing `update.exe` file from the current directory if it exists.
+   * Deletes the existing `update.msi` file from the current directory if it exists.
    *
-   * <p>This method checks for the presence of a file named `update.exe` in the working directory and
+   * <p>This method checks for the presence of a file named `update.msi` in the working directory and
    * attempts to delete it if found. It logs a debug message upon successful deletion and a warning
    * message if the deletion fails due to an {@link IOException}.
    *
@@ -88,7 +89,7 @@ public class UpdateHandler {
       java.nio.file.Path updateFilePath = java.nio.file.Paths.get("update.msi");
       if (java.nio.file.Files.exists(updateFilePath)) {
         java.nio.file.Files.delete(updateFilePath);
-        log.debug("Deleted existing update.exe file from the current directory.");
+        log.debug("Deleted existing update.msi file from the current directory.");
       }
     } catch (IOException e) {
       log.warn("Failed to delete update.msi file: {}", e.getMessage(), e);
@@ -105,16 +106,22 @@ public class UpdateHandler {
         fileOutputStream.write(dataBuffer, 0, bytesRead);
       }
     } catch (IOException e) {
-      // handle exception
+      log.error("Failed to download the update file.", e);
     }
   }
 
   public void startUpdate(@NotNull ReleaseData release, @NotNull MainViewController mainViewController) {
     try {
       downloadUpdate(release);
-      new ProcessBuilder("update.msi").start();
+      // Get the absolute path to the MSI file
+      String msiPath = Path.of("update.msi").toAbsolutePath().toString();
+      // Create ProcessBuilder with command and arguments as separate elements
+      ProcessBuilder processBuilder = new ProcessBuilder("msiexec", "/i", msiPath);
+      // Start the process
+      processBuilder.start();
       mainViewController.onClosePressed();
     } catch (IOException e) {
+      log.error("Failed to start the update process.", e);
       AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "Failed to start the update process. Please try again later or contact the developer for support.", true);
       mainViewController.onClosePressed();
     }
