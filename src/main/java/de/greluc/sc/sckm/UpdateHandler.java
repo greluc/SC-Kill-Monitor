@@ -28,13 +28,21 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
 import javafx.scene.control.Alert;
 import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
@@ -48,11 +56,85 @@ import org.semver4j.Semver;
 @Log4j2
 public class UpdateHandler {
 
+  /**
+   * Initializes SSL configuration to ensure secure connections.
+   * This method sets up proper certificate validation to prevent MITM attacks.
+   * 
+   * <p>Uses the default system TrustManager for certificate validation,
+   * which validates certificate chains against the system's trusted CA certificates.
+   */
+  private void initializeSecureConnection() {
+    try {
+      // Use the default SSLContext which uses the system's trusted CA certificates
+      SSLContext sc = SSLContext.getDefault();
+      HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+      // Use the default hostname verifier which properly validates that 
+      // the hostname matches the certificate
+      HttpsURLConnection.setDefaultHostnameVerifier(HttpsURLConnection.getDefaultHostnameVerifier());
+
+      log.debug("Secure connection initialized with system default TrustManager and HostnameVerifier");
+    } catch (Exception e) {
+      log.error("Failed to initialize secure connection", e);
+    }
+  }
+
+  /**
+   * Computes the SHA-256 checksum of a file.
+   *
+   * @param filePath The path to the file
+   * @return The SHA-256 checksum as a hexadecimal string
+   * @throws IOException If an I/O error occurs
+   * @throws NoSuchAlgorithmException If the SHA-256 algorithm is not available
+   */
+  private String computeChecksum(Path filePath) throws IOException, NoSuchAlgorithmException {
+    MessageDigest digest = MessageDigest.getInstance(Constants.CHECKSUM_ALGORITHM);
+    try (InputStream is = Files.newInputStream(filePath);
+         DigestInputStream dis = new DigestInputStream(is, digest)) {
+      byte[] buffer = new byte[8192];
+      while (dis.read(buffer) != -1) {
+        // Read the entire file
+      }
+    }
+
+    byte[] checksumBytes = digest.digest();
+    StringBuilder result = new StringBuilder();
+    for (byte b : checksumBytes) {
+      result.append(String.format("%02x", b));
+    }
+    return result.toString();
+  }
+
+  /**
+   * Verifies the integrity of a downloaded file by comparing its checksum with the expected checksum.
+   *
+   * @param filePath The path to the file
+   * @param expectedChecksum The expected checksum
+   * @return true if the checksums match, false otherwise
+   */
+  private boolean verifyFileIntegrity(Path filePath, String expectedChecksum) {
+    try {
+      String actualChecksum = computeChecksum(filePath);
+      boolean isValid = actualChecksum.equalsIgnoreCase(expectedChecksum);
+      if (!isValid) {
+        log.error("Checksum verification failed. Expected: {}, Actual: {}", 
+            expectedChecksum, actualChecksum);
+      } else {
+        log.info("Checksum verification successful");
+      }
+      return isValid;
+    } catch (IOException | NoSuchAlgorithmException e) {
+      log.error("Failed to verify file integrity", e);
+      return false;
+    }
+  }
+
   public Optional<ReleaseData> checkUpdate() {
     deleteOldUpdateFile();
+    initializeSecureConnection();
 
     try {
-      String releaseJson = fetchReleases("greluc", "SC-Kill-Monitor");
+      String releaseJson = fetchReleases(Constants.GITHUB_REPO_OWNER, Constants.GITHUB_REPO_NAME);
       ObjectMapper objectMapper = new ObjectMapper();
       objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
       ReleaseData release = objectMapper.readValue(releaseJson, ReleaseData.class);
@@ -96,39 +178,87 @@ public class UpdateHandler {
     }
   }
 
-  public void downloadUpdate(@NotNull ReleaseData release) throws IOException {
-    URL url = URI.create(release.releaseAssets.getFirst().browser_download_url).toURL();
+  /**
+   * Downloads an update file from the specified URL and verifies its integrity.
+   *
+   * @param release The release data containing information about the update
+   * @return The path to the downloaded file if successful, empty if download or verification fails
+   * @throws IOException If an I/O error occurs during download
+   */
+  public Optional<Path> downloadUpdate(@NotNull ReleaseData release) throws IOException {
+    if (release.releaseAssets.isEmpty()) {
+      log.error("No assets found in the release");
+      return Optional.empty();
+    }
+
+    var asset = release.releaseAssets.getFirst();
+    URL url = URI.create(asset.browser_download_url).toURL();
+    Path updateFilePath = Paths.get("update.msi");
+
     try (BufferedInputStream in = new BufferedInputStream(url.openStream());
-         FileOutputStream fileOutputStream = new FileOutputStream("update.msi")) {
+         FileOutputStream fileOutputStream = new FileOutputStream(updateFilePath.toFile())) {
       byte[] dataBuffer = new byte[1024];
       int bytesRead;
       while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
         fileOutputStream.write(dataBuffer, 0, bytesRead);
       }
+
+      // Verify the integrity of the downloaded file
+      if (asset.sha256_checksum != null && !asset.sha256_checksum.isEmpty()) {
+        if (verifyFileIntegrity(updateFilePath, asset.sha256_checksum)) {
+          log.info("Update file downloaded and verified successfully");
+          return Optional.of(updateFilePath);
+        } else {
+          log.error("Update file integrity verification failed");
+          Files.deleteIfExists(updateFilePath);
+          return Optional.empty();
+        }
+      } else {
+        log.warn("No checksum provided for the update file. Skipping integrity verification.");
+        return Optional.of(updateFilePath);
+      }
     } catch (IOException e) {
-      log.error("Failed to download the update file.", e);
+      log.error("Failed to download the update file", e);
+      Files.deleteIfExists(updateFilePath);
+      throw e;
     }
   }
 
+  /**
+   * Starts the update process by downloading the update file, verifying its integrity,
+   * and launching the installer.
+   *
+   * @param release The release data containing information about the update
+   * @param mainViewController The main view controller to close the application after starting the update
+   */
   public void startUpdate(@NotNull ReleaseData release, @NotNull MainViewController mainViewController) {
     try {
-      downloadUpdate(release);
-      // Get the absolute path to the MSI file
-      String msiPath = Path.of("update.msi").toAbsolutePath().toString();
-      // Create ProcessBuilder with command and arguments as separate elements
-      ProcessBuilder processBuilder = new ProcessBuilder("msiexec", "/i", msiPath);
-      // Start the process
-      processBuilder.start();
-      mainViewController.onClosePressed();
+      Optional<Path> updateFilePath = downloadUpdate(release);
+      if (updateFilePath.isPresent()) {
+        // Get the absolute path to the MSI file
+        String msiPath = updateFilePath.get().toAbsolutePath().toString();
+        // Create ProcessBuilder with command and arguments as separate elements
+        ProcessBuilder processBuilder = new ProcessBuilder("msiexec", "/i", msiPath);
+        // Start the process
+        processBuilder.start();
+        mainViewController.onClosePressed();
+      } else {
+        log.error("Failed to download or verify the update file");
+        AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", 
+            "Failed to download or verify the update file. The file may be corrupted or tampered with. " +
+            "Please try again later or download the update manually from the official website.", true);
+      }
     } catch (IOException e) {
-      log.error("Failed to start the update process.", e);
-      AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "Failed to start the update process. Please try again later or contact the developer for support.", true);
+      log.error("Failed to start the update process", e);
+      AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", 
+          "Failed to start the update process. Please try again later or contact the developer for support.", true);
       mainViewController.onClosePressed();
     }
   }
 
   /**
    * Fetches release data from the GitHub API's releases endpoint.
+   * This method uses HTTPS with certificate validation to prevent MITM attacks.
    *
    * @param owner The repository owner (GitHub username or organization name).
    * @param repo The repository name.
@@ -138,17 +268,25 @@ public class UpdateHandler {
   public static @NotNull String fetchReleases(@NotNull String owner, @NotNull String repo)
       throws IOException {
     // The URL for the GitHub Releases endpoint
-    String apiUrl =
-        String.format("https://api.github.com/repos/%s/%s/releases/latest", owner, repo);
+    String apiUrl = String.format("%s/repos/%s/%s/releases/latest", 
+        Constants.GITHUB_API_URL, owner, repo);
 
     // Open a connection to the API endpoint
     URL url = URI.create(apiUrl).toURL();
-    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
     connection.setRequestMethod("GET");
     connection.setRequestProperty("Accept", "application/vnd.github+json");
 
+    // Set connection timeout
+    connection.setConnectTimeout(10000); // 10 seconds
+    connection.setReadTimeout(10000); // 10 seconds
+
     // You can optionally set an API token here for authenticated access
     // connection.setRequestProperty("Authorization", "Bearer YOUR_ACCESS_TOKEN");
+
+    // Use the default hostname verifier which properly validates certificates
+    // This is important for preventing MITM attacks
+    connection.setHostnameVerifier(HttpsURLConnection.getDefaultHostnameVerifier());
 
     // Check the HTTP response code
     int responseCode = connection.getResponseCode();

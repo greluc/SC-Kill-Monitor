@@ -56,7 +56,13 @@ public class Constants {
   public static final String SETTINGS_KILLER_MODE_ACTIVE = "killer_mode_active";
   public static final String SETTINGS_STREAMER_MODE_ACTIVE = "streamer_mode_active";
 
-  public static final Semver APP_VERSION = new Semver("1.6.0");
+  // Security-related constants
+  public static final String CHECKSUM_ALGORITHM = "SHA-256";
+  public static final String GITHUB_API_URL = "https://api.github.com";
+  public static final String GITHUB_REPO_OWNER = "greluc";
+  public static final String GITHUB_REPO_NAME = "SC-Kill-Monitor";
+
+  public static final Semver APP_VERSION = new Semver("1.4.0");
   public static final String APP_TITLE = "SC Kill Monitor v" + APP_VERSION;
 
   public static final String UTILITY_CLASS = "Utility class";

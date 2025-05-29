@@ -27,4 +27,6 @@ package de.greluc.sc.sckm.data;
  */
 public class ReleaseAsset {
   public String browser_download_url;
+  public String name;
+  public String sha256_checksum; // Added for integrity verification
 }
