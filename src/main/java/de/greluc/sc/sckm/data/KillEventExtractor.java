@@ -26,8 +26,17 @@ import de.greluc.sc.sckm.AlertHandler;
 import de.greluc.sc.sckm.settings.SettingsData;
 import de.greluc.sc.sckm.util.PathSanitizer;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -54,19 +63,23 @@ import org.jetbrains.annotations.NotNull;
 public class KillEventExtractor {
 
   /**
-   * Extracts kill events from a log file and populates the provided list of {@link KillEvent}s. Only
-   * new kill events involving the user (as determined by the {@code SettingsData}) are added to the
+   * Extracts kill events from a log file using memory-mapped file access for improved performance.
+   * This method uses NIO's memory-mapped files which provide faster access to large files by mapping
+   * portions of the file directly into memory.
+   *
+   * <p>Only new kill events involving the user (as determined by the {@code SettingsData}) are added to the
    * list. The extracted kill events are sorted in descending order by their timestamp.
    *
    * <p>If enabled in the {@code SettingsData}, new kill events are also written to an output file.
    *
    * <p>If the specified log file cannot be read, an error alert is displayed to the user and the
-   * method throws an {@link IOException}.
+   * method returns false.
    *
    * @param killEvents A list of {@link KillEvent} to which detected kill events will be added.
    * @param inputFilePath The file path to the log file to be read for extracting kill events.
    * @param scanStartTime The start time of the scanning process, used for file naming when writing
    *     kill events.
+   * @return true if the extraction was successful, false otherwise
    */
   public static boolean extractKillEvents(
       @NotNull List<KillEvent> killEvents,
@@ -87,28 +100,90 @@ public class KillEventExtractor {
       return false;
     }
 
-    try (BufferedReader reader = new BufferedReader(new FileReader(sanitizedPath))) {
-      String line;
-      while ((line = reader.readLine()) != null) {
-        if (line.contains("<Actor Death>") && isWriteSuccesfull.get()) {
-          Optional<KillEvent> event = parseKillEvent(line);
-          event.ifPresent(
-              killEvent -> {
-                if ((killEvent.killedPlayer().equalsIgnoreCase(SettingsData.getHandle())
-                        || killEvent.killingPlayer().equalsIgnoreCase(SettingsData.getHandle()))
-                    && !killEvents.contains(killEvent)) {
-                  killEvents.add(killEvent);
-                  log.info("New kill event detected");
-                  log.debug("Kill Event:\n{}", killEvent);
-                  if (SettingsData.isWriteKillEventToFile()) {
-                    isWriteSuccesfull.set(writeKillEventToFile(
-                        killEvent,
-                        scanStartTime.format(DateTimeFormatter.ofPattern("yyMMdd-HHmmss"))));
+    Path path = Paths.get(sanitizedPath);
+    if (!Files.exists(path)) {
+      Platform.runLater(
+          () ->
+              AlertHandler.showAlert(
+                  Alert.AlertType.ERROR,
+                  "Failed to read log file",
+                  "Please check if the file exists and the path is set correctly.", false));
+      log.error("Failed to find the specified log file: {}", sanitizedPath);
+      return false;
+    }
+
+    try {
+      // Get file size
+      long fileSize = Files.size(path);
+      if (fileSize == 0) {
+        log.info("Log file is empty: {}", sanitizedPath);
+        return true;
+      }
+
+      // Use memory-mapped file for efficient reading of large files
+      try (FileChannel fileChannel = FileChannel.open(path, StandardOpenOption.READ)) {
+        // Map the file into memory
+        MappedByteBuffer buffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, fileSize);
+
+        // Process the file line by line
+        StringBuilder lineBuilder = new StringBuilder();
+        byte b;
+        while (buffer.hasRemaining()) {
+          b = buffer.get();
+          if (b == '\n') {
+            String line = lineBuilder.toString();
+            // Process the line
+            if (line.contains("<Actor Death>") && isWriteSuccesfull.get()) {
+              Optional<KillEvent> event = parseKillEvent(line);
+              event.ifPresent(
+                  killEvent -> {
+                    if ((killEvent.killedPlayer().equalsIgnoreCase(SettingsData.getHandle())
+                            || killEvent.killingPlayer().equalsIgnoreCase(SettingsData.getHandle()))
+                        && !killEvents.contains(killEvent)) {
+                      killEvents.add(killEvent);
+                      log.info("New kill event detected");
+                      log.debug("Kill Event:\n{}", killEvent);
+                      if (SettingsData.isWriteKillEventToFile()) {
+                        isWriteSuccesfull.set(writeKillEventToFile(
+                            killEvent,
+                            scanStartTime.format(DateTimeFormatter.ofPattern("yyMMdd-HHmmss"))));
+                      }
+                    }
+                  });
+            }
+            lineBuilder.setLength(0); // Clear the buffer for the next line
+          } else if (b == '\r') {
+            // Skip carriage return
+            continue;
+          } else {
+            lineBuilder.append((char) b);
+          }
+        }
+
+        // Process the last line if it doesn't end with a newline
+        if (lineBuilder.length() > 0) {
+          String line = lineBuilder.toString();
+          if (line.contains("<Actor Death>") && isWriteSuccesfull.get()) {
+            Optional<KillEvent> event = parseKillEvent(line);
+            event.ifPresent(
+                killEvent -> {
+                  if ((killEvent.killedPlayer().equalsIgnoreCase(SettingsData.getHandle())
+                          || killEvent.killingPlayer().equalsIgnoreCase(SettingsData.getHandle()))
+                      && !killEvents.contains(killEvent)) {
+                    killEvents.add(killEvent);
+                    log.info("New kill event detected");
+                    log.debug("Kill Event:\n{}", killEvent);
+                    if (SettingsData.isWriteKillEventToFile()) {
+                      isWriteSuccesfull.set(writeKillEventToFile(
+                          killEvent,
+                          scanStartTime.format(DateTimeFormatter.ofPattern("yyMMdd-HHmmss"))));
+                    }
                   }
-                }
-              });
+                });
+          }
         }
       }
+
       killEvents.sort(Comparator.comparing(KillEvent::timestamp, Comparator.reverseOrder()));
       return isWriteSuccesfull.get();
     } catch (IOException ioException) {
@@ -117,8 +192,8 @@ public class KillEventExtractor {
               AlertHandler.showAlert(
                   Alert.AlertType.ERROR,
                   "Failed to read log file",
-                  "Please check if the file exists and the path is set correctly.", false));
-      log.error("Failed to find the specified log file: {}", sanitizedPath);
+                  "An error occurred while reading the log file.", false));
+      log.error("Failed to read the specified log file: {}", sanitizedPath);
       log.trace("Stacktrace:", ioException);
       return false;
     }
