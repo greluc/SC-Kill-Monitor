@@ -18,15 +18,15 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-val checkstyleVersion="10.23.0" // https://github.com/checkstyle/checkstyle
+val checkstyleVersion="10.24.0" // https://github.com/checkstyle/checkstyle
 val annotationsVersion="26.0.2" // https://mvnrepository.com/artifact/org.jetbrains/annotations https://github.com/JetBrains/java-annotations
 val junitVersion = "5.12.2" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 val junitLauncherVersion = "1.12.2" // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
-val mockitoVersion = "5.15.2" // https://mvnrepository.com/artifact/org.mockito/mockito-core
+val mockitoVersion = "5.18.0" // https://mvnrepository.com/artifact/org.mockito/mockito-core
 val atlantaFxVersion = "2.0.1" // https://mvnrepository.com/artifact/io.github.mkpaz/atlantafx-base
 val log4j2Version = "2.24.3" // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
-val jacksonVersion = "2.18.3" // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-val semver4jVersion = "5.6.0" // https://mvnrepository.com/artifact/org.semver4j/semver4j
+val jacksonVersion = "2.19.0" // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+val semver4jVersion = "5.7.0" // https://mvnrepository.com/artifact/org.semver4j/semver4j
 val mockitoAgent = configurations.create("mockitoAgent")
 
 plugins {
@@ -71,12 +71,6 @@ base {
   description = "See who griefed you!"
 }
 
-configurations {
-  compileOnly {
-    extendsFrom(configurations.annotationProcessor.get())
-  }
-}
-
 java {
   sourceCompatibility = JavaVersion.VERSION_24
   targetCompatibility = JavaVersion.VERSION_24
@@ -85,8 +79,9 @@ java {
   withSourcesJar()
 }
 
-tasks.withType(JavaCompile::class.java) {
-  options.encoding = "UTF-8"
+javafx {
+  version = "24"
+  modules = listOf("javafx.controls", "javafx.fxml")
 }
 
 idea {
@@ -100,56 +95,11 @@ idea {
 application {
   mainModule = "de.greluc.sc.sckm"
   mainClass = "de.greluc.sc.sckm.ScKillMonitorApp"
-}
-
-javafx {
-  version = "24"
-  modules = listOf("javafx.controls", "javafx.fxml")
+  applicationDefaultJvmArgs = listOf("--enable-native-access=javafx.graphics")
 }
 
 checkstyle {
   toolVersion = checkstyleVersion
-}
-
-tasks.cyclonedxBom {
-  setProjectType("library")
-  setSchemaVersion("1.6")
-  setDestination(project.file("docs"))
-  setOutputName("bom")
-  setOutputFormat("all")
-  setIncludeBomSerialNumber(true)
-  setIncludeLicenseText(true)
-}
-
-tasks.javadoc {
-  options {
-    (this as CoreJavadocOptions).addStringOption("Xdoclint:none", "-quiet")
-  }
-  setDestinationDir(project.file("docs/javadoc"))
-}
-
-tasks.test {
-  useJUnitPlatform()
-  finalizedBy(tasks.jacocoTestReport)
-}
-
-tasks.build {
-  finalizedBy(tasks.cyclonedxBom)
-}
-
-tasks.jacocoTestReport {
-  dependsOn(tasks.test)
-  reports {
-    xml.required.set(true)
-    csv.required.set(true)
-    html.required.set(true)
-  }
-}
-
-tasks {
-  test {
-    jvmArgs("-javaagent:${mockitoAgent.asPath}")
-  }
 }
 
 jlink {
@@ -171,6 +121,54 @@ jlink {
           "--copyright", "Copyright (C) 2025-2025 SC Kill Monitor Team",
           "--description", description))
       //imageOptions.add("--win-console")
+    }
+  }
+}
+
+configurations {
+  compileOnly {
+    extendsFrom(configurations.annotationProcessor.get())
+  }
+}
+
+tasks {
+  withType(JavaCompile::class.java) {
+    options.encoding = "UTF-8"
+  }
+
+  build {
+    finalizedBy(cyclonedxBom)
+  }
+
+  javadoc {
+    options {
+      (this as CoreJavadocOptions).addStringOption("Xdoclint:none", "-quiet")
+    }
+    setDestinationDir(project.file("docs/javadoc"))
+  }
+
+  cyclonedxBom {
+    setProjectType("library")
+    setSchemaVersion("1.6")
+    setDestination(project.file("docs"))
+    setOutputName("bom")
+    setOutputFormat("all")
+    setIncludeBomSerialNumber(true)
+    setIncludeLicenseText(true)
+  }
+
+  test {
+    useJUnitPlatform()
+    jvmArgs("-javaagent:${mockitoAgent.asPath}")
+    finalizedBy(jacocoTestReport)
+  }
+
+  jacocoTestReport {
+    dependsOn(test)
+    reports {
+      xml.required.set(true)
+      csv.required.set(true)
+      html.required.set(true)
     }
   }
 }
