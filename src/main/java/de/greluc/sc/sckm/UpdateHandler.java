@@ -30,29 +30,25 @@ import de.greluc.sc.sckm.exceptions.DownloadException;
 import de.greluc.sc.sckm.exceptions.IntegrityException;
 import de.greluc.sc.sckm.exceptions.ParseException;
 import de.greluc.sc.sckm.exceptions.UpdateException;
+import de.greluc.sc.sckm.util.FileIntegrityUtils;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLException;
-import javafx.scene.control.Alert;
 import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
 import org.semver4j.Semver;
@@ -107,32 +103,6 @@ public class UpdateHandler {
   }
 
   /**
-   * Computes the SHA-256 checksum of a file.
-   *
-   * @param filePath The path to the file
-   * @return The SHA-256 checksum as a hexadecimal string
-   * @throws IOException If an I/O error occurs
-   * @throws NoSuchAlgorithmException If the SHA-256 algorithm is not available
-   */
-  private String computeChecksum(Path filePath) throws IOException, NoSuchAlgorithmException {
-    MessageDigest digest = MessageDigest.getInstance(Constants.CHECKSUM_ALGORITHM);
-    try (InputStream is = Files.newInputStream(filePath);
-         DigestInputStream dis = new DigestInputStream(is, digest)) {
-      byte[] buffer = new byte[8192];
-      while (dis.read(buffer) != -1) {
-        // Read the entire file
-      }
-    }
-
-    byte[] checksumBytes = digest.digest();
-    StringBuilder result = new StringBuilder();
-    for (byte b : checksumBytes) {
-      result.append(String.format("%02x", b));
-    }
-    return result.toString();
-  }
-
-  /**
    * Verifies the integrity of a downloaded file by comparing its checksum with the expected checksum.
    *
    * @param filePath The path to the file
@@ -141,7 +111,7 @@ public class UpdateHandler {
    */
   private void verifyFileIntegrity(Path filePath, String expectedChecksum) throws IntegrityException {
     try {
-      String actualChecksum = computeChecksum(filePath);
+      String actualChecksum = FileIntegrityUtils.computeChecksum(filePath);
       boolean isValid = actualChecksum.equalsIgnoreCase(expectedChecksum);
       if (!isValid) {
         log.error("Checksum verification failed. Expected: {}, Actual: {}",
