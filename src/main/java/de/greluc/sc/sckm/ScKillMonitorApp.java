@@ -61,6 +61,9 @@ public class ScKillMonitorApp extends Application {
    * @param args Command-line arguments passed to the application.
    */
   public static void main(String[] args) {
+    // Initialize the global exception handler
+    GlobalExceptionHandler.initialize();
+
     launch();
   }
 
