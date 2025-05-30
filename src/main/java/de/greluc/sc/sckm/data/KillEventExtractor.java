@@ -81,7 +81,8 @@ public class KillEventExtractor {
   private static final Map<String, Long> lastProcessedPositions = new ConcurrentHashMap<>();
 
   // Cache for parsed kill events to avoid re-parsing
-  private static final Map<String, Map<String, KillEvent>> killEventCache = new ConcurrentHashMap<>();
+  // Using a more memory-efficient approach: Map<filePath, Map<eventHash, KillEvent>>
+  private static final Map<String, Map<Integer, KillEvent>> killEventCache = new ConcurrentHashMap<>();
 
   // Constants for chunked processing
   private static final int CHUNK_SIZE = 10 * 1024 * 1024; // 10MB chunks
@@ -171,7 +172,7 @@ public class KillEventExtractor {
       }
 
       // Initialize or get the cache for this file
-      Map<String, KillEvent> fileCache = killEventCache.computeIfAbsent(sanitizedPath, k -> new ConcurrentHashMap<>());
+      Map<Integer, KillEvent> fileCache = killEventCache.computeIfAbsent(sanitizedPath, k -> new ConcurrentHashMap<>(256));
 
       // Determine if we should use parallel processing based on file size and amount of new data
       boolean useParallel = fileSize > LARGE_FILE_THRESHOLD && (fileSize - lastPosition) > LARGE_FILE_THRESHOLD;
@@ -225,7 +226,7 @@ public class KillEventExtractor {
       long startPosition, 
       long fileSize, 
       List<KillEvent> killEvents,
-      Map<String, KillEvent> fileCache,
+      Map<Integer, KillEvent> fileCache,
       AtomicBoolean isWriteSuccessful,
       ZonedDateTime scanStartTime) throws IOException {
 
@@ -235,11 +236,10 @@ public class KillEventExtractor {
     int numChunks = (int) Math.ceil((double) (fileSize - startPosition) / CHUNK_SIZE);
     int numThreads = Math.min(numChunks, MAX_THREADS);
 
-    // Create a thread pool
-    ExecutorService executor = Executors.newFixedThreadPool(numThreads);
     List<Future<List<KillEvent>>> futures = new ArrayList<>();
 
-    try {
+    // Use try-with-resources for ExecutorService
+    try (ExecutorService executor = Executors.newFixedThreadPool(numThreads)) {
       // Submit tasks for each chunk
       for (int i = 0; i < numChunks; i++) {
         long chunkStart = startPosition + (i * (long) CHUNK_SIZE);
@@ -264,8 +264,6 @@ public class KillEventExtractor {
           isWriteSuccessful.set(false);
         }
       }
-    } finally {
-      executor.shutdown();
     }
   }
 
@@ -286,7 +284,7 @@ public class KillEventExtractor {
       long startPosition, 
       long fileSize, 
       List<KillEvent> killEvents,
-      Map<String, KillEvent> fileCache,
+      Map<Integer, KillEvent> fileCache,
       AtomicBoolean isWriteSuccessful,
       ZonedDateTime scanStartTime) throws IOException {
 
@@ -316,7 +314,7 @@ public class KillEventExtractor {
       }
 
       // Process the last line if it doesn't end with a newline
-      if (lineBuilder.length() > 0) {
+      if (!lineBuilder.isEmpty()) {
         String line = lineBuilder.toString();
         processLine(line, killEvents, fileCache, isWriteSuccessful, scanStartTime);
       }
@@ -339,7 +337,7 @@ public class KillEventExtractor {
       Path path, 
       long startPosition, 
       long endPosition, 
-      Map<String, KillEvent> fileCache,
+      Map<Integer, KillEvent> fileCache,
       AtomicBoolean isWriteSuccessful,
       ZonedDateTime scanStartTime) throws IOException {
 
@@ -369,7 +367,7 @@ public class KillEventExtractor {
       }
 
       // Process the last line if it doesn't end with a newline
-      if (lineBuilder.length() > 0) {
+      if (!lineBuilder.isEmpty()) {
         String line = lineBuilder.toString();
         processLine(line, chunkEvents, fileCache, isWriteSuccessful, scanStartTime);
       }
@@ -390,14 +388,17 @@ public class KillEventExtractor {
   private static void processLine(
       String line, 
       List<KillEvent> killEvents, 
-      Map<String, KillEvent> fileCache,
+      Map<Integer, KillEvent> fileCache,
       AtomicBoolean isWriteSuccessful,
       ZonedDateTime scanStartTime) {
 
     if (line.contains("<Actor Death>") && isWriteSuccessful.get()) {
+      // Use the hash of the line as the key for better memory efficiency
+      int lineHash = line.hashCode();
+
       // Check if this line is already in the cache
-      if (fileCache.containsKey(line)) {
-        KillEvent cachedEvent = fileCache.get(line);
+      if (fileCache.containsKey(lineHash)) {
+        KillEvent cachedEvent = fileCache.get(lineHash);
         if ((cachedEvent.killedPlayer().equalsIgnoreCase(SettingsData.getHandle())
                 || cachedEvent.killingPlayer().equalsIgnoreCase(SettingsData.getHandle()))
             && !killEvents.contains(cachedEvent)) {
@@ -414,8 +415,8 @@ public class KillEventExtractor {
         // Parse the line and add to cache if it's a valid kill event
         Optional<KillEvent> eventOpt = parseKillEvent(line);
         eventOpt.ifPresent(killEvent -> {
-          // Add to cache
-          fileCache.put(line, killEvent);
+          // Add to cache using the hash as the key
+          fileCache.put(lineHash, killEvent);
 
           if ((killEvent.killedPlayer().equalsIgnoreCase(SettingsData.getHandle())
                   || killEvent.killingPlayer().equalsIgnoreCase(SettingsData.getHandle()))
@@ -527,7 +528,7 @@ public class KillEventExtractor {
     int totalCachedFiles = lastProcessedPositions.size();
     int totalCachedEvents = 0;
 
-    for (Map<String, KillEvent> fileCache : killEventCache.values()) {
+    for (Map<Integer, KillEvent> fileCache : killEventCache.values()) {
       totalCachedEvents += fileCache.size();
     }
 

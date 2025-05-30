@@ -52,6 +52,16 @@ import org.jetbrains.annotations.NotNull;
 @Log4j2
 public class FileHandler {
 
+  // Static ObjectMapper for better memory efficiency
+  private static final ObjectMapper OBJECT_MAPPER;
+
+  static {
+    OBJECT_MAPPER = new ObjectMapper();
+    OBJECT_MAPPER.registerModule(new JavaTimeModule());
+    OBJECT_MAPPER.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    OBJECT_MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
+  }
+
   /** Used to exclude the unused constructor from code coverage evaluation. */
   @Generated
   private FileHandler() {
@@ -104,10 +114,6 @@ public class FileHandler {
   public static boolean writeKillEventToFile(
       @NotNull KillEvent killEvent, @NotNull String fileSuffix) {
     log.debug("Appending KillEvent to file in JSON format.");
-    ObjectMapper objectMapper = new ObjectMapper();
-    objectMapper.registerModule(new JavaTimeModule());
-    objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
     if (SettingsData.getPathKillEvent().isBlank()) {
       Platform.runLater(() -> AlertHandler.showAlert(Alert.AlertType.ERROR, "ERROR", "No path to save the KilLEvent file set.", false));
@@ -125,7 +131,7 @@ public class FileHandler {
 
       File file = new File(safePath);
       try (FileWriter writer = new FileWriter(file, true)) {
-        String json = objectMapper.writeValueAsString(killEvent);
+        String json = OBJECT_MAPPER.writeValueAsString(killEvent);
         if (file.length() > 0) {
           writer.write("," + System.lineSeparator());
         }
