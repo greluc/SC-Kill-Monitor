@@ -20,6 +20,9 @@
 
 package de.greluc.sc.sckm.controller;
 
+import de.greluc.sc.sckm.constants.LogicConstants;
+import de.greluc.sc.sckm.constants.MessageConstants;
+import de.greluc.sc.sckm.constants.UiConstants;
 import de.greluc.sc.sckm.data.KillEvent;
 import de.greluc.sc.sckm.logparser.LogParserFactory;
 import de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory;
@@ -200,11 +203,11 @@ public class ScanViewController implements SettingsListener {
           default -> SettingsData.getPathLive();
         };
 
-    log.info("Starting scan for kill events...");
-    log.info("Using the selected handle: {}", SettingsData.getHandle());
-    log.info("Using the selected interval: {}", SettingsData.getInterval());
-    log.info("Using the selected channel: {}", SettingsData.getSelectedChannel());
-    log.info("Using the selected log file path: {}", selectedPathValue);
+    log.info(MessageConstants.LOG_STARTING_SCAN);
+    log.info(MessageConstants.LOG_USING_HANDLE, SettingsData.getHandle());
+    log.info(MessageConstants.LOG_USING_INTERVAL, SettingsData.getInterval());
+    log.info(MessageConstants.LOG_USING_CHANNEL, SettingsData.getSelectedChannel());
+    log.info(MessageConstants.LOG_USING_PATH, selectedPathValue);
     ZonedDateTime scanStartTime = ZonedDateTime.now();
     killCount = 0;
     deathCount = 0;
@@ -214,14 +217,14 @@ public class ScanViewController implements SettingsListener {
         Platform.runLater(this::onStopPressed);
         return;
       }
-      log.debug("Finished extracting kill events");
+      log.debug(MessageConstants.LOG_FINISHED_EXTRACTING);
       displayKillEvents();
-      log.debug("Finished updating the GUI with kill events");
+      log.debug(MessageConstants.LOG_FINISHED_UPDATING_GUI);
 
       try {
         TimeUnit.SECONDS.sleep(SettingsData.getInterval());
       } catch (InterruptedException e) {
-        log.debug("Scan thread was interrupted. Terminating...");
+        log.debug(MessageConstants.LOG_SCAN_THREAD_INTERRUPTED);
         Thread.currentThread().interrupt();
         return;
       }
@@ -294,9 +297,9 @@ public class ScanViewController implements SettingsListener {
     TextArea textArea =
         new TextArea(KillEventFormatterFactory.getFormatter().format(killEvent, SettingsData.isStreamerModeActive()));
     textArea.setEditable(false);
-    textArea.setMinHeight(160);
-    textArea.setMaxHeight(160);
-    textArea.setStyle("-fx-font-family: \"Segoe UI\";");
+    textArea.setMinHeight(UiConstants.TEXT_AREA_MIN_HEIGHT);
+    textArea.setMaxHeight(UiConstants.TEXT_AREA_MAX_HEIGHT);
+    textArea.setStyle(UiConstants.FONT_FAMILY_SEGOE_UI);
     textArea
         .onMouseClickedProperty()
         .set(
@@ -310,7 +313,7 @@ public class ScanViewController implements SettingsListener {
     wrapper.prefWidthProperty().bind(textPane.widthProperty());
     textArea.prefWidthProperty().bind(wrapper.widthProperty());
 
-    VBox.setMargin(textArea, new Insets(5, 10, 0, 0)); // Top, Right, Bottom, Left
+    VBox.setMargin(textArea, new Insets(UiConstants.INSET_TOP, UiConstants.INSET_RIGHT, UiConstants.INSET_BOTTOM, UiConstants.INSET_LEFT));
     return wrapper;
   }
 
@@ -325,20 +328,20 @@ public class ScanViewController implements SettingsListener {
    *     {@code false} otherwise.
    */
   private boolean checkIfNoPlayer(@NotNull KillEvent killEvent) {
-    if (killEvent.killingPlayer().toLowerCase().contains("unknown")
-        || killEvent.killingPlayer().toLowerCase().contains("aimodule")
-        || killEvent.killingPlayer().toLowerCase().contains("pu_")
-        || killEvent.killingPlayer().toLowerCase().contains("npc_")
-        || killEvent.killingPlayer().toLowerCase().contains("kopion_")
-        || killEvent.killingPlayer().toLowerCase().contains("missionentitystreamable_")) {
+    if (killEvent.killingPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_UNKNOWN)
+        || killEvent.killingPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_AI_MODULE)
+        || killEvent.killingPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_PU)
+        || killEvent.killingPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_NPC)
+        || killEvent.killingPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_KOPION)
+        || killEvent.killingPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_MISSION_ENTITY)) {
       return true;
     } else
-      return killEvent.killedPlayer().toLowerCase().contains("unknown")
-          || killEvent.killedPlayer().toLowerCase().contains("aimodule")
-          || killEvent.killedPlayer().toLowerCase().contains("pu_")
-          || killEvent.killedPlayer().toLowerCase().contains("npc_")
-          || killEvent.killedPlayer().toLowerCase().contains("kopion_")
-          || killEvent.killedPlayer().toLowerCase().contains("missionentitystreamable_");
+      return killEvent.killedPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_UNKNOWN)
+          || killEvent.killedPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_AI_MODULE)
+          || killEvent.killedPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_PU)
+          || killEvent.killedPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_NPC)
+          || killEvent.killedPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_KOPION)
+          || killEvent.killedPlayer().toLowerCase().contains(LogicConstants.NPC_IDENTIFIER_MISSION_ENTITY);
   }
 
   /**

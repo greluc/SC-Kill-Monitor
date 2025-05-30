@@ -45,7 +45,10 @@ public class AlertHandler {
   @Generated
   public static void showGeneralError() {
     showAlert(
-        Alert.AlertType.ERROR, "ERROR", "An error occurred while performing the desired action.", false);
+        Alert.AlertType.ERROR, 
+        "ERROR", 
+        "An error occurred while performing the desired action.", 
+        false);
   }
 
   /**
@@ -57,7 +60,10 @@ public class AlertHandler {
    */
   @Generated
   public static void showAlert(
-      @NotNull Alert.AlertType alertType, @NotNull String header, @NotNull String content, boolean blocking) {
+      @NotNull Alert.AlertType alertType, 
+      @NotNull String header, 
+      @NotNull String content, 
+      boolean blocking) {
     var alert = new Alert(alertType);
     alert.titleProperty().set(APP_TITLE);
     alert.headerTextProperty().set(header);
@@ -70,6 +76,13 @@ public class AlertHandler {
     }
   }
 
+  /**
+   * Shows a confirmation alert and returns whether the user clicked OK.
+   *
+   * @param header String containing the short text with the main information
+   * @param content String containing the description of the alert
+   * @return true if the user clicked OK, false otherwise
+   */
   @Generated
   public static boolean showConfirmationAlert(@NotNull String header, @NotNull String content) {
     var alert = new Alert(Alert.AlertType.CONFIRMATION);

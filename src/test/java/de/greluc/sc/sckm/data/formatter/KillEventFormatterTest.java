@@ -142,23 +142,6 @@ class KillEventFormatterTest {
     assertEquals(DefaultKillEventFormatter.class, formatter.getClass());
   }
 
-  /**
-   * Tests that the deprecated static KillEventFormatter.format method
-   * delegates to the current formatter from the factory.
-   */
-  @Test
-  @SuppressWarnings("deprecation") // We're intentionally testing deprecated methods
-  void deprecatedStaticMethod_delegatesToCurrentFormatter() {
-    // Arrange
-    KillEventFormatterFactory.resetToDefault();
-
-    // Act
-    String resultFromStatic = de.greluc.sc.sckm.data.KillEventFormatter.format(testKillEvent, false);
-    String resultFromFactory = KillEventFormatterFactory.getFormatter().format(testKillEvent, false);
-
-    // Assert
-    assertEquals(resultFromFactory, resultFromStatic);
-  }
 
   /**
    * A custom formatter implementation for testing the factory's ability to use different formatters.

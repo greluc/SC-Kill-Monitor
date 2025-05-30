@@ -72,10 +72,11 @@ public class AboutViewController {
   protected void initialize() {
     textAreaAbout.setText(
         """
-            SC Kill Monitor is an application to search the Star Citizen game.log file for the person who killed you.
+            SC Kill Monitor is an application to search the Star Citizen game.log file 
+            for the person who killed you.
 
             The source code is available on GitHub: https://github.com/greluc/SC-Kill-Monitor
-            
+
             The team behind the app:
             - Lucas Greuloch (greluc, https://github.com/greluc)
             - René Jansen (rjcncpt, https://github.com/rjcncpt)

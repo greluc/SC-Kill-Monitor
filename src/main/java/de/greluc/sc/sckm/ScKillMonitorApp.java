@@ -22,6 +22,10 @@ package de.greluc.sc.sckm;
 
 import static de.greluc.sc.sckm.Constants.APP_TITLE;
 
+import de.greluc.sc.sckm.constants.MessageConstants;
+import de.greluc.sc.sckm.constants.ResourceConstants;
+import de.greluc.sc.sckm.constants.UiConstants;
+
 import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
 import java.io.IOException;
@@ -80,20 +84,20 @@ public class ScKillMonitorApp extends Application {
       Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
       Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
       FXMLLoader fxmlLoader =
-          new FXMLLoader(ScKillMonitorApp.class.getResource("fxml/MainView.fxml"));
-      Scene scene = new Scene(fxmlLoader.load(), 700, 500);
+          new FXMLLoader(ScKillMonitorApp.class.getResource(ResourceConstants.FXML_MAIN_VIEW));
+      Scene scene = new Scene(fxmlLoader.load(), UiConstants.WINDOW_WIDTH, UiConstants.WINDOW_HEIGHT);
       stage.setScene(scene);
-      stage.setMinWidth(700);
-      stage.setMinHeight(500);
-      stage.setMaxWidth(700);
-      stage.setMaxHeight(500);
+      stage.setMinWidth(UiConstants.WINDOW_WIDTH);
+      stage.setMinHeight(UiConstants.WINDOW_HEIGHT);
+      stage.setMaxWidth(UiConstants.WINDOW_WIDTH);
+      stage.setMaxHeight(UiConstants.WINDOW_HEIGHT);
       stage.setResizable(false);
       stage.setTitle(APP_TITLE);
       stage
           .getIcons()
           .add(
               new javafx.scene.image.Image(
-                  String.valueOf(ScKillMonitorApp.class.getResource("logos/sckm.jpg"))));
+                  String.valueOf(ScKillMonitorApp.class.getResource(ResourceConstants.LOGO_PATH))));
       stage.setOnCloseRequest(
           ignored -> {
             Platform.exit();
@@ -101,7 +105,7 @@ public class ScKillMonitorApp extends Application {
           });
       stage.show();
     } catch (IOException ioException) {
-      log.error("Could not load main view", ioException);
+      log.error(MessageConstants.LOG_COULD_NOT_LOAD_MAIN_VIEW, ioException);
       System.exit(-1);
     }
   }

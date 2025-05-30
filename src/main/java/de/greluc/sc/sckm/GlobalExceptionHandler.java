@@ -20,6 +20,8 @@
 
 package de.greluc.sc.sckm;
 
+import de.greluc.sc.sckm.constants.ErrorConstants;
+import de.greluc.sc.sckm.constants.MessageConstants;
 import de.greluc.sc.sckm.exceptions.ConnectionException;
 import de.greluc.sc.sckm.exceptions.DownloadException;
 import de.greluc.sc.sckm.exceptions.IntegrityException;
@@ -60,13 +62,13 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
      */
     public static void initialize() {
         Thread.setDefaultUncaughtExceptionHandler(new GlobalExceptionHandler());
-        
+
         // Set handler for JavaFX thread
         Platform.runLater(() -> {
             Thread.currentThread().setUncaughtExceptionHandler(new GlobalExceptionHandler());
         });
-        
-        log.info("Global exception handler initialized");
+
+        log.info(MessageConstants.LOG_GLOBAL_EXCEPTION_HANDLER_INITIALIZED);
     }
 
     /**
@@ -77,12 +79,12 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
      */
     @Override
     public void uncaughtException(@NotNull Thread thread, @NotNull Throwable throwable) {
-        log.error("Uncaught exception in thread: {}", thread.getName(), throwable);
-        
+        log.error(MessageConstants.LOG_UNCAUGHT_EXCEPTION, thread.getName(), throwable);
+
         // Handle the exception based on its type
         Platform.runLater(() -> handleException(throwable, true));
     }
-    
+
     /**
      * Handles an exception that was caught in the application code.
      * This method can be called directly from catch blocks to ensure
@@ -95,49 +97,48 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
     public static boolean handleException(Throwable throwable, boolean isCritical) {
         // Log the exception
         if (isCritical) {
-            log.error("Critical exception occurred", throwable);
+            log.error(MessageConstants.LOG_CRITICAL_EXCEPTION, throwable);
         } else {
-            log.warn("Non-critical exception occurred", throwable);
+            log.warn(MessageConstants.LOG_NON_CRITICAL_EXCEPTION, throwable);
         }
-        
+
         // Determine the appropriate alert type and message based on the exception type
-        String title = "Error";
-        String header = "An error occurred";
-        String content = "An unexpected error occurred in the application.";
+        String title = ErrorConstants.ERROR_TITLE;
+        String header = ErrorConstants.ERROR_HEADER;
+        String content = ErrorConstants.ERROR_CONTENT;
         boolean shouldExit = isCritical;
-        
+
         if (throwable instanceof ScKillMonitorException) {
             // Handle application-specific exceptions
           switch (throwable) {
             case ConnectionException connectionException -> {
-              title = "Connection Error";
-              header = "Connection Error";
-              content = "Failed to connect to the update server. Please check your internet connection and try again.";
+              title = ErrorConstants.CONNECTION_ERROR_TITLE;
+              header = ErrorConstants.CONNECTION_ERROR_HEADER;
+              content = ErrorConstants.CONNECTION_ERROR_CONTENT;
               shouldExit = false;
             }
             case DownloadException downloadException -> {
-              title = "Download Error";
-              header = "Download Error";
-              content = "Failed to download the update file. " + throwable.getMessage();
+              title = ErrorConstants.DOWNLOAD_ERROR_TITLE;
+              header = ErrorConstants.DOWNLOAD_ERROR_HEADER;
+              content = ErrorConstants.DOWNLOAD_ERROR_CONTENT_PREFIX + throwable.getMessage();
               shouldExit = false;
             }
             case IntegrityException integrityException -> {
-              title = "Security Warning";
-              header = "Security Warning";
-              content = "The downloaded update file failed integrity verification. This could indicate tampering or corruption. " +
-                  "Please try again later or download the update manually from the official website.";
+              title = ErrorConstants.SECURITY_WARNING_TITLE;
+              header = ErrorConstants.SECURITY_WARNING_HEADER;
+              content = ErrorConstants.SECURITY_WARNING_CONTENT;
               shouldExit = false;
             }
             case ParseException parseException -> {
-              title = "Parse Error";
-              header = "Parse Error";
-              content = "Failed to parse the response from the update server. " + throwable.getMessage();
+              title = ErrorConstants.PARSE_ERROR_TITLE;
+              header = ErrorConstants.PARSE_ERROR_HEADER;
+              content = ErrorConstants.PARSE_ERROR_CONTENT_PREFIX + throwable.getMessage();
               shouldExit = false;
             }
             case UpdateException updateException -> {
-              title = "Update Error";
-              header = "Update Error";
-              content = "An error occurred during the update process. " + throwable.getMessage();
+              title = ErrorConstants.UPDATE_ERROR_TITLE;
+              header = ErrorConstants.UPDATE_ERROR_HEADER;
+              content = ErrorConstants.UPDATE_ERROR_CONTENT_PREFIX + throwable.getMessage();
               shouldExit = false;
             }
             default ->
@@ -148,7 +149,7 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
             // Handle common IO exceptions
             title = "I/O Error";
             header = "I/O Error";
-            
+
             if (throwable instanceof ConnectException || 
                 throwable instanceof SocketTimeoutException || 
                 throwable instanceof UnknownHostException) {
@@ -174,24 +175,24 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
             header = "Invalid State";
             content = "The application is in an invalid state: " + throwable.getMessage();
         }
-        
+
         // Show the alert to the user
         final boolean finalShouldExit = shouldExit;
         final String finalTitle = title;
         final String finalHeader = header;
         final String finalContent = content;
-        
+
         Platform.runLater(() -> {
             Alert.AlertType alertType = finalShouldExit ? Alert.AlertType.ERROR : Alert.AlertType.WARNING;
             AlertHandler.showAlert(alertType, finalHeader, finalContent, true);
-            
+
             // Exit the application if the exception is critical
             if (finalShouldExit) {
                 log.error("Exiting application due to critical error");
                 System.exit(1);
             }
         });
-        
+
         return !shouldExit;
     }
 }
