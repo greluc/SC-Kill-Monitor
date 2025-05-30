@@ -127,6 +127,8 @@ public class ScanViewController implements SettingsListener {
    */
   @FXML
   private void onStopPressed() {
+    // Clear the KillEventExtractor cache to ensure a fresh scan when restarted
+    de.greluc.sc.sckm.data.KillEventExtractor.clearCache(null);
     executorService.shutdownNow();
     mainViewController.onStopPressed();
   }
