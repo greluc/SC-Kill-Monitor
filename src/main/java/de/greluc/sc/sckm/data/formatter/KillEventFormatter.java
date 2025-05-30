@@ -18,50 +18,38 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-package de.greluc.sc.sckm.data;
+package de.greluc.sc.sckm.data.formatter;
 
-import de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory;
-import org.jetbrains.annotations.Contract;
+import de.greluc.sc.sckm.data.KillEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * The KillEventFormatter class provides a utility method for formatting kill events into
- * human-readable string representations. This class is primarily used to format the details of a
- * {@link KillEvent} record into a structured string for display or logging purposes.
+ * The KillEventFormatter interface defines the contract for formatting kill events into
+ * human-readable string representations. Implementations of this interface are responsible
+ * for converting {@link KillEvent} objects into formatted strings for display or logging purposes.
  *
- * <p>This class now delegates to the modular formatter system defined in the
- * {@link de.greluc.sc.sckm.data.formatter} package. It maintains backward compatibility
- * with existing code while allowing for custom formatter implementations to be used.
- *
- * <p>For new code, it is recommended to use {@link de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory}
- * directly to obtain a formatter instance.
+ * <p>This interface allows for different formatting strategies to be implemented and swapped
+ * at runtime, making the kill event formatting system modular and extensible.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @version 1.6.0
- * @since 1.2.1
- * @deprecated Use {@link de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory#getFormatter()}
- *     instead to obtain a formatter instance.
+ * @since 1.6.0
  */
-@Deprecated(since = "1.6.0", forRemoval = true)
-public class KillEventFormatter {
+public interface KillEventFormatter {
+  
   /**
    * Formats a {@link KillEvent} instance into a human-readable string representation.
-   * This method delegates to the current formatter implementation provided by
-   * {@link KillEventFormatterFactory}.
+   * The string typically includes details like the kill timestamp, killed player, zone, weapon used,
+   * weapon class, and damage type. If the killer's information needs to be redacted,
+   * implementations should handle this appropriately.
    *
    * @param killEvent The {@link KillEvent} instance containing the details of the kill event
    *                  to be formatted. Must not be null.
    * @param isRedacted A boolean flag indicating whether the killer's name should be redacted
-   *                   in the final output. If true, the killer's name will be replaced with
-   *                   "REDACTED"; otherwise, the actual name will be included.
+   *                   in the final output. If true, the killer's name should be replaced with
+   *                   an appropriate placeholder; otherwise, the actual name should be included.
    * @return A non-null, human-readable formatted string representing the kill event details
    *         with or without the killer's name redacted, based on the isRedacted flag.
-   * @deprecated Use {@link de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory#getFormatter()}
-   *     instead to obtain a formatter instance.
    */
-  @Contract(pure = true)
-  @Deprecated(since = "1.6.0", forRemoval = true)
-  public static @NotNull String format(@NotNull KillEvent killEvent, boolean isRedacted) {
-    return KillEventFormatterFactory.getFormatter().format(killEvent, isRedacted);
-  }
+  @NotNull String format(@NotNull KillEvent killEvent, boolean isRedacted);
 }

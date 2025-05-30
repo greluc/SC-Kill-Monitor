@@ -18,36 +18,32 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-package de.greluc.sc.sckm.data;
+package de.greluc.sc.sckm.data.formatter;
 
-import de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory;
+import de.greluc.sc.sckm.data.KillEvent;
+import java.time.format.DateTimeFormatter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * The KillEventFormatter class provides a utility method for formatting kill events into
- * human-readable string representations. This class is primarily used to format the details of a
- * {@link KillEvent} record into a structured string for display or logging purposes.
+ * The DefaultKillEventFormatter class is the standard implementation of the KillEventFormatter
+ * interface. It formats kill events into human-readable string representations with a consistent
+ * layout that includes timestamp, player names, zone, weapon details, and damage type.
  *
- * <p>This class now delegates to the modular formatter system defined in the
- * {@link de.greluc.sc.sckm.data.formatter} package. It maintains backward compatibility
- * with existing code while allowing for custom formatter implementations to be used.
- *
- * <p>For new code, it is recommended to use {@link de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory}
- * directly to obtain a formatter instance.
+ * <p>This implementation provides the default formatting behavior for the application, maintaining
+ * the same output format as the original static utility class.
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @version 1.6.0
- * @since 1.2.1
- * @deprecated Use {@link de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory#getFormatter()}
- *     instead to obtain a formatter instance.
+ * @since 1.6.0
  */
-@Deprecated(since = "1.6.0", forRemoval = true)
-public class KillEventFormatter {
+public class DefaultKillEventFormatter implements KillEventFormatter {
+
   /**
    * Formats a {@link KillEvent} instance into a human-readable string representation.
-   * This method delegates to the current formatter implementation provided by
-   * {@link KillEventFormatterFactory}.
+   * The string includes details like the kill timestamp, killed player, zone, weapon used,
+   * weapon class, and damage type. If the killer's information needs to be redacted,
+   * the output will replace the killer's name with "REDACTED".
    *
    * @param killEvent The {@link KillEvent} instance containing the details of the kill event
    *                  to be formatted. Must not be null.
@@ -56,12 +52,57 @@ public class KillEventFormatter {
    *                   "REDACTED"; otherwise, the actual name will be included.
    * @return A non-null, human-readable formatted string representing the kill event details
    *         with or without the killer's name redacted, based on the isRedacted flag.
-   * @deprecated Use {@link de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory#getFormatter()}
-   *     instead to obtain a formatter instance.
    */
   @Contract(pure = true)
-  @Deprecated(since = "1.6.0", forRemoval = true)
-  public static @NotNull String format(@NotNull KillEvent killEvent, boolean isRedacted) {
-    return KillEventFormatterFactory.getFormatter().format(killEvent, isRedacted);
+  @Override
+  public @NotNull String format(@NotNull KillEvent killEvent, boolean isRedacted) {
+    String result;
+    if (isRedacted) {
+      result =
+          "Kill Date = "
+              + killEvent.timestamp().format(DateTimeFormatter.ofPattern("dd.MM.yy HH:mm:ss:SSS"))
+              + " UTC"
+              + "\n"
+              + "Killed Player = "
+              + killEvent.killedPlayer()
+              + "\n"
+              + "Zone = "
+              + killEvent.zone()
+              + "\n"
+              + "Killer = REDACTED"
+              + "\n"
+              + "Used Method/Weapon = "
+              + killEvent.weapon()
+              + "\n"
+              + "Class = "
+              + killEvent.weaponClass()
+              + "\n"
+              + "Damage Type = "
+              + killEvent.damageType();
+    } else {
+      result =
+          "Kill Date = "
+              + killEvent.timestamp().format(DateTimeFormatter.ofPattern("dd.MM.yy HH:mm:ss:SSS"))
+              + " UTC"
+              + "\n"
+              + "Killed Player = "
+              + killEvent.killedPlayer()
+              + "\n"
+              + "Zone = "
+              + killEvent.zone()
+              + "\n"
+              + "Killer = "
+              + killEvent.killingPlayer()
+              + "\n"
+              + "Used Method/Weapon = "
+              + killEvent.weapon()
+              + "\n"
+              + "Class = "
+              + killEvent.weaponClass()
+              + "\n"
+              + "Damage Type = "
+              + killEvent.damageType();
+    }
+    return result;
   }
 }

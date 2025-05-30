@@ -18,11 +18,12 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-package de.greluc.sc.sckm.data;
+package de.greluc.sc.sckm.logparser;
 
 import static de.greluc.sc.sckm.FileHandler.writeKillEventToFile;
 
 import de.greluc.sc.sckm.AlertHandler;
+import de.greluc.sc.sckm.data.KillEvent;
 import de.greluc.sc.sckm.settings.SettingsData;
 import de.greluc.sc.sckm.util.PathSanitizer;
 import java.io.IOException;
@@ -51,10 +52,10 @@ import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * The KillEventExtractor class is responsible for extracting and processing kill events from game
+ * Implementation of the {@link LogParser} interface for Star Citizen game logs.
+ * This class is responsible for extracting and processing kill events from Star Citizen game
  * log files. These events are represented by {@link KillEvent} objects containing detailed
- * information about each kill event such as timestamp, killingPlayer, killed player, weapon used, and
- * location.
+ * information about each kill event.
  *
  * <p>This implementation includes optimizations for handling very large log files efficiently:
  * <ul>
@@ -62,14 +63,15 @@ import org.jetbrains.annotations.NotNull;
  *   <li>Incremental parsing to avoid re-processing the entire file on each scan</li>
  *   <li>Caching mechanisms for frequently accessed data</li>
  *   <li>Parallel processing for large files</li>
+ *   <li>Memory-mapped file access for efficient file reading</li>
  * </ul>
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @version 1.7.0
- * @since 1.2.1
+ * @since 1.7.0
  */
 @Log4j2
-public class KillEventExtractor {
+public class StarCitizenLogParser implements LogParser {
   // File position tracking for incremental parsing
   private static final Map<String, Long> lastProcessedPositions = new ConcurrentHashMap<>();
 
@@ -107,7 +109,8 @@ public class KillEventExtractor {
    *     kill events.
    * @return true if the extraction was successful, false otherwise
    */
-  public static boolean extractKillEvents(
+  @Override
+  public boolean extractKillEvents(
       @NotNull List<KillEvent> killEvents,
       @NotNull String inputFilePath,
       @NotNull ZonedDateTime scanStartTime) {
@@ -214,7 +217,7 @@ public class KillEventExtractor {
    * @param scanStartTime The scan start time for file naming
    * @throws IOException If an I/O error occurs
    */
-  private static void processLargeFileInParallel(
+  private void processLargeFileInParallel(
       Path path, 
       long startPosition, 
       long fileSize, 
@@ -272,7 +275,7 @@ public class KillEventExtractor {
    * @param scanStartTime The scan start time for file naming
    * @throws IOException If an I/O error occurs
    */
-  private static void processFileSequentially(
+  private void processFileSequentially(
       Path path, 
       long startPosition, 
       long fileSize, 
@@ -326,7 +329,7 @@ public class KillEventExtractor {
    * @return A list of kill events found in this chunk
    * @throws IOException If an I/O error occurs
    */
-  private static List<KillEvent> processFileChunk(
+  private List<KillEvent> processFileChunk(
       Path path, 
       long startPosition, 
       long endPosition, 
@@ -378,7 +381,7 @@ public class KillEventExtractor {
    * @param isWriteSuccessful Flag to track write success
    * @param scanStartTime The scan start time for file naming
    */
-  private static void processLine(
+  private void processLine(
       String line, 
       List<KillEvent> killEvents, 
       Map<Integer, KillEvent> fileCache,
@@ -441,7 +444,7 @@ public class KillEventExtractor {
    * @return an {@link Optional} containing the parsed {@link KillEvent} if successful, or an empty
    *     {@link Optional} if parsing fails
    */
-  private static @NotNull Optional<KillEvent> parseKillEvent(@NotNull String logLine) {
+  private @NotNull Optional<KillEvent> parseKillEvent(@NotNull String logLine) {
     try {
       String timestamp = logLine.substring(logLine.indexOf('<') + 1, logLine.indexOf('>'));
       String killedPlayer = extractValue(logLine, "CActor::Kill: '", "'");
@@ -476,8 +479,7 @@ public class KillEventExtractor {
    * @param endToken The ending delimiter of the substring to extract. Must not be null.
    * @return The extracted substring if both tokens are found; otherwise, an empty string.
    */
-  @SuppressWarnings("SameParameterValue")
-  private static @NotNull String extractValue(
+  private @NotNull String extractValue(
       @NotNull String text, @NotNull String startToken, @NotNull String endToken) {
     int startIndex = text.indexOf(startToken);
     if (startIndex == -1) {
@@ -497,7 +499,8 @@ public class KillEventExtractor {
    * 
    * @param filePath Optional file path to clear cache for a specific file
    */
-  public static void clearCache(String filePath) {
+  @Override
+  public void clearCache(String filePath) {
     if (filePath != null && !filePath.isEmpty()) {
       String sanitizedPath = PathSanitizer.sanitizePath(filePath);
       if (!sanitizedPath.isEmpty()) {
@@ -517,7 +520,8 @@ public class KillEventExtractor {
    * 
    * @return A string containing cache statistics
    */
-  public static String getCacheStats() {
+  @Override
+  public String getCacheStats() {
     int totalCachedFiles = lastProcessedPositions.size();
     int totalCachedEvents = 0;
 

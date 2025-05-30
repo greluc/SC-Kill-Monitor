@@ -20,10 +20,9 @@
 
 package de.greluc.sc.sckm.controller;
 
-import static de.greluc.sc.sckm.data.KillEventExtractor.extractKillEvents;
-
 import de.greluc.sc.sckm.data.KillEvent;
-import de.greluc.sc.sckm.data.KillEventFormatter;
+import de.greluc.sc.sckm.logparser.LogParserFactory;
+import de.greluc.sc.sckm.data.formatter.KillEventFormatterFactory;
 import de.greluc.sc.sckm.settings.SettingsData;
 import de.greluc.sc.sckm.settings.SettingsHandler;
 import de.greluc.sc.sckm.settings.SettingsListener;
@@ -127,8 +126,8 @@ public class ScanViewController implements SettingsListener {
    */
   @FXML
   private void onStopPressed() {
-    // Clear the KillEventExtractor cache to ensure a fresh scan when restarted
-    de.greluc.sc.sckm.data.KillEventExtractor.clearCache(null);
+    // Clear the log parser cache to ensure a fresh scan when restarted
+    LogParserFactory.getDefaultParser().clearCache(null);
     executorService.shutdownNow();
     mainViewController.onStopPressed();
   }
@@ -211,7 +210,7 @@ public class ScanViewController implements SettingsListener {
     deathCount = 0;
 
     while (true) {
-      if (!extractKillEvents(killEvents, selectedPathValue, scanStartTime)) {
+      if (!LogParserFactory.getDefaultParser().extractKillEvents(killEvents, selectedPathValue, scanStartTime)) {
         Platform.runLater(this::onStopPressed);
         return;
       }
@@ -293,7 +292,7 @@ public class ScanViewController implements SettingsListener {
    */
   private @NotNull VBox getKillEventPane(@NotNull KillEvent killEvent) {
     TextArea textArea =
-        new TextArea(KillEventFormatter.format(killEvent, SettingsData.isStreamerModeActive()));
+        new TextArea(KillEventFormatterFactory.getFormatter().format(killEvent, SettingsData.isStreamerModeActive()));
     textArea.setEditable(false);
     textArea.setMinHeight(160);
     textArea.setMaxHeight(160);
@@ -303,7 +302,7 @@ public class ScanViewController implements SettingsListener {
         .set(
             event -> {
               if (SettingsData.isStreamerModeActive()) {
-                textArea.setText(KillEventFormatter.format(killEvent, false));
+                textArea.setText(KillEventFormatterFactory.getFormatter().format(killEvent, false));
               }
             });
 
