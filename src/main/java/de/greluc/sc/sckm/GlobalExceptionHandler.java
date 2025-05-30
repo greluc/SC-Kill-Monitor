@@ -36,6 +36,7 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.NoSuchFileException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Global exception handler for the SC Kill Monitor application.
@@ -75,8 +76,8 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
      * @param throwable the uncaught exception
      */
     @Override
-    public void uncaughtException(Thread thread, Throwable throwable) {
-        log.error("Uncaught exception in thread: " + thread.getName(), throwable);
+    public void uncaughtException(@NotNull Thread thread, @NotNull Throwable throwable) {
+        log.error("Uncaught exception in thread: {}", thread.getName(), throwable);
         
         // Handle the exception based on its type
         Platform.runLater(() -> handleException(throwable, true));
@@ -107,36 +108,42 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
         
         if (throwable instanceof ScKillMonitorException) {
             // Handle application-specific exceptions
-            if (throwable instanceof ConnectionException) {
-                title = "Connection Error";
-                header = "Connection Error";
-                content = "Failed to connect to the update server. Please check your internet connection and try again.";
-                shouldExit = false;
-            } else if (throwable instanceof DownloadException) {
-                title = "Download Error";
-                header = "Download Error";
-                content = "Failed to download the update file. " + throwable.getMessage();
-                shouldExit = false;
-            } else if (throwable instanceof IntegrityException) {
-                title = "Security Warning";
-                header = "Security Warning";
-                content = "The downloaded update file failed integrity verification. This could indicate tampering or corruption. " +
-                          "Please try again later or download the update manually from the official website.";
-                shouldExit = false;
-            } else if (throwable instanceof ParseException) {
-                title = "Parse Error";
-                header = "Parse Error";
-                content = "Failed to parse the response from the update server. " + throwable.getMessage();
-                shouldExit = false;
-            } else if (throwable instanceof UpdateException) {
-                title = "Update Error";
-                header = "Update Error";
-                content = "An error occurred during the update process. " + throwable.getMessage();
-                shouldExit = false;
-            } else {
-                // Generic application exception
-                content = throwable.getMessage();
+          switch (throwable) {
+            case ConnectionException connectionException -> {
+              title = "Connection Error";
+              header = "Connection Error";
+              content = "Failed to connect to the update server. Please check your internet connection and try again.";
+              shouldExit = false;
             }
+            case DownloadException downloadException -> {
+              title = "Download Error";
+              header = "Download Error";
+              content = "Failed to download the update file. " + throwable.getMessage();
+              shouldExit = false;
+            }
+            case IntegrityException integrityException -> {
+              title = "Security Warning";
+              header = "Security Warning";
+              content = "The downloaded update file failed integrity verification. This could indicate tampering or corruption. " +
+                  "Please try again later or download the update manually from the official website.";
+              shouldExit = false;
+            }
+            case ParseException parseException -> {
+              title = "Parse Error";
+              header = "Parse Error";
+              content = "Failed to parse the response from the update server. " + throwable.getMessage();
+              shouldExit = false;
+            }
+            case UpdateException updateException -> {
+              title = "Update Error";
+              header = "Update Error";
+              content = "An error occurred during the update process. " + throwable.getMessage();
+              shouldExit = false;
+            }
+            default ->
+              // Generic application exception
+                content = throwable.getMessage();
+          }
         } else if (throwable instanceof IOException) {
             // Handle common IO exceptions
             title = "I/O Error";

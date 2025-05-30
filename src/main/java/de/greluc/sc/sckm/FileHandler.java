@@ -20,11 +20,10 @@
 
 package de.greluc.sc.sckm;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.greluc.sc.sckm.data.KillEvent;
 import de.greluc.sc.sckm.settings.SettingsData;
+import de.greluc.sc.sckm.util.JsonUtils;
 import de.greluc.sc.sckm.util.PathSanitizer;
 import java.io.File;
 import java.io.FileWriter;
@@ -52,15 +51,7 @@ import org.jetbrains.annotations.NotNull;
 @Log4j2
 public class FileHandler {
 
-  // Static ObjectMapper for better memory efficiency
-  private static final ObjectMapper OBJECT_MAPPER;
-
-  static {
-    OBJECT_MAPPER = new ObjectMapper();
-    OBJECT_MAPPER.registerModule(new JavaTimeModule());
-    OBJECT_MAPPER.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    OBJECT_MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
-  }
+  // No static ObjectMapper needed anymore, using JsonUtils instead
 
   /** Used to exclude the unused constructor from code coverage evaluation. */
   @Generated
@@ -131,13 +122,16 @@ public class FileHandler {
 
       File file = new File(safePath);
       try (FileWriter writer = new FileWriter(file, true)) {
-        String json = OBJECT_MAPPER.writeValueAsString(killEvent);
+        String json = JsonUtils.toJson(killEvent);
         if (file.length() > 0) {
           writer.write("," + System.lineSeparator());
         }
         writer.write(json);
         log.info("KillEvent successfully written to file: {}", file.getAbsolutePath());
         return true;
+      } catch (JsonProcessingException e) {
+        log.error("Error while serializing KillEvent to JSON", e);
+        return false;
       } catch (IOException e) {
         log.error("Error while writing KillEvent to file", e);
         return false;

@@ -59,12 +59,12 @@ import org.semver4j.Semver;
 
 /**
  * Handles the update process for the SC Kill Monitor application.
- * 
+ *
  * <p>This class is responsible for checking for updates, downloading update files,
  * verifying their integrity, and launching the installer. It uses a secure connection
  * to the GitHub API to fetch release information and implements proper exception handling
  * to ensure a robust update process.
- * 
+ *
  * <p>The class uses custom exceptions to handle different error scenarios:
  * <ul>
  *   <li>{@link ConnectionException} - For network-related errors</li>
@@ -83,7 +83,7 @@ public class UpdateHandler {
   /**
    * Initializes SSL configuration to ensure secure connections.
    * This method sets up proper certificate validation to prevent MITM attacks.
-   * 
+   *
    * <p>Uses the default system TrustManager for certificate validation,
    * which validates certificate chains against the system's trusted CA certificates.
    *
@@ -95,7 +95,7 @@ public class UpdateHandler {
       SSLContext sc = SSLContext.getDefault();
       HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 
-      // Use the default hostname verifier which properly validates that 
+      // Use the default hostname verifier which properly validates that
       // the hostname matches the certificate
       HttpsURLConnection.setDefaultHostnameVerifier(HttpsURLConnection.getDefaultHostnameVerifier());
 
@@ -144,7 +144,7 @@ public class UpdateHandler {
       String actualChecksum = computeChecksum(filePath);
       boolean isValid = actualChecksum.equalsIgnoreCase(expectedChecksum);
       if (!isValid) {
-        log.error("Checksum verification failed. Expected: {}, Actual: {}", 
+        log.error("Checksum verification failed. Expected: {}, Actual: {}",
             expectedChecksum, actualChecksum);
         throw new IntegrityException(expectedChecksum, actualChecksum);
       } else {
@@ -351,7 +351,7 @@ public class UpdateHandler {
   public static @NotNull String fetchReleases(@NotNull String owner, @NotNull String repo)
       throws ConnectionException, ParseException {
     // The URL for the GitHub Releases endpoint
-    String apiUrl = String.format("%s/repos/%s/%s/releases/latest", 
+    String apiUrl = String.format("%s/repos/%s/%s/releases/latest",
         Constants.GITHUB_API_URL, owner, repo);
 
     URL url;
