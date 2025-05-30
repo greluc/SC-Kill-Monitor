@@ -45,3 +45,4 @@ bin/
 .idea
 output
 logs
+docs/*.md
