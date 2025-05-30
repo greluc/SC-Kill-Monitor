@@ -26,6 +26,8 @@ import de.greluc.sc.sckm.data.ChannelType;
 import de.greluc.sc.sckm.settings.SettingsData;
 import de.greluc.sc.sckm.settings.SettingsHandler;
 import de.greluc.sc.sckm.settings.SettingsListener;
+import de.greluc.sc.sckm.validation.InputValidator;
+import de.greluc.sc.sckm.validation.ValidationResult;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -120,10 +122,10 @@ public class StartViewController implements SettingsListener {
   /**
    * Handles the event triggered when the "Start" button is clicked in the user interface.
    *
-   * <p>This method performs input validation on three fields: handle, interval, and path. If any of
-   * the fields are empty, an error alert is displayed and the method returns early. Additionally,
-   * the method ensures the interval input is a valid integer, showing an error if the value is
-   * invalid.
+   * <p>This method performs input validation on three fields: handle, interval, and path. It uses
+   * the InputValidator class to validate the handle and interval inputs according to specific
+   * format and range requirements. If any validation fails, an error alert is displayed and the
+   * method returns early.
    *
    * <p>Upon successful validation:
    *
@@ -136,11 +138,9 @@ public class StartViewController implements SettingsListener {
    * <p>Validation logic includes:
    *
    * <ul>
-   *   <li>Checking if the handle input field is empty and logging a warning if so.
-   *   <li>Checking if the interval input field is empty and logging a warning if so.
-   *   <li>Checking if the selected path field is empty and logging a warning if so.
-   *   <li>Parsing the interval input to an integer, handling potential {@code
-   *       NumberFormatException} to ensure a valid integer is provided.
+   *   <li>Validating the handle format (3-16 characters, letters, numbers, underscores, and hyphens only).
+   *   <li>Validating the interval as a valid integer within an acceptable range.
+   *   <li>Checking if the selected path field is empty.
    * </ul>
    *
    * <p>Alerts are displayed to the user via {@code AlertHandler} with specific messages indicating
@@ -148,34 +148,58 @@ public class StartViewController implements SettingsListener {
    */
   @FXML
   protected void onStartButtonClicked() {
-    if (inputHandle.getText().isEmpty()) {
-      log.warn("Handle is empty");
-      AlertHandler.showAlert(Alert.AlertType.ERROR, "Handle is empty", "Please enter a handle", false);
-      return;
-    }
-    if (inputInterval.getText().isEmpty()) {
-      log.warn("Interval is empty");
+    // Validate handle
+    String handle = inputHandle.getText().trim();
+    ValidationResult handleResult = InputValidator.validateHandle(handle);
+    if (!handleResult.isValid()) {
+      log.warn("Invalid handle: {}", handleResult.getErrorMessage());
       AlertHandler.showAlert(
-          Alert.AlertType.ERROR, "Interval is empty", "Please enter an interval", false);
+          Alert.AlertType.ERROR, 
+          "Invalid Handle", 
+          handleResult.getErrorMessage(), 
+          false);
       return;
     }
+
+    // Validate interval
+    String intervalStr = inputInterval.getText().trim();
+    ValidationResult intervalResult = InputValidator.validateScanInterval(intervalStr);
+    if (!intervalResult.isValid()) {
+      log.warn("Invalid interval: {}", intervalResult.getErrorMessage());
+      AlertHandler.showAlert(
+          Alert.AlertType.ERROR, 
+          "Invalid Interval", 
+          intervalResult.getErrorMessage(), 
+          false);
+      return;
+    }
+
+    // Validate path
     if (selectedPathValue.getText().isEmpty()) {
       log.warn("Path is empty");
-      AlertHandler.showAlert(Alert.AlertType.ERROR, "Path is empty", "Please select a path", false);
+      AlertHandler.showAlert(
+          Alert.AlertType.ERROR, 
+          "Path is empty", 
+          "Please select a path in the settings", 
+          false);
       return;
     }
 
     try {
-      SettingsData.setHandle(inputHandle.getText().toLowerCase().trim());
-      SettingsData.setInterval(Integer.parseInt(inputInterval.getText()));
+      // All validations passed, save settings and start
+      SettingsData.setHandle(handle.toLowerCase());
+      SettingsData.setInterval(Integer.parseInt(intervalStr));
       SettingsData.settingsChanged();
       SettingsHandler settingsHandler = new SettingsHandler();
       settingsHandler.saveSettings();
       mainViewController.onStartPressed();
-    } catch (NumberFormatException numberFormatException) {
-      log.warn("Interval is invalid");
+    } catch (Exception e) {
+      log.error("Unexpected error when starting", e);
       AlertHandler.showAlert(
-          Alert.AlertType.ERROR, "Interval is invalid", "Please enter a valid interval", false);
+          Alert.AlertType.ERROR, 
+          "Error", 
+          "An unexpected error occurred: " + e.getMessage(), 
+          false);
     }
   }
 

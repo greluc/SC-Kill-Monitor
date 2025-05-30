@@ -63,7 +63,6 @@ public class ScKillMonitorApp extends Application {
   public static void main(String[] args) {
     // Initialize the global exception handler
     GlobalExceptionHandler.initialize();
-
     launch();
   }
 

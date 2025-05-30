@@ -20,17 +20,22 @@
 
 package de.greluc.sc.sckm.controller;
 
+import de.greluc.sc.sckm.AlertHandler;
 import de.greluc.sc.sckm.FileHandler;
 import de.greluc.sc.sckm.settings.SettingsData;
 import de.greluc.sc.sckm.settings.SettingsHandler;
+import de.greluc.sc.sckm.validation.InputValidator;
+import de.greluc.sc.sckm.validation.ValidationResult;
 import java.io.File;
 import java.util.Optional;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.Generated;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -51,12 +56,14 @@ import org.jetbrains.annotations.NotNull;
  *       to the SettingsHandler.
  *   <li>Supports dynamic updates to the settings interface based on user input.
  *   <li>Handles closing the settings window upon saving changes or user interaction.
+ *   <li>Validates user inputs to ensure they meet the required format and constraints.
  * </ul>
  *
  * @author Lucas Greuloch (greluc, lucas.greuloch@protonmail.com)
  * @version 1.6.0
  * @since 1.0.0
  */
+@Log4j2
 public class SettingsViewController {
   @FXML private TextField inputPathLive;
   @FXML private TextField inputPathPtu;
@@ -101,12 +108,12 @@ public class SettingsViewController {
    * Handles the "Save" button action in the settings view and persists the updated settings data.
    *
    * <p>This method is triggered when the user clicks the "Save" button in the settings interface.
-   * It retrieves the values entered into the various input fields, updates the corresponding
-   * properties in the {@link SettingsData} class, and saves the settings using the
-   * {@code settingsHandler}.
+   * It validates the input values, updates the corresponding properties in the {@link SettingsData}
+   * class, and saves the settings using the {@code settingsHandler}.
    *
    * <p>Specifically, this method performs the following actions:
    * <ul>
+   *   <li>Validates all path inputs to ensure they have valid formats.
    *   <li>Updates file path settings for live, PTU, EPTU, Hotfix, Tech Preview, and custom environments.
    *   <li>Stores the boolean values for the "Write Kill Event to File" and "Killer Mode" options.
    *   <li>Invokes the {@link SettingsData#settingsChanged()} method to signal that the settings
@@ -114,21 +121,152 @@ public class SettingsViewController {
    *   <li>Calls the {@code settingsHandler.saveSettings()} method to persist the changes.
    *   <li>Closes the settings window by calling {@link #closeWindow()}.
    * </ul>
+   *
+   * <p>If any validation fails, an error message is displayed and the settings are not saved.
    */
   @FXML
   protected void onSave() {
-    SettingsData.setPathLive(inputPathLive.getText());
-    SettingsData.setPathPtu(inputPathPtu.getText());
-    SettingsData.setPathEptu(inputPathEptu.getText());
-    SettingsData.setPathHotfix(inputPathHotfix.getText());
-    SettingsData.setPathTechPreview(inputPathTechPreview.getText());
-    SettingsData.setPathCustom(inputPathCustom.getText());
-    SettingsData.setPathKillEvent(inputPathKillEvent.getText());
+    // Validate all path inputs
+    if (!validatePaths()) {
+      return;
+    }
+
+    // All validations passed, save the settings
+    SettingsData.setPathLive(inputPathLive.getText().trim());
+    SettingsData.setPathPtu(inputPathPtu.getText().trim());
+    SettingsData.setPathEptu(inputPathEptu.getText().trim());
+    SettingsData.setPathHotfix(inputPathHotfix.getText().trim());
+    SettingsData.setPathTechPreview(inputPathTechPreview.getText().trim());
+    SettingsData.setPathCustom(inputPathCustom.getText().trim());
+    SettingsData.setPathKillEvent(inputPathKillEvent.getText().trim());
     SettingsData.setWriteKillEventToFile(cbWriteKillEvent.isSelected());
     SettingsData.setKillerModeActive(cbKillerMode.isSelected());
     SettingsData.settingsChanged();
     settingsHandler.saveSettings();
     closeWindow();
+  }
+
+  /**
+   * Validates all path inputs to ensure they have valid formats.
+   *
+   * <p>This method checks each path input field to ensure it has a valid format. If a path is not
+   * empty, it must be a valid path format. If the "Write Kill Event to File" checkbox is selected,
+   * the Kill Event path must be a valid directory path.
+   *
+   * @return true if all validations pass, false otherwise
+   */
+  private boolean validatePaths() {
+    // Validate path formats for all non-empty paths
+    String livePath = inputPathLive.getText().trim();
+    if (!livePath.isEmpty()) {
+      ValidationResult result = InputValidator.validatePathFormat(livePath);
+      if (!result.isValid()) {
+        log.warn("Invalid LIVE path format: {}", result.getErrorMessage());
+        AlertHandler.showAlert(
+            Alert.AlertType.ERROR, 
+            "Invalid LIVE Path", 
+            "The LIVE path format is invalid: " + result.getErrorMessage(),
+            false);
+        return false;
+      }
+    }
+
+    String ptuPath = inputPathPtu.getText().trim();
+    if (!ptuPath.isEmpty()) {
+      ValidationResult result = InputValidator.validatePathFormat(ptuPath);
+      if (!result.isValid()) {
+        log.warn("Invalid PTU path format: {}", result.getErrorMessage());
+        AlertHandler.showAlert(
+            Alert.AlertType.ERROR, 
+            "Invalid PTU Path", 
+            "The PTU path format is invalid: " + result.getErrorMessage(),
+            false);
+        return false;
+      }
+    }
+
+    String eptuPath = inputPathEptu.getText().trim();
+    if (!eptuPath.isEmpty()) {
+      ValidationResult result = InputValidator.validatePathFormat(eptuPath);
+      if (!result.isValid()) {
+        log.warn("Invalid EPTU path format: {}", result.getErrorMessage());
+        AlertHandler.showAlert(
+            Alert.AlertType.ERROR, 
+            "Invalid EPTU Path", 
+            "The EPTU path format is invalid: " + result.getErrorMessage(),
+            false);
+        return false;
+      }
+    }
+
+    String hotfixPath = inputPathHotfix.getText().trim();
+    if (!hotfixPath.isEmpty()) {
+      ValidationResult result = InputValidator.validatePathFormat(hotfixPath);
+      if (!result.isValid()) {
+        log.warn("Invalid HOTFIX path format: {}", result.getErrorMessage());
+        AlertHandler.showAlert(
+            Alert.AlertType.ERROR, 
+            "Invalid HOTFIX Path", 
+            "The HOTFIX path format is invalid: " + result.getErrorMessage(),
+            false);
+        return false;
+      }
+    }
+
+    String techPreviewPath = inputPathTechPreview.getText().trim();
+    if (!techPreviewPath.isEmpty()) {
+      ValidationResult result = InputValidator.validatePathFormat(techPreviewPath);
+      if (!result.isValid()) {
+        log.warn("Invalid TECH-PREVIEW path format: {}", result.getErrorMessage());
+        AlertHandler.showAlert(
+            Alert.AlertType.ERROR, 
+            "Invalid TECH-PREVIEW Path", 
+            "The TECH-PREVIEW path format is invalid: " + result.getErrorMessage(),
+            false);
+        return false;
+      }
+    }
+
+    String customPath = inputPathCustom.getText().trim();
+    if (!customPath.isEmpty()) {
+      ValidationResult result = InputValidator.validatePathFormat(customPath);
+      if (!result.isValid()) {
+        log.warn("Invalid Custom path format: {}", result.getErrorMessage());
+        AlertHandler.showAlert(
+            Alert.AlertType.ERROR, 
+            "Invalid Custom Path", 
+            "The Custom path format is invalid: " + result.getErrorMessage(),
+            false);
+        return false;
+      }
+    }
+
+    // If "Write Kill Event to File" is selected, validate the Kill Event path
+    if (cbWriteKillEvent.isSelected()) {
+      String killEventPath = inputPathKillEvent.getText().trim();
+      if (killEventPath.isEmpty()) {
+        log.warn("Kill Event path is empty but Write Kill Event to File is selected");
+        AlertHandler.showAlert(
+            Alert.AlertType.ERROR, 
+            "Missing Kill Event Path", 
+            "Please specify a valid directory path for Kill Event files or uncheck the 'Write Kill Event to File' option.",
+            false);
+        return false;
+      }
+
+      ValidationResult result = InputValidator.validatePathFormat(killEventPath);
+      if (!result.isValid()) {
+        log.warn("Invalid Kill Event path format: {}", result.getErrorMessage());
+        AlertHandler.showAlert(
+            Alert.AlertType.ERROR, 
+            "Invalid Kill Event Path", 
+            "The Kill Event path format is invalid: " + result.getErrorMessage(),
+            false);
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /** Closes the dedicated settings window. */
