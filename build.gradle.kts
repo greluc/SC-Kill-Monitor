@@ -20,7 +20,7 @@
 
 val checkstyleVersion="10.24.0" // https://github.com/checkstyle/checkstyle
 val annotationsVersion="26.0.2" // https://mvnrepository.com/artifact/org.jetbrains/annotations https://github.com/JetBrains/java-annotations
-val junitVersion = "5.12.2" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+val junitVersion = "5.13.4" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 val junitLauncherVersion = "1.12.2" // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
 val mockitoVersion = "5.18.0" // https://mvnrepository.com/artifact/org.mockito/mockito-core
 val atlantaFxVersion = "2.0.1" // https://mvnrepository.com/artifact/io.github.mkpaz/atlantafx-base
