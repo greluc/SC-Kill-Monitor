@@ -18,15 +18,15 @@
  * along with SC Kill Monitor. If not, see https://www.gnu.org/licenses/                          *
  **************************************************************************************************/
 
-val checkstyleVersion="10.24.0" // https://github.com/checkstyle/checkstyle
+val checkstyleVersion="11.0.0" // https://github.com/checkstyle/checkstyle
 val annotationsVersion="26.0.2" // https://mvnrepository.com/artifact/org.jetbrains/annotations https://github.com/JetBrains/java-annotations
-val junitVersion = "5.12.2" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-val junitLauncherVersion = "1.12.2" // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
+val junitVersion = "5.13.4" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+val junitLauncherVersion = "1.13.4" // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
 val mockitoVersion = "5.18.0" // https://mvnrepository.com/artifact/org.mockito/mockito-core
-val atlantaFxVersion = "2.0.1" // https://mvnrepository.com/artifact/io.github.mkpaz/atlantafx-base
-val log4j2Version = "2.24.3" // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
-val jacksonVersion = "2.19.0" // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-val semver4jVersion = "5.7.0" // https://mvnrepository.com/artifact/org.semver4j/semver4j
+val atlantaFxVersion = "2.1.0" // https://mvnrepository.com/artifact/io.github.mkpaz/atlantafx-base
+val log4j2Version = "2.25.1" // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+val jacksonVersion = "2.19.2" // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+val semver4jVersion = "6.0.0" // https://mvnrepository.com/artifact/org.semver4j/semver4j
 val mockitoAgent = configurations.create("mockitoAgent")
 
 plugins {
@@ -35,16 +35,16 @@ plugins {
   id("idea")
   id("jacoco")
   id("checkstyle")
-  id("org.beryx.jlink") version "3.1.1" // https://plugins.gradle.org/plugin/org.beryx.jlink
-  id("io.freefair.lombok") version "8.13.1" // https://plugins.gradle.org/plugin/io.freefair.lombok
+  id("org.beryx.jlink") version "3.1.3" // https://plugins.gradle.org/plugin/org.beryx.jlink
+  id("io.freefair.lombok") version "8.14" // https://plugins.gradle.org/plugin/io.freefair.lombok
   id("org.cyclonedx.bom") version "2.3.1" // https://github.com/CycloneDX/cyclonedx-gradle-plugin
   id("org.javamodularity.moduleplugin") version "1.8.15" // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
   id("org.openjfx.javafxplugin") version "0.1.0" // https://plugins.gradle.org/plugin/org.openjfx.javafxplugin
 }
 
-lombok {
-  version.set("1.18.38")
-}
+group = "de.greluc.sc.sckm"
+version = "1.6.0"
+description = "SC Kill Monitor"
 
 repositories {
   mavenCentral()
@@ -63,12 +63,6 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher:${junitLauncherVersion}")
-}
-
-base {
-  group = "de.greluc.sc"
-  version = "1.6.0"
-  description = "See who griefed you!"
 }
 
 java {
@@ -93,8 +87,8 @@ idea {
 }
 
 application {
-  mainModule = "de.greluc.sc.sckm"
-  mainClass = "de.greluc.sc.sckm.ScKillMonitorApp"
+  mainModule.set("de.greluc.sc.sckm")
+  mainClass.set("de.greluc.sc.sckm.ScKillMonitorApp")
   applicationDefaultJvmArgs = listOf("--enable-native-access=javafx.graphics")
 }
 
@@ -119,7 +113,7 @@ jlink {
           "--about-url", "https://github.com/greluc/SC-Kill-Monitor/wiki",
           "--app-version", version.toString(),
           "--copyright", "Copyright (C) 2025-2025 SC Kill Monitor Team",
-          "--description", description))
+          "--description", (project.description ?: "SC Kill Monitor")))
       //imageOptions.add("--win-console")
     }
   }
@@ -148,13 +142,13 @@ tasks {
   }
 
   cyclonedxBom {
-    setProjectType("library")
-    setSchemaVersion("1.6")
-    setDestination(project.file("docs"))
-    setOutputName("bom")
-    setOutputFormat("all")
-    setIncludeBomSerialNumber(true)
-    setIncludeLicenseText(true)
+    projectType.set("library")
+    schemaVersion.set("1.6")
+    destination.set(project.file("docs"))
+    outputName.set("bom")
+    outputFormat.set("all")
+    includeBomSerialNumber.set(true)
+    includeLicenseText.set(true)
   }
 
   test {
