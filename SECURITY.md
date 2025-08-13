@@ -25,7 +25,7 @@ The BOM can be found under [docs/bom.xml](docs/bom.xml) and [docs/bom.json](docs
 
 | Version | Virus Total Link                                                                                              |
 |---------|---------------------------------------------------------------------------------------------------------------|
-| 1.6.0   | https://                                                                                                      |
+| 1.6.0   | https://www.virustotal.com/gui/file/27644516dcf24484522e5b142e6c20b5218df714dc2d72da65d8811c04766cad          |
 | 1.5.0   | https://www.virustotal.com/gui/url/c1e151aa138ea386d33d7bb00e8192e313a3bde3d6d07b6bf699baff89b88969?nocache=1 |
 | 1.4.0   | https://www.virustotal.com/gui/url/581467f7d936b9de80eec8165ae42ea38e0ac97200cb4f4972add5bb43eff610?nocache=1 |
 | 1.3.0   | https://www.virustotal.com/gui/url/1218be3f196087af041c681dab30366fcbcbfa641f365f277c9bf00eb73c8393?nocache=1 |
