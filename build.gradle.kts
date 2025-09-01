@@ -25,7 +25,7 @@ val junitLauncherVersion = "1.13.4" // https://mvnrepository.com/artifact/org.ju
 val mockitoVersion = "5.18.0" // https://mvnrepository.com/artifact/org.mockito/mockito-core
 val atlantaFxVersion = "2.1.0" // https://mvnrepository.com/artifact/io.github.mkpaz/atlantafx-base
 val log4j2Version = "2.25.1" // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
-val jacksonVersion = "2.19.2" // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+val jacksonVersion = "2.20.0" // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 val semver4jVersion = "6.0.0" // https://mvnrepository.com/artifact/org.semver4j/semver4j
 val mockitoAgent = configurations.create("mockitoAgent")
 
