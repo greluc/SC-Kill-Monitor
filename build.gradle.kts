@@ -37,7 +37,7 @@ plugins {
   id("checkstyle")
   id("org.beryx.jlink") version "3.1.3" // https://plugins.gradle.org/plugin/org.beryx.jlink
   id("io.freefair.lombok") version "8.14" // https://plugins.gradle.org/plugin/io.freefair.lombok
-  id("org.cyclonedx.bom") version "2.3.1" // https://github.com/CycloneDX/cyclonedx-gradle-plugin
+  id("org.cyclonedx.bom") version "2.4.1" // https://github.com/CycloneDX/cyclonedx-gradle-plugin
   id("org.javamodularity.moduleplugin") version "1.8.15" // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
   id("org.openjfx.javafxplugin") version "0.1.0" // https://plugins.gradle.org/plugin/org.openjfx.javafxplugin
 }
