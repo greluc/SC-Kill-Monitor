@@ -19,7 +19,7 @@
  **************************************************************************************************/
 
 val checkstyleVersion="11.0.0" // https://github.com/checkstyle/checkstyle
-val annotationsVersion="26.0.2" // https://mvnrepository.com/artifact/org.jetbrains/annotations https://github.com/JetBrains/java-annotations
+val annotationsVersion="26.0.2-1" // https://mvnrepository.com/artifact/org.jetbrains/annotations https://github.com/JetBrains/java-annotations
 val junitVersion = "5.13.4" // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 val junitLauncherVersion = "1.13.4" // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
 val mockitoVersion = "5.18.0" // https://mvnrepository.com/artifact/org.mockito/mockito-core
